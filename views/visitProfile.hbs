@@ -1,0 +1,29 @@
+<div id="visit-profile-wrapper">
+    <div id="view-profile-top-wrapper">
+        <div id="profile-div-left" class="profile-divs">
+            <div id="view-profile-bio">
+                <img id="profile-img" class="circle-img-150" src="https://randomuser.me/api/portraits/women/12.jpg" alt="{{profile.firstName}}"/>
+                <h3 id="profile-name">{{profile.firstName}} {{profile.lastName}}</h3>
+                <span>{{profile.about}}</span>
+            </div>
+        </div>
+
+        <div id="profile-div-right" class="profile-divs align-bottom">
+            <div>
+                <button class="blue-btn">Message</button>
+            </div>
+            <div>
+                <a>Likes</a>
+                <a>+</a>
+            </div>
+            <div>
+                <a>Posts</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="visit-profile-posts">
+        <h2>All posts by {{profile.firstName}}:</h2>
+        {{>posts}}
+    </div>
+</div>
