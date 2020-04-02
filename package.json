@@ -1,16 +1,17 @@
 {
   "name": "comp4711-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "SPA: Knowlege Base using node/express and postgresql",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AMiKaH/COMP4711-Project.git"
   },
-  "author": "",
+  "author": "Daniel Hwang, Please type your name as well",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AMiKaH/COMP4711-Project/issues"
@@ -19,6 +20,9 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "express-handlebars": "^4.0.0"
+    "express-handlebars": "^4.0.0",
+    "express-session": "^1.17.0",
+    "handlebars": "^4.4.2",
+    "pg": "^7.18.2"
   }
 }
