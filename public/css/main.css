@@ -1,0 +1,369 @@
+/**
+    main div
+**/
+body {
+    text-align: center;
+}
+#page-main-div {
+    width: 60%;
+    text-align: left;
+    margin: 0 auto;
+}
+/**
+    Forms Stylesheets
+**/
+.inline-divs {
+    display: inline-block;
+    width: 45%;
+    text-align: left;
+    vertical-align: top;
+}
+
+#login-div {
+    text-align: left;
+}
+
+.left-aligned-divs {
+    display: inline-block;
+    width: 45%;
+    text-align: left;
+    vertical-align: top;
+}
+
+#signup-div {
+    display: inline-block;
+    text-align: left;
+    width: 75%;
+}
+
+#signup-form {
+    width: 100%;
+}
+
+#signup-div .form-control {
+    width:75%
+}
+
+.form-control {
+    display: inline-block;
+}
+
+#registration-form {
+    width: 100%;
+}
+
+.inline-container {
+    text-align: justify;
+    text-justify: distribute-all-lines;
+    /* just for demo */
+    min-width: 100%;
+    line-height: 0;
+}
+
+.stretch {
+    width: 50%;
+    height: 0%;
+    display: inline-block;
+}
+
+#signup-div .form-control .input-field {
+    max-width: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-control .input-field {
+    max-width: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.inline-fields-div {
+    display: inline-block;
+    *display: inline;
+    width: 48%;
+}
+
+.inline-fields-div > .input-ilfield{
+    max-width: 100%;
+    box-sizing: border-box;
+
+}
+
+#signup-div Button {
+    width: 100%;
+}
+
+.form-control .btn {
+    background-color: rgb(6, 158, 231);
+    color: white;
+    border-radius: 2px;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
+
+#signup-div .form-control .btn {
+    background-color: rgb(6, 158, 231);
+    color: white;
+    border-radius: 2px;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 5px 10px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+#complete-btn {
+    background-color: white;
+    color: rgb(6, 158, 231);
+    border-radius: 2px;
+    border-color: rgb(6, 158, 231);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 5px 10px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+.form-control Button:active {
+    box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.4);
+}
+
+
+.inline-divs h2, h1 {
+    margin-top: 0;
+}
+
+#complete-registration-form .input-field {
+    display: block;
+}
+
+#comp-reg {
+    display: inline-block;
+    text-align: left;
+    width: 50%;
+}
+
+.input-field, .input-ilfield {
+    max-width: inherit;
+    padding: 5px 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid lightgrey;
+}
+
+input::placeholder {
+    color: lightgrey;
+    width: 80%;
+    padding-right: 25px;;
+}
+
+/**
+    Header stylesheets
+**/
+#header {
+    margin-top: 25px;;
+    text-align: left;
+}
+
+.search-logo-wrapper {
+    display: inline-block;
+    *display: inline;
+    width: 48%;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#header-logo{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.logout {
+    display: inline-block;
+}
+
+#search {
+    width: 75%;
+}
+
+#search input  {
+    width: 100%;
+}
+
+
+/**
+    profile stylesheets
+**/
+
+.profile-divs {
+    vertical-align: top;
+    width: 49%;
+    display: inline-block;
+    text-align: center;
+}
+
+.profile-wrapper {
+    min-width: 40%;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.profile-wrapper-posts {
+    width: 75%;
+    margin: 0 auto;
+}
+
+#profile-bio {
+    display: inline-block;
+}
+
+.profile-inner-wrapper {
+    text-align: left;
+}
+
+.topic-select {
+    padding: 5px 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid lightgrey;
+    width: 35%;
+}
+
+.circle-img-100 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.circle-img-75 {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+.white-blue-btn {
+    background-color: white;
+    color: rgb(6, 158, 231);
+    border-radius: 2px;
+    border-color: rgb(6, 158, 231);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 5px 10px;
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+#new-post-btn {
+    width: 63%;
+}
+
+.blue-btn {
+    background-color: rgb(6, 158, 231);
+    color: white;
+    border-radius: 2px;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 5px 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+#search-by-topic-div {
+    width: 100%;
+}
+
+#search-by-topic-btn {
+    width: 25%;
+    display: inline-block;
+}
+
+/**
+    Posts stylesheet
+**/
+
+.post-wrapper{
+    height: 125px;;
+    text-align: left;
+    margin: 0px 10px;
+}
+
+.post-parameters-outer {
+    width: 75%;
+    display: inline-block;
+    vertical-align: top;
+
+}
+
+.post-parameters {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.post-inline-divs {
+    margin: 0px 10px;
+    vertical-align: top;
+    display: inline-block;
+}
+
+
+.post-header-inline {
+    vertical-align: top;
+    display: inline-block;
+}
+
+.post-header-inline {
+    vertical-align: top;
+    display: inline-block;
+}
+
+.post-header-inline h4 {
+    margin: 0;
+}
+
+.post-header-inline p {
+    margin: 0;
+}
+
+.post-param-left {
+    margin: 0;
+}
+
+.post-param-right {
+    padding: 0px 5px;
+    float: right;
+}
+
+#post-topic {
+    color: rgb(6, 158, 231);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 2px;
+}
+
+#post-details span {
+    margin: 10px 10px 10px 0px;
+    height: 90px;
+    width: 285px;
+    overflow: eli;
+    display: -webkit-box;
+    -webkit-box-orient: vertical; 
+}

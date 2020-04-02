@@ -1,0 +1,28 @@
+{{#each postList}}
+<div class="post-wrapper">
+    <div class="post-inline-divs">
+        <img class="circle-img-75" src="{{this.imgUrl}}" alt="{{this.firstName}}">
+    </div>
+
+
+    <div class="post-parameters-outer">
+        <div class="post-parameters">
+            <div id="post-title" class="post-param-left post-header-inline">
+                <h4>{{this.postTitle}}</h4>
+            </div>
+            <div id="post-topic" class="post-param-right post-header-inline">
+                <p>{{this.postTopic}}</p>
+            </div>    
+        </div>
+
+        <div id="post-details">
+            <p>{{this.postDetails}}</p>
+        </div>
+
+        <div class="post-parameters">
+            <span>{{this.date}}</span>
+            <a class="post-param-right" href="">{{this.repliesCount}} replies</a>
+        </div>
+    </div>
+</div>
+{{/each}}
