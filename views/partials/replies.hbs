@@ -1,0 +1,19 @@
+<div id="replies-outer-wrapper{{@index}}" class="replies-outer-wrapper">
+    {{#each replies}}
+    <div class="reply-wrapper">
+        <div class="replies-profile-img replies-inline">
+            <img class="circle-img-50" src="{{this.imgUrl}}" alt="User Image">
+        </div>
+
+        <div id="" class="replies-text replies-inline">
+            <span>{{this.replyText}}</span>
+        </div>
+    </div>
+    {{/each}}
+    <div id="reply-form">
+        <form id="replies-form" METHOD="GET">
+            <input name="add-reply-text" class="reply-input-field input-field" placeholder="add your reply ...">
+            <button type="submit" class="comment-btn blue-btn">comment</button>
+        </form>
+    </div>
+</div>

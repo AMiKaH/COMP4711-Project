@@ -52,6 +52,36 @@ body {
     width: 100%;
 }
 
+
+
+/**
+    edit profile
+**/
+
+#edit-profile-wrapper {
+    text-align: center;
+}
+
+#edit-div {
+    display: inline-block;
+    text-align: center;
+    width: 50%;
+}
+
+#edit-profile-form {
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+}
+
+#edit-form {
+    width: 100%;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+
+
 .inline-container {
     text-align: justify;
     text-justify: distribute-all-lines;
@@ -145,6 +175,8 @@ body {
 #complete-registration-form .input-field {
     display: block;
 }
+
+
 
 #comp-reg {
     display: inline-block;
@@ -244,6 +276,18 @@ input::placeholder {
     width: 35%;
 }
 
+/**
+    Image css
+**/
+.circle-img-150 {
+    width: 150px;
+    height: 150px;
+
+    border-radius: 50%;
+    border-width: 50px;
+    border-color: black;
+}
+
 .circle-img-100 {
     width: 100px;
     height: 100px;
@@ -253,6 +297,12 @@ input::placeholder {
 .circle-img-75 {
     width: 75px;
     height: 75px;
+    border-radius: 50%;
+}
+
+.circle-img-50 {
+    width: 50px;
+    height: 50;
     border-radius: 50%;
 }
 
@@ -300,13 +350,15 @@ input::placeholder {
 **/
 
 .post-wrapper{
-    height: 125px;;
+    height: auto;
     text-align: left;
     margin: 0px 10px;
+    margin-bottom: 25px;
 }
 
 .post-parameters-outer {
     width: 75%;
+    height: auto;
     display: inline-block;
     vertical-align: top;
 
@@ -366,4 +418,102 @@ input::placeholder {
     overflow: eli;
     display: -webkit-box;
     -webkit-box-orient: vertical; 
+}
+
+/**
+    Replies css
+**/
+
+.replies-outer-wrapper {
+    display: none;
+}
+.replies-inline {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.reply-wrapper {
+    margin-top: 20px;
+}
+
+.replies-profile-img {
+    width: 30%;
+}
+
+.replies-text {
+    width: 50%;
+}
+
+.reply-input-field {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+.comment-btn {
+    float: right;
+}
+#reply-form {
+
+}
+
+/**
+    anchor
+**/
+
+a {
+    text-decoration: underline;
+}
+
+
+.limit-150-alt{
+    width: 250px;
+    height: auto;
+
+}
+
+.limit-150 {
+    width: 250px;
+    height: auto;
+    max-height:110px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/**
+    View profile
+**/
+
+
+#profile-div-left {
+    width: 75%;
+    text-align: left;
+}
+
+#profile-div-right {
+    text-align: center;
+    height: 100%;
+    width: 20% ;
+
+}
+
+.align-bottom {
+    vertical-align: bottom;
+}
+
+
+#profile-div-right div {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+#visit-profile-posts {
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 25px;
 }

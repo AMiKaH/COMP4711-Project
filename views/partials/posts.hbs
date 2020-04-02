@@ -15,14 +15,16 @@
             </div>    
         </div>
 
-        <div id="post-details">
-            <p>{{this.postDetails}}</p>
+        <div id="post-details" >
+            <p id="post-id-{{@index}}" class="limit-150">{{this.postDetails}}</p>
         </div>
 
         <div class="post-parameters">
             <span>{{this.date}}</span>
-            <a class="post-param-right" href="">{{this.repliesCount}} replies</a>
+            <a id="replies-anchor{{@index}}" class="post-param-right replies-link" onclick="expandCloseReplies(this)" >{{this.repliesCount}} replies</a>
+            {{>replies replies = this.replies}}
         </div>
+        
     </div>
 </div>
 {{/each}}
