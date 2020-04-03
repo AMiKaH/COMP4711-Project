@@ -3,7 +3,7 @@ let app = express();
 let bodyParser = require('body-parser');
 let path = require('path');
 let db = require('./db/db');
-
+var cookieParser = require('cookie-parser');
 const expressHbs = require('express-handlebars');
 
 app.engine(
@@ -19,6 +19,9 @@ app.engine(
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false })) // middleware
+
+
+app.use(cookieParser());
 
 // parse application/json
 app.use(bodyParser.json()) // middleware
@@ -84,7 +87,6 @@ app.get('/', function (req,res) {
   //   },
   // ]
   // })
-
 
 });
 

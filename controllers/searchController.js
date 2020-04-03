@@ -2,7 +2,7 @@ let modPost = require('../models/post');
 
 exports.searchByKeyword = function(req,res,next) {
     
-    let keyword = req.body.search;
+    let keyword = req.body.search.toLowerCase();
     let post = modPost.searchPostRe(keyword);
     post.then((data) => {
         res.render('search', {postList: data.rows, signedIn:true});

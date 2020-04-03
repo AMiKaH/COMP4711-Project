@@ -2,8 +2,11 @@ let mod = require('../models/post');
 let modUser = require('../models/user');
 
 exports.addPost = function(req,res,next) {
-
-    let uid = 1;//req.body.userID;
+    if(req.cookies.signedIn !== "true"){
+        res.redirect(301,'/');
+        return
+    }
+    let uid = req.cookies.userid;
     let top = req.body.topic;
     let titl = req.body.title;
     let txt = req.body.text;
@@ -23,6 +26,12 @@ exports.addPost = function(req,res,next) {
 }
 
 exports.getPost = function(req,res,next) {
+
+    if(req.cookies.signedIn !== "true"){
+        res.redirect(301,'/');
+        return
+    }
+    
     let id = req.params.id;
     let post = mod.getpost(id);
     post.then((data) => {
@@ -30,6 +39,11 @@ exports.getPost = function(req,res,next) {
     });
 }
 exports.getRecentPosts = function(req,res,next){
+
+    if(req.cookies.signedIn !== "true"){
+        res.redirect(301,'/');
+        return
+    }
     let post = mod.getRecentPostRe();
     let prof = mod.tempProf();
 
@@ -39,4 +53,23 @@ exports.getRecentPosts = function(req,res,next){
         signedIn:true,
         postList: data[0].rows});
     });
+}
+
+exports.addReply = function(req,res,next){
+    if(req.cookies.signedIn !== "true"){
+        res.redirect(301,'/');
+        return
+    }
+    if(req.body.replyText === "")
+        return;
+
+    let data = {
+        postID: req.body.postID,
+        userID: req.cookies.userid,
+        text: req.body.replyText
+    }
+    let post = mod.addReply(data);
+    post.then((data)=>{
+
+    })
 }
