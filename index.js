@@ -31,7 +31,11 @@ let routes = require('./routes/routes');
 app.use(express.static(path.join(__dirname,'public')));
 
 app.get('/', function (req,res) {
-  res.render('home', { pageTitle: 'KB Login/Signup', heading: 'Welcome to People App'});
+  if(req.cookies.signedIn === "true" && req.cookies.userid !== undefined){
+    res.redirect(301,'/homepage')
+  } else {
+    res.render('home', { pageTitle: 'KB Login/Signup', heading: 'Welcome to People App'});
+  }
 });
 
 app.use(routes)
