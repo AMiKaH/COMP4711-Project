@@ -19,18 +19,14 @@ function parsePosts(rows){
     let postList = rows;
     let replies = [];
     postList.forEach(element => {
-        if(element.reply_text[0] != null){
-            for(let i = element.reply_text.length - 1; i >= 0; i--){
-                let id = element.reply_userid[i].trim();
-                let imgUrl = modUser.getUserImgByID(id);
+        if(element.r_text[0] != null){
+            for(let i = element.r_text.length - 1; i >= 0; i--){
 
-                imgUrl.then((data)=>{
-                    let obj = {
-                        imgUrl : imgUrl.imgurl,
-                        replyText : element.reply_text[i]
+                let obj = {
+                        imgUrl : element.r_imgurl[i],
+                        replyText : element.r_text[i]
                     }                
                 replies.push(obj);
-                })
                 
             }
             element.replies = replies;
