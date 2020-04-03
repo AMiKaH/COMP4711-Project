@@ -25,21 +25,24 @@
                 <p>What is your question today?</p>
             </div>
             <div id="question-form" class="form-control">
-                <input class="input-field" type="text" name="subject" placeholder="subject">
-                <textarea class="input-field" rows="4" name="details" placeholder="explain in detail..."></textarea>
-                <select class="topic-select" name="topic">
-                    <option value="php">php</option>
-                    <option value="node.js">node.js</option>
-                    <option value="java">java</option>
-                    <option value="sql">sql</option>
-                    <option value="zend">zend</option>
-                </select>
-                <button type="submit" class="white-blue-btn" id="new-post-btn">post to timeline</button>
+                <form form action="/createNewPost" METHOD="GET">
+                    <input class="input-field" type="text" name="subject" placeholder="subject">
+                    <textarea class="input-field" rows="4" name="details" placeholder="explain in detail..."></textarea>
+                    <select class="topic-select" name="topic">
+                        <option value="php">php</option>
+                        <option value="node.js">node.js</option>
+                        <option value="java">java</option>
+                        <option value="sql">sql</option>
+                        <option value="zend">zend</option>
+                    </select>
+                    <button type="submit" class="white-blue-btn" id="new-post-btn">post to timeline</button>
+                </form>
             </div>
         </div>
 
         <div class="profile-wrapper">
             <div id="search-by-topic-div" class="form-control">
+                <form action="/searchByTopic" METHOD="GET"></form>
                 <span>Search by topic</span>
                 <select class="topic-select" name="topic">
                     <option value="php">php</option>
@@ -49,6 +52,7 @@
                     <option value="zend">zend</option>
                 </select>
                 <button type="submit" class="blue-btn" id="search-by-topic-btn">go -></button>
+                </form>
             </div>
         </div>
 

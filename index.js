@@ -38,7 +38,7 @@ app.get('/', function (req,res) {
   //res.render('visitProfile', { pageTitle: 'Viewing Profile', signedIn:true, 
 
   
- /*res.render('homePage', {pageTitle: 'Search', signedIn:true, 
+ res.render('homePage', {pageTitle: 'Search', signedIn:true, 
     profile: {
       'firstName' : 'Random',
       'lastName' : 'User',
@@ -84,7 +84,7 @@ app.get('/', function (req,res) {
       ]
     },
   ]
-  })*/
+  })
 
 });
 
