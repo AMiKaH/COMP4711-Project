@@ -1,12 +1,16 @@
-let mod = require('../models/login');
+let modUser = require('../models/user');
+let modHome = require('../models/user');
 
 exports.validateLogin = function(req,res,next) {
-    let email = req.params.email;
-    let pass = req.params.password;
+    let email = req.body.email;
+    let pass = req.body.password;
 
-    let log = mod.valid(id,pass);
+    let log = modUser.userExists(email,pass);
     
     log.then((data) => {
-        return data == 'TRUE';
+        if(data.rows[0].cnt === "1"){
+            sessionStorage.setItem('signedIn',data.rows[0]);
+            let home = modHome
+        }
     });
 }

@@ -1,5 +1,5 @@
 let mod = require('../models/post');
-
+let modUser = require('../models/user');
 exports.addPost = function(req,res,next) {
 
     let uid = req.body.userID;
@@ -27,8 +27,13 @@ exports.getPost = function(req,res,next) {
 }
 exports.getRecentPosts = function(req,res,next){
     let post = mod.getRecentPostRe();
-    post.then((data) => {
-        res.render('homepage', {posts: data.rows});
+    let prof = mod.tempProf();
+
+    Promise.all([post,prof]).then((data)=>{
+        res.render('homepage', {pageTitle:'HomePage',
+        profile: data[1].rows[0],
+        signedIn:true,
+        postList: data[0].rows});
     });
 }
 

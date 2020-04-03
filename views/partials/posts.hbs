@@ -1,26 +1,26 @@
 {{#each postList}}
 <div class="post-wrapper">
     <div class="post-inline-divs">
-        <img class="circle-img-75" src="{{this.imgUrl}}" alt="{{this.firstName}}">
+        <img class="circle-img-75" src="{{this.imgurl}}" alt="{{this.fname}}">
     </div>
 
 
     <div class="post-parameters-outer">
         <div class="post-parameters">
             <div id="post-title" class="post-param-left post-header-inline">
-                <h4>{{this.postTitle}}</h4>
+                <h4>{{this.title}}</h4>
             </div>
             <div id="post-topic" class="post-param-right post-header-inline">
-                <p>{{this.postTopic}}</p>
+                <p>{{this.topicname}}</p>
             </div>    
         </div>
 
         <div id="post-details" >
-            <p id="post-id-{{@index}}" class="limit-150">{{this.postDetails}}</p>
+            <p id="post-id-{{@index}}" class="limit-150">{{this.text}}</p>
         </div>
 
         <div class="post-parameters">
-            <span>{{this.date}}</span>
+            <span>{{this.timedate}}</span>
             <a id="replies-anchor{{@index}}" class="post-param-right replies-link" onclick="expandCloseReplies(this)" >{{this.repliesCount}} replies</a>
             {{>replies replies = this.replies}}
         </div>

@@ -2,8 +2,8 @@
     <div class="profile-divs">
         <div class="profile-wrapper">
             <div id="profile-bio">
-                <img id="profile-img" class="circle-img-100" src="{{profile.imgUrl}}" alt="{{profile.firstName}}"/>
-                <h3 id="profile-name">{{profile.firstName}} {{profile.lastName}}</h3>
+                <img id="profile-img" class="circle-img-100" src="{{profile.imgurl}}" alt="{{profile.firstName}}"/>
+                <h3 id="profile-name">{{profile.fname}} {{profile.lname}}</h3>
                 <span>{{profile.about}}</span>
             </div>
             <br/>
@@ -11,7 +11,7 @@
                 <table>
                     <tr><td><a>Posts</a></td> <td>{{profile.postCount}}</td> </tr>
                     <tr><td><a>Messages</a></td></td><td>{{profile.messageCount}}</td></tr>
-                    <tr><td>Likes</td><td>{{profile.likesCount}}</td></tr>
+                    <tr><td>Likes</td><td>{{profile.likes}}</td></tr>
                 </table>
                 <br>
                 <a>Edit profile</a>
