@@ -17,7 +17,11 @@ function getUserByID(id) {
     let sql = `SELECT * FROM v_user WHERE userID = ${id} LIMIT 1`;
     return db.query(sql);
 }
+function getUserImgByID(id) {
+    let sql = `SELECT imgurl FROM v_user WHERE userID = ${id} LIMIT 1`;
 
+    return db.query(sql);
+}
 // get a specific individual with email
 function getUserByEmail(email) {
     let sql = `SELECT * FROM v_user WHERE email = '${email}'`
@@ -62,6 +66,7 @@ module.exports = {
     getAll: getAllUser,
     getUserByID: getUserByID,
     getUserByEmail: getUserByEmail,
+    getUserImgByID: getUserImgByID,
     userExists: userExists,
     updateUser: updateUser,
     getLikes: getLikes,

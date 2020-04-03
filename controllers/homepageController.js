@@ -16,8 +16,20 @@ exports.getHomePage = function(req,res,next){
 }
 
 function parsePosts(rows){
-    let obj 
-    rows.forEach(element => {
-        
+    let postList = rows;
+    let replies = [];
+    postList.forEach(element => {
+        if(element.r_text[0] != null){
+            for(let i = element.r_text.length - 1; i >= 0; i--){
+
+                let obj = {
+                        imgUrl : element.r_imgurl[i],
+                        replyText : element.r_text[i]
+                    }                
+                replies.push(obj);
+                
+            }
+            element.replies = replies;
+        }
     });
 }

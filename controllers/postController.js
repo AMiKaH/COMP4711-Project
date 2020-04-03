@@ -7,6 +7,9 @@ exports.addPost = function(req,res,next) {
     let top = req.body.topic;
     let titl = req.body.title;
     let txt = req.body.text;
+    
+    if(top === "" || titl === "" || txt === "")
+        return;
 
     let newPost = {
        userID: uid,
