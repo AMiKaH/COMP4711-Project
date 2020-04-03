@@ -32,7 +32,10 @@ app.get('/', function (req,res) {
   res.render('home', { pageTitle: 'KB Login/Signup', heading: 'Welcome to People App'});
   //res.render('editProfile', { pageTitle: 'Edit Profile', heading: 'Welcome to People App' , signedIn:true});
   //res.render('visitProfile', { pageTitle: 'Viewing Profile', heading: 'Welcome to People App' , signedIn:true});
+  //res.render('messageUser', { pageTitle: 'Viewing Profile', heading: 'Welcome to People App' , signedIn:true});
+  //res.render('homePage', { pageTitle: 'Viewing Profile', heading: 'Welcome to People App' , signedIn:true});
 
+  //res.render('messages', { pageTitle: 'Messages', heading: 'Welcome to People App' , signedIn:true});
 
   // res.render('visitProfile', { pageTitle: 'Viewing Profile', signedIn:true, 
   //   profile: {
@@ -81,6 +84,7 @@ app.get('/', function (req,res) {
   //   },
   // ]
   // })
+
 
 });
 
