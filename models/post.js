@@ -55,7 +55,7 @@ function getPostCounts(id){
 // get all the posts written by specific user
 function getPosts(id) {
     let sql = "SELECT * FROM post WHERE userID = " + id;
-    return db.qeury(sql);
+    return db.query(sql);
 }
 
 module.exports = {
