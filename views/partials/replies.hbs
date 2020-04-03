@@ -11,8 +11,9 @@
     </div>
     {{/each}}
     <div id="reply-form">
-        <form id="replies-form" METHOD="GET">
-            <input name="add-reply-text" class="reply-input-field input-field" placeholder="add your reply ...">
+        <form action="/addReply" id="replies-form" METHOD="POST">
+            <input type="hidden" name="postID" value="{{this.postid}}">
+            <input name="replyText" type="text"  class="reply-input-field input-field" placeholder="add your reply ...">
             <button type="submit" class="comment-btn blue-btn">comment</button>
         </form>
     </div>
