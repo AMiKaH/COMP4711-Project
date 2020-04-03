@@ -23,7 +23,6 @@ exports.getHomePage = function(req,res,next){
 function parsePosts(rows){
     let postList = rows;
     postList.forEach(element => {
-<<<<<<< HEAD
         var replies = [];
         if(element.r_text[0] != null){
             for(let i = element.r_text.length - 1; i >= 0; i--){
@@ -33,21 +32,8 @@ function parsePosts(rows){
                         imgUrl : element.r_imgurl[i],
                         replyText : element.r_text[i]
 
-=======
-        if(element.reply_text[0] != null){
-            for(let i = element.reply_text.length - 1; i >= 0; i--){
-                let id = element.reply_userid[i].trim();
-                let imgUrl = modUser.getUserImgByID(id);
-
-                imgUrl.then((data)=>{
-                    let obj = {
-                        imgUrl : imgUrl.imgurl,
-                        replyText : element.reply_text[i]
->>>>>>> parent of 31a68f2... fixed issue with parsing posts
                     }                
                 replies.push(obj);
-                })
-                
             }
             element.replies = replies;
         }

@@ -2,10 +2,7 @@ let mod = require('../models/post');
 let modUser = require('../models/user');
 
 exports.addPost = function(req,res,next) {
-    if(req.cookies.signedIn !== "true"){
-        res.redirect(301,'/');
-        return
-    }
+    
     let uid = req.cookies.userid;
     let top = req.body.topic;
     let titl = req.body.title;

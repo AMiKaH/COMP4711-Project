@@ -17,6 +17,6 @@ router.get('/homepage',home.getHomePage);
 
 router.post('/addReply',postController.addReply);
 
-router.get('/logout',loginController.logout);
+router.post('/logout',loginController.logout);
 
 module.exports = router;
