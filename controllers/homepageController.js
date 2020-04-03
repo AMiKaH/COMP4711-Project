@@ -16,8 +16,24 @@ exports.getHomePage = function(req,res,next){
 }
 
 function parsePosts(rows){
-    let obj 
-    rows.forEach(element => {
-        
+    let postList = rows;
+    let replies = [];
+    postList.forEach(element => {
+        if(element.reply_text[0] != null){
+            for(let i = element.reply_text.length - 1; i >= 0; i--){
+                let id = element.reply_userid[i].trim();
+                let imgUrl = modUser.getUserImgByID(id);
+
+                imgUrl.then((data)=>{
+                    let obj = {
+                        imgUrl : imgUrl.imgurl,
+                        replyText : element.reply_text[i]
+                    }                
+                replies.push(obj);
+                })
+                
+            }
+            element.replies = replies;
+        }
     });
 }
