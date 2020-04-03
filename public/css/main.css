@@ -302,7 +302,13 @@ input::placeholder {
 
 .circle-img-50 {
     width: 50px;
-    height: 50;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.circle-img-35 {
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
 }
 
@@ -516,4 +522,156 @@ a {
     width: 40%;
     margin: 0 auto;
     margin-top: 25px;
+}
+
+/**
+    Send message 
+**/
+
+#send-message-wrapper {
+    margin-top: 25px;
+    text-align: center;
+}
+
+#send-message-inner-wrapper {
+    display: inline-block;
+    margin: 0 auto;
+    width: 40%;
+    text-align: center;
+}
+
+#message-left-div {
+    width: 25%;
+    float: left;
+}
+
+#message-right-div {
+    width: 70%;
+    float: right;
+}
+
+#message-subject {
+    width: 70%;
+}
+
+
+
+/**
+    seach div
+**/
+
+#search-wrapper {
+    margin-top: 25px;;
+    text-align: center;
+}
+#search-div{
+    display: inline-block;
+    margin: 0 auto;
+    width: 40%;
+}
+
+/**
+    Conversations page
+**/
+
+#messages-main-wrapper{
+    margin-top: 50px;;
+}
+#conversations {
+    width: 25%;
+    margin-right: 25px;
+    vertical-align: middle;
+}
+
+.border-bottom:hover {
+    background-color: rgb(241, 241, 241);
+}
+
+.conversation-wrapper {
+    vertical-align: middle;
+    
+
+}
+
+.border-bottom {
+    border-color: lightgrey;
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    margin: 10px 0px 10px 0px
+}
+
+.conversation-left {
+    margin: 0 auto;
+    text-align: center;
+    width: 25%;
+    vertical-align: top;
+}
+
+.conversation-right {
+    width: 70%;
+    vertical-align: top;
+}
+
+.float-left{
+    font-weight: bold;
+    float: left;
+    margin-right: 15px;;
+}
+
+.float-right {
+    float: right;
+}
+
+.coversation-subject {
+    margin-top: 5px;
+}
+
+#messages {
+    border: none;
+    border-left: lightgrey;
+    border-width: 0px 0px 0px 1px;
+    border-style: solid;
+}
+
+.messages-form {
+    vertical-align: bottom;
+}
+
+p.background {
+    margin-top: 0px;
+    text-align: center;
+}
+
+.background {
+    position: relative;
+    z-index: 1;
+}
+
+.background:before {
+    border-top: 1px solid #dfdfdf;
+    content:"";
+    margin: 0 auto; 
+    position: absolute; 
+    top: 8px; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+.bg-line { 
+    background: #fff; 
+    padding: 0 15px; 
+}
+
+.message-left {
+    width: 15%;
+    text-align: center;
+}
+
+.message-right {
+    width: 70%;
+    vertical-align: center;
+}
+
+.message-div {
+    vertical-align: center;
 }
