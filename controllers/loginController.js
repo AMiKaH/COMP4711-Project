@@ -9,8 +9,8 @@ exports.validateLogin = function(req,res,next) {
     
     log.then((data) => {
         if(data.rows[0].cnt === "1"){
+            //TODO GIVE AN ACTUAL COOKIE OR SOMETHING
             sessionStorage.setItem('signedIn',data.rows[0]);
-            let home = modHome
         }
     });
 }

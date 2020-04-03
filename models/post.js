@@ -3,8 +3,8 @@ let db = require('../util/database');
 // insert a single post to the database
 function addPost(data) {
    
-    let sql = `INSERT INTO post (userid, topic, title, "text") VALUES (${data.userID}, ${data.topic}, '${data.title}', '${data.text}')`;
-    return db.query(sql);
+    let sql = `INSERT INTO post (userid, topic, title, "text") VALUES (${data.userID}, (SELECT topicid FROM topic where topicname LIKE '%${data.topic}%'), '${data.title}', '${data.text}')`;
+    db.query(sql);
 }
 
  
@@ -41,7 +41,8 @@ function searchPostWithReplies(keyword) {
 
 // search post with replies by topicID
 function searchPostWithRepliesByTopic(topicID) {
-    let sql = `SELECT * FROM v_post_r WHERE topic = ` + topicID;
+    let sql = `SELECT * FROM v_post_r WHERE topic = ` + 
+    `(SELECT topicid FROM topic where topicname LIKE '%${topicID}%')`;
     return db.query(sql)
 }
 
