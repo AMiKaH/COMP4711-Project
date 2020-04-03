@@ -29,9 +29,16 @@ app.get('/', function (req,res) {
   //res.render('home', { pageTitle: 'KB Login/Signup', heading: 'Welcome to People App'});
   //res.render('editProfile', { pageTitle: 'Edit Profile', heading: 'Welcome to People App' , signedIn:true});
   //res.render('visitProfile', { pageTitle: 'Viewing Profile', heading: 'Welcome to People App' , signedIn:true});
+  //res.render('messageUser', { pageTitle: 'Viewing Profile', heading: 'Welcome to People App' , signedIn:true});
+  //res.render('homePage', { pageTitle: 'Viewing Profile', heading: 'Welcome to People App' , signedIn:true});
+
+  //res.render('messages', { pageTitle: 'Messages', heading: 'Welcome to People App' , signedIn:true});
 
 
-  res.render('visitProfile', { pageTitle: 'Viewing Profile', signedIn:true, 
+  //res.render('visitProfile', { pageTitle: 'Viewing Profile', signedIn:true, 
+
+  
+ /*res.render('homePage', {pageTitle: 'Search', signedIn:true, 
     profile: {
       'firstName' : 'Random',
       'lastName' : 'User',
@@ -68,16 +75,16 @@ app.get('/', function (req,res) {
       'replies' : [
         {
           'imgUrl' : 'https://randomuser.me/api/portraits/lego/2.jpg',
-          'replyText' : 'Here\'s a reply'
+          'replyText' : 'Here\'s more replies'
         },
         {
           'imgUrl' : 'https://randomuser.me/api/portraits/lego/4.jpg',
-          'replyText' : 'Here\'s MORE!!'
+          'replyText' : 'Here\'s EVEN MORE!!'
         }
       ]
     },
   ]
-  })
+  })*/
 
 });
 
