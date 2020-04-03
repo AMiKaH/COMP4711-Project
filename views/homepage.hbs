@@ -2,16 +2,16 @@
     <div class="profile-divs">
         <div class="profile-wrapper">
             <div id="profile-bio">
-                <img id="profile-img" class="circle-img-100" src="{{profile.imgUrl}}" alt="{{profile.firstName}}"/>
-                <h3 id="profile-name">{{profile.firstName}} {{profile.lastName}}</h3>
+                <img id="profile-img" class="circle-img-100" src="{{profile.imgurl}}" alt="{{profile.firstName}}"/>
+                <h3 id="profile-name">{{profile.fname}} {{profile.lname}}</h3>
                 <span>{{profile.about}}</span>
             </div>
             <br/>
             <div class="profile-inner-wrapper">
                 <table>
-                    <tr><td><a>Posts</a></td> <td>{{profile.postCount}}</td> </tr>
-                    <tr><td><a>Messages</a></td></td><td>{{profile.messageCount}}</td></tr>
-                    <tr><td>Likes</td><td>{{profile.likesCount}}</td></tr>
+                    <tr><td><a>Posts</a></td> <td>{{profile.postcnt}}</td> </tr>
+                    <tr><td><a>Messages</a></td></td><td>{{profile.msgcnt}}</td></tr>
+                    <tr><td>Likes</td><td>{{profile.like}}</td></tr>
                 </table>
                 <br>
                 <a>Edit profile</a>
@@ -24,25 +24,23 @@
             <div>
                 <p>What is your question today?</p>
             </div>
-            <div id="question-form" class="form-control">
-                <form form action="/createNewPost" METHOD="GET">
-                    <input class="input-field" type="text" name="subject" placeholder="subject">
-                    <textarea class="input-field" rows="4" name="details" placeholder="explain in detail..."></textarea>
-                    <select class="topic-select" name="topic">
-                        <option value="php">php</option>
-                        <option value="node.js">node.js</option>
-                        <option value="java">java</option>
-                        <option value="sql">sql</option>
-                        <option value="zend">zend</option>
-                    </select>
-                    <button type="submit" class="white-blue-btn" id="new-post-btn">post to timeline</button>
-                </form>
-            </div>
+            <form action="addPost" method="POST" id="question-form" class="form-control">
+                <input class="input-field" type="text" name="title" placeholder="subject">
+                <textarea class="input-field" rows="4" name="text" placeholder="explain in detail..."></textarea>
+                <select class="topic-select" name="topic">
+                    <option value="php">php</option>
+                    <option value="nodejs">node.js</option>
+                    <option value="java">java</option>
+                    <option value="sql">sql</option>
+                    <option value="zend">zend</option>
+                </select>
+                <button type="submit" class="white-blue-btn" id="new-post-btn">post to timeline</button>
+            </form>
         </div>
 
         <div class="profile-wrapper">
-            <div id="search-by-topic-div" class="form-control">
-                <form action="/searchByTopic" METHOD="GET"></form>
+            <form action="/searchTopic" method="POST" id="search-by-topic-div" class="form-control">
+
                 <span>Search by topic</span>
                 <select class="topic-select" name="topic">
                     <option value="php">php</option>
@@ -51,9 +49,9 @@
                     <option value="sql">sql</option>
                     <option value="zend">zend</option>
                 </select>
-                <button type="submit" class="blue-btn" id="search-by-topic-btn">go -></button>
-                </form>
-            </div>
+                <button  type="submit" class="blue-btn" id="search-by-topic-btn">go -></button>
+            </form>
+
         </div>
 
         <div class="profile-wrapper-posts">

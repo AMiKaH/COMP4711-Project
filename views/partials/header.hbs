@@ -20,7 +20,7 @@
                         </div>
 
                         <div id="search" class="form-control">
-                            <form>
+                            <form action="/search" method="POST">
                                 <input  class="input-ilfield" type="text" name="search" placeholder="search">
                             </form>
                         </div>
@@ -32,7 +32,7 @@
                             </form>
                         </div>
                     </div>
-                    <spane class="stretch"></spane>
+                    <span class="stretch"></span>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="inline-divs">
                         <div id="login-div">
-                            <form id="login-form" method="POST">
+                            <form id="login-form" action="/validateLogin" method="POST">
                                 <div class="form-control">
                                     <input class="input-field" type="text" name="email" placeholder="email">
                                     <input class="input-field" type="password" name="password" placeholder="password">
