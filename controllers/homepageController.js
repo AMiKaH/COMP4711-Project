@@ -31,8 +31,10 @@ function parsePosts(rows){
                         postid: element.postid,
                         imgUrl : element.r_imgurl[i],
                         replyText : element.r_text[i]
+
                     }                
                 replies.push(obj);
+                })
                 
             }
             element.replies = replies;
