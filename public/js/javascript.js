@@ -21,6 +21,13 @@ function expandCloseReplies(clickedAnchor) {
     document.getElementById
 }
 
+/**
+ * This function is used to limit the number of characters displayed
+ * per post. When a user exapnds the replies it will also 
+ * display the entire topic text
+ * @param {*} className 
+ * @param {*} maxLength 
+ */
 function truncateText(className, maxLength) {
     var element = document.getElementsByClassName(className);
     console.log(element)
@@ -35,9 +42,33 @@ function truncateText(className, maxLength) {
         if (truncated.length > maxLength) {
             element[eachElement].innerText= truncated.substr(0,maxLength) + '...';
         }
-        
     }
-
 }
 
-//document.getElementsByClassName("limit-150").innerText = truncateText('limit-150', 150);
+/**
+ * Paginate
+ */
+function paginate(button){
+     //check which button is pressed first
+     if (button.id == "btn-next") {
+        fetch('/getArtists')
+        .then((response) => response.json())
+        .then((data) => {
+            artistList = data;
+            console.log(artistList.length)
+        if (artistList.length <= 0 || artistList == null || artistList == undefined){
+            var artistList = [];
+        } else {
+            for (var artist in artistList){
+                 //Get List Div
+                 artist = artistList[artist]
+                 populatePage(artist)
+            }
+        }
+        toggleInnerWrapperDiv();
+        })
+        .catch((err) => console.log(err));
+     } else {
+
+     }
+ }

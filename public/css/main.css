@@ -426,6 +426,14 @@ input::placeholder {
     -webkit-box-orient: vertical; 
 }
 
+#post-next {
+    float: right;
+}
+
+#post-previous {
+    float: left;
+
+}
 /**
     Replies css
 **/
