@@ -2,6 +2,7 @@ let express = require('express')
 let app = express();
 let bodyParser = require('body-parser');
 let path = require('path');
+let db = require('./db/db');
 
 const expressHbs = require('express-handlebars');
 
@@ -22,7 +23,11 @@ app.use(bodyParser.urlencoded({ extended: false })) // middleware
 // parse application/json
 app.use(bodyParser.json()) // middleware
 
+let postRoutes = require('./routes/post');
+
 app.use(express.static(path.join(__dirname,'public')));
+
+
 
 app.get('/', function (req,res) {
   //res.render('completeRegistration', { pageTitle: 'KB Login/Signup', heading: 'Welcome to People App', finishSigning: true});
@@ -81,6 +86,7 @@ app.get('/', function (req,res) {
 
 });
 
+app.use(postRoutes);
 
 app.listen(process.env.PORT || 3000, () => console.log('Server ready @ port 3000'))
 
