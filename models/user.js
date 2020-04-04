@@ -6,6 +6,12 @@ function addUser(data) {
     return db.query(sql);
 }
 
+// add a single user profile to the database
+function addProfile(data) {
+    let sql = `INSERT INTO "profile" (userid, fname, lname) VALUES ('${data.userid}', '${data.fname}','${data.lname}')`;
+    return db.query(sql);
+}
+
 // get all the individuals in the database
 function getAllUser() {
     let sql = "SELECT * FROM v_user";
@@ -17,11 +23,13 @@ function getUserByID(id) {
     let sql = `SELECT * FROM v_user WHERE userID = ${id} LIMIT 1`;
     return db.query(sql);
 }
+
 function getUserImgByID(id) {
     let sql = `SELECT imgurl FROM v_user WHERE userID = ${id} LIMIT 1`;
 
     return db.query(sql);
 }
+
 // get a specific individual with email
 function getUserByEmail(email) {
     let sql = `SELECT * FROM v_user WHERE email = '${email}'`
@@ -33,7 +41,6 @@ function userExists(email, pwd) {
     let sql = `SELECT userID FROM "user" WHERE email = '${email}' and password = '${pwd}'`
     return db.query(sql)
 }
-
 
 // update user information
 function updateUser(data) {
@@ -63,6 +70,7 @@ function increaseLike(id) {
 
 module.exports = {
     addUser: addUser,
+    addProfile: addProfile,
     getAll: getAllUser,
     getUserByID: getUserByID,
     getUserByEmail: getUserByEmail,
