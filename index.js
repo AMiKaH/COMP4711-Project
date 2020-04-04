@@ -52,7 +52,7 @@ app.get('/', function (req,res) {
   if(req.cookies.signedIn === "true" && req.cookies.userid !== undefined){
     res.redirect(301,'/homepage')
   } else {
-    res.render('home', { pageTitle: 'KB Login/Signup', heading: 'Welcome to People App'});
+    res.render('home', { pageTitle: 'KB Login/Signup', loginError: false, heading: 'Welcome to People App'});
   }
 });
 

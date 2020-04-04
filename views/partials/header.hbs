@@ -52,6 +52,9 @@
                         <h1><span>knowledge</span><span id="base-span">Base</span></h1>
                     </div>
                     <div class="header-inline-divs float-right inline-divs">
+                        {{#if loginError}}
+                            <span class="error">Username and password combination is incorrect!</span>
+                        {{/if}}
                         <div id="login-div">
                             <form id="login-form" action="/validateLogin" method="POST">
                                 <div id="login-form" class="form-control">

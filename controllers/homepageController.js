@@ -3,6 +3,7 @@ let modUser = require('../models/user');
 
 
 exports.getHomePage =  function(req,res,next, pageNumber = 0){
+
     if(req.cookies.signedIn !== "true"){
         res.redirect(301,'/');
         return
@@ -18,7 +19,6 @@ exports.getHomePage =  function(req,res,next, pageNumber = 0){
     let post = modPost.getRecentPostRe(req.cookies.pageNum);
     let prof = modUser.getUserByID(req.cookies.userid);
     
-    var html2
     Promise.all([post,prof]).then((data)=>{
         parsePosts(data[0].rows)
         
@@ -27,11 +27,11 @@ exports.getHomePage =  function(req,res,next, pageNumber = 0){
         profile: data[1].rows[0],
         signedIn:true,
         postList: data[0].rows,
+        postNotComplete: req.query.postNotComplete,
         cache: false}, (err, html) => {
             res.set('content-type', 'text/html')
             res.send(html)
         })
-
     });
 }
 
