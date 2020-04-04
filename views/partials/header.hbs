@@ -16,7 +16,9 @@
                         <span class="helper"></span>
 
                         <div id="header-logo">
-                            <img src="/imgs/Kb.png">
+                            <a href="/homepage">
+                                <img src="/imgs/Kb.png" onclick='/'>
+                            </a>
                         </div>
 
                         <div id="search" class="form-control">
@@ -27,7 +29,7 @@
                     </div>
                     <div class="logout">
                         <div class="form-control">
-                            <form>
+                            <form action="/logout" method="POST">
                                 <button class="btn" type="submit">logout</button>
                             </form>
                         </div>
