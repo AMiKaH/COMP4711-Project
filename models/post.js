@@ -34,16 +34,18 @@ function addReply(data) {
 }
 
 // search post with replies using keyword 
-function searchPostWithReplies(keyword) {
+function searchPostWithReplies(keyword,page) {
+    let offset = 5 * page;
     let condition = `(LOWER(title) LIKE '%${keyword}%' OR LOWER(topicName) LIKE '%${keyword}%' OR LOWER(text) LIKE '%${keyword}%')`;
-    let sql = `SELECT * FROM v_post_r WHERE ${condition}`;
+    let sql = `SELECT '` + page + `' AS page,* FROM v_post_r WHERE ${condition}LIMIT 5 offset `  + offset;
     return db.query(sql)
 }
 
 // search post with replies by topicID
-function searchPostWithRepliesByTopic(topicID) {
-    let sql = `SELECT * FROM v_post_r WHERE topic = ` + 
-    `(SELECT topicid FROM topic where topicname LIKE '%${topicID}%')`;
+function searchPostWithRepliesByTopic(topicID,page) {
+    let offset = 5 * page;
+    let sql = `SELECT '` + page + `' AS page, * FROM v_post_r WHERE topic = ` + 
+    `(SELECT topicid FROM topic where topicname LIKE '%${topicID}%') LIMIT 5 offset `  + offset;
     return db.query(sql)
 }
 
@@ -55,7 +57,7 @@ function getPostCounts(id){
 
 // get all the posts written by specific user
 function getPosts(id) {
-    let sql = "SELECT * FROM post WHERE userID = " + id;
+    let sql = "SELECT *, to_char(timedate, 'DD mon YYYY') f_timedate FROM post WHERE userID = " + id;
     return db.qeury(sql);
 }
 

@@ -1,3 +1,5 @@
+{{log this}}
+
 <div id="profile">
     <div class="profile-divs">
         <div class="profile-wrapper">
@@ -23,6 +25,9 @@
         <div class="profile-wrapper">
             <div>
                 <p>What is your question today?</p>
+            {{#ifCond postNotComplete 666}}
+                <span class="error">Please make sure all fields are filled out</span>
+            {{/ifCond}}
             </div>
             <form action="addPost" method="POST" id="question-form" class="form-control">
                 <input class="input-field" type="text" name="title" placeholder="subject">
@@ -44,7 +49,7 @@
                 <span>Search by topic</span>
                 <select class="topic-select" name="topic">
                     <option value="php">php</option>
-                    <option value="node.js">node.js</option>
+                    <option value="nodejs">node.js</option>
                     <option value="java">java</option>
                     <option value="sql">sql</option>
                     <option value="zend">zend</option>
