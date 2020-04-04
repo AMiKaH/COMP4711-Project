@@ -1,8 +1,10 @@
+
 /**
- * This will expanf the replies section if it's closed
+ * This will expand the replies section if it's closed
  * and close it if it is open whenever the user clicks the 
  * replies link. This will also expand and close the post text
  */
+
 
 function expandCloseReplies(clickedAnchor) {
     var id = clickedAnchor.id[clickedAnchor.id.length - 1];
@@ -49,26 +51,43 @@ function truncateText(className, maxLength) {
  * Paginate
  */
 function paginate(button){
+    initSessionVar();
+
      //check which button is pressed first
-     if (button.id == "btn-next") {
-        fetch('/getArtists')
-        .then((response) => response.json())
+    if (button.id == "btn-next") {
+        sessionStorage.setItem("pageNum", parseInt(sessionStorage.getItem("pageNum")) + 1)
+        
+        let pageNum = parseInt(sessionStorage.getItem("pageNum"))
+        
+        fetch('/paginator?pageNum=' + pageNum)
+        .then((res) => res)  
         .then((data) => {
-            artistList = data;
-            console.log(artistList.length)
-        if (artistList.length <= 0 || artistList == null || artistList == undefined){
-            var artistList = [];
-        } else {
-            for (var artist in artistList){
-                 //Get List Div
-                 artist = artistList[artist]
-                 populatePage(artist)
-            }
-        }
-        toggleInnerWrapperDiv();
+            
         })
         .catch((err) => console.log(err));
-     } else {
+    } else {
+        sessionStorage.setItem("pageNum", parseInt(sessionStorage.getItem("pageNum")) - 1)
+        console.log(sessionStorage.getItem("pageNum"))
+        let pageNum = parseInt(sessionStorage.getItem("pageNum"))
 
-     }
+        fetch('/paginator?pageNum=' + pageNum)
+        .then((res) => res)  
+        .then((data) => {
+            
+        })
+        .catch((err) => console.log(err));
+    }
+
+    if (parseInt(sessionStorage.getItem("pageNum")) > 0) {
+        document.getElementById("post-previous").style.display = 'inline-block'
+    } else {
+        document.getElementById("post-previous").style.display = 'none'
+    }
+     
  }
+
+ function initSessionVar() {
+    if (sessionStorage.pageNum == null) {
+        sessionStorage.pageNum = parseInt(0);
+    } 
+}
