@@ -51,43 +51,30 @@ function truncateText(className, maxLength) {
  * Paginate
  */
 function paginate(button){
-    initSessionVar();
 
      //check which button is pressed first
+    let pageNum = getCookieValue('pageNum');
     if (button.id == "btn-next") {
-        sessionStorage.setItem("pageNum", parseInt(sessionStorage.getItem("pageNum")) + 1)
-        
-        let pageNum = parseInt(sessionStorage.getItem("pageNum"))
-        
-        fetch('/paginator?pageNum=' + pageNum)
-        .then((res) => res)  
-        .then((data) => {
-            
-        })
-        .catch((err) => console.log(err));
+        pageNum++;
+        document.cookie ="pageNum=" + pageNum;
+        window.location.reload(true)
     } else {
-        sessionStorage.setItem("pageNum", parseInt(sessionStorage.getItem("pageNum")) - 1)
-        console.log(sessionStorage.getItem("pageNum"))
-        let pageNum = parseInt(sessionStorage.getItem("pageNum"))
+        
+        if(pageNum != 0)
+            pageNum--;
 
-        fetch('/paginator?pageNum=' + pageNum)
-        .then((res) => res)  
-        .then((data) => {
-            
-        })
-        .catch((err) => console.log(err));
-    }
-
-    if (parseInt(sessionStorage.getItem("pageNum")) > 0) {
-        document.getElementById("post-previous").style.display = 'inline-block'
-    } else {
-        document.getElementById("post-previous").style.display = 'none'
+        document.cookie ="pageNum=" + pageNum;
+        
+        window.location.reload(true)
     }
      
  }
 
- function initSessionVar() {
-    if (sessionStorage.pageNum == null) {
-        sessionStorage.pageNum = parseInt(0);
-    } 
+function getCookieValue(key) {
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        if(c.includes(key))
+            return parseInt(c.split("=")[1]);
+    }
 }

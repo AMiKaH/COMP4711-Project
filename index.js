@@ -26,6 +26,12 @@ hbs.handlebars.registerHelper('ifCond', function(v1, v2, options) {
   }
   return options.inverse(this);
 });
+hbs.handlebars.registerHelper('ifCond2', function(v1, v2, options) {
+  if(v1 == v2) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
 
 
 // parse application/x-www-form-urlencoded
