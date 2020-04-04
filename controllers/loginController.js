@@ -1,3 +1,4 @@
+let modUser = require('../models/user');
 
 exports.validateLogin = function(req,res,next) {
 
