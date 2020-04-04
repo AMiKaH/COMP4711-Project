@@ -30,17 +30,18 @@
 {{/each}}
 
 
-{{#ifCond postList.length 5}}
     <div>
+        {{#ifCond2 pageNum 0}}
         <div id="post-previous">
             <button id="btn-previous" onclick="paginate(this)" type="submit" class="comment-btn white-blue-btn"><-Previous</button>
         </div>
+        {{/ifCond2}}
         
+        {{#ifCond postList.length 5}}
         <div id="post-next">
             <button id="btn-next" onclick="paginate(this)" type="submit" class="comment-btn white-blue-btn">Next-></button>
         </div>
+        {{/ifCond}}
     </div>
-
-{{/ifCond}}
 
 {{this.render}}

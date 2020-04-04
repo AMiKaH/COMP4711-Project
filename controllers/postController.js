@@ -67,6 +67,6 @@ exports.addReply = function(req,res,next){
     }
     let post = mod.addReply(data);
     post.then((data)=>{
-
+        res.redirect(301, '/homepage');
     })
 }
