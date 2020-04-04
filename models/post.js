@@ -29,13 +29,13 @@ function getRecentPostWithReplies(limit = 5) {
 
 // insert a single post to the database
 function addReply(data) {
-    let sql = `INSERT INTO post (postid, userid, "text") VALUES (${data.postID}, ${data.userID}, '${data.text}')`;
+    let sql = `INSERT INTO reply (postid, userid, "text") VALUES (${data.postID}, ${data.userID}, '${data.text}')`;
     return db.query(sql);
 }
 
 // search post with replies using keyword 
 function searchPostWithReplies(keyword) {
-    let condition = `(title LIKE '%${keyword}%' OR topicName LIKE '%${keyword}%' OR text LIKE '%${keyword}%' OR reply_text LIKE '%${keyword}%')`;
+    let condition = `(LOWER(title) LIKE '%${keyword}%' OR LOWER(topicName) LIKE '%${keyword}%' OR LOWER(text) LIKE '%${keyword}%')`;
     let sql = `SELECT * FROM v_post_r WHERE ${condition}`;
     return db.query(sql)
 }

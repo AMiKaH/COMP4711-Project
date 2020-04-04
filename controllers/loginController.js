@@ -1,5 +1,6 @@
 
 exports.validateLogin = function(req,res,next) {
+
     let email = req.body.email;
     let pass = req.body.password;
     console.log(req.headers.referer)
@@ -7,10 +8,19 @@ exports.validateLogin = function(req,res,next) {
     
 
     log.then((data) => {
-        if(data.rows[0].cnt === "1"){
-            //TODO GIVE AN ACTUAL COOKIE OR SOMETHING
-            sessionStorage.setItem('signedIn',data.rows[0]);
+        let id = parseInt(data.rows[0].userid);
+        if(id > 0){
+            res.cookie('signedIn','true');
+            res.cookie('userid',id)
+            .redirect('/homepage');
+        } else {
+            return;
         }
     });
-    
+}
+
+exports.logout = function(req,res,next){
+    res.clearCookie('signedIn');
+    res.clearCookie('userid');
+    res.redirect(301,'/');
 }

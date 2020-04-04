@@ -30,7 +30,7 @@ function getUserByEmail(email) {
 
 // check a specific individual with email and password
 function userExists(email, pwd) {
-    let sql = `SELECT count(userID) cnt FROM "user" WHERE email = '${email}' and password = '${pwd}'`
+    let sql = `SELECT userID FROM "user" WHERE email = '${email}' and password = '${pwd}'`
     return db.query(sql)
 }
 

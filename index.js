@@ -3,7 +3,7 @@ let app = express();
 let bodyParser = require('body-parser');
 let path = require('path');
 let db = require('./db/db');
-
+var cookieParser = require('cookie-parser');
 const expressHbs = require('express-handlebars');
 
 app.engine(
@@ -31,6 +31,9 @@ hbs.handlebars.registerHelper('ifCond', function(v1, v2, options) {
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false })) // middleware
 
+
+app.use(cookieParser());
+
 // parse application/json
 app.use(bodyParser.json()) // middleware
 
@@ -39,13 +42,12 @@ let routes = require('./routes/routes');
 app.use(express.static(path.join(__dirname,'public')));
 
 app.get('/', function (req,res) {
-  //res.render('completeRegistration', { pageTitle: 'KB Login/Signup', heading: 'Welcome to People App', finishSigning: true});
-  //res.render('home', { pageTitle: 'KB Login/Signup', heading: 'Welcome to People App'});
-  //res.render('editProfile', { pageTitle: 'Edit Profile', heading: 'Welcome to People App' , signedIn:true});
-  //res.render('visitProfile', { pageTitle: 'Viewing Profile', heading: 'Welcome to People App' , signedIn:true});
-  //res.render('messageUser', { pageTitle: 'Viewing Profile', heading: 'Welcome to People App' , signedIn:true});
-  //res.render('homePage', { pageTitle: 'Viewing Profile', heading: 'Welcome to People App' , signedIn:true});
 
+  if(req.cookies.signedIn === "true" && req.cookies.userid !== undefined){
+    res.redirect(301,'/homepage')
+  } else {
+    res.render('home', { pageTitle: 'KB Login/Signup', heading: 'Welcome to People App'});
+  }
 });
 
 app.use(routes)
