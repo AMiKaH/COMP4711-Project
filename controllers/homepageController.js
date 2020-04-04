@@ -1,7 +1,6 @@
 let modPost = require('../models/post');
 let modUser = require('../models/user');
 
-
 exports.getHomePage = function(req,res,next, pageNumber = 0){
     if(req.cookies.signedIn !== "true"){
         res.redirect(301,'/');
