@@ -22,14 +22,8 @@ exports.getHomePage =  function(req,res,next, pageNumber = 0){
         signedIn:true,
         postList: data[0].rows,
         cache: false}, (err, html) => {
-            //res.writeHead(200, {'Content-Type': 'text/html'});
             res.set('content-type', 'text/html')
-
             res.send(html)
-            
-            console.log(html)
-            
-            //res.end(html);
         })
 
     });
