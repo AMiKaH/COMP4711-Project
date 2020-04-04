@@ -20,18 +20,13 @@ exports.getHomePage =  function(req,res,next, pageNumber = 0){
     let prof = modUser.getUserByID(req.cookies.userid);
     
     Promise.all([post,prof]).then((data)=>{
-        parsePosts(data[0].rows)
-        
+        parsePosts(data[0].rows)        
         res.render('homepage', {pageTitle:'Home Page',
         pageNum: req.cookies.pageNum,
         profile: data[1].rows[0],
         signedIn:true,
         postList: data[0].rows,
-        postNotComplete: req.query.postNotComplete,
-        cache: false}, (err, html) => {
-            res.set('content-type', 'text/html')
-            res.send(html)
-        })
+        postNotComplete: req.query.postNotComplete});
     });
 }
 
