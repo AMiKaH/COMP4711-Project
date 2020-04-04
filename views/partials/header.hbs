@@ -47,15 +47,16 @@
             </div>
         {{else}}
                 <div id="main-header">
-                    <div class="inline-divs">
-                        <h1>knowledgeBase</h1>
+                    <span class="helper"></span>
+                    <div class="header-inline-divs inline-divs">
+                        <h1><span>knowledge</span><span id="base-span">Base</span></h1>
                     </div>
-                    <div class="inline-divs">
+                    <div class="header-inline-divs float-right inline-divs">
                         <div id="login-div">
                             <form id="login-form" action="/validateLogin" method="POST">
-                                <div class="form-control">
-                                    <input class="input-field" type="text" name="email" placeholder="email">
-                                    <input class="input-field" type="password" name="password" placeholder="password">
+                                <div id="login-form" class="form-control">
+                                    <input class="login-field input-ilfield" type="text" name="email" placeholder="email">
+                                    <input class="login-field input-ilfield" type="password" name="password" placeholder="password">
                                     <button class="btn" type="submit">login</button>
                                 </div>
                             </form>
