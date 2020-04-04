@@ -7,8 +7,13 @@ exports.validateLogin = function(req,res,next) {
     console.log(req.headers.referer)
     let log = modUser.userExists(email,pass);
     
-
+    
     log.then((data) => {
+
+        if (data.rows.length <= 0){
+            res.render('home', { pageTitle: 'KB Login/Signup', loginError: true, heading: 'Welcome to People App'});
+            return;
+        }
         let id = parseInt(data.rows[0].userid);
         if(id > 0){
             res.cookie('pageNum',0);
