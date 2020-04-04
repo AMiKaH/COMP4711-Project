@@ -11,6 +11,7 @@ exports.validateLogin = function(req,res,next) {
     log.then((data) => {
         let id = parseInt(data.rows[0].userid);
         if(id > 0){
+            res.cookie('pageNum',0);
             res.cookie('signedIn','true');
             res.cookie('userid',id)
             .redirect('/homepage');

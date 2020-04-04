@@ -7,18 +7,19 @@ exports.getHomePage = function(req,res,next, pageNumber = 0){
         res.redirect(301,'/');
         return
     }
+    let a = req.cookies.pageNum
 
-    let post = modPost.getRecentPostRe(pageNumber);
+    let post = modPost.getRecentPostRe(req.cookies.pageNum);
     let prof = modUser.getUserByID(req.cookies.userid);
 
     Promise.all([post,prof]).then((data)=>{
         parsePosts(data[0].rows);
         res.render('homepage', {pageTitle:'Home Page',
+        pageNum: req.cookies.pageNum,
         profile: data[1].rows[0],
         signedIn:true,
         postList: data[0].rows});
     });
-    
 }
 
 function parsePosts(rows){
