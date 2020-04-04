@@ -37,6 +37,7 @@ body {
     vertical-align: top;
 }
 
+
 .header-inline-divs {
     vertical-align: middle;
 }
@@ -323,6 +324,18 @@ input#search-field:focus {
 
 .profile-inner-wrapper {
     text-align: left;
+}
+
+.profile-controls {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 25px;
+
+}
+
+.profile-controls > table {
+    width: 100%;
+    margin: 0 auto;
 }
 
 .topic-select {

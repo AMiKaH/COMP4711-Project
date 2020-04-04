@@ -18,7 +18,6 @@ exports.addPost = function(req,res,next) {
             title: titl,
             text: txt
          }
-      
          mod.add(newPost);
          res.redirect(301, '/homepage');
     }
