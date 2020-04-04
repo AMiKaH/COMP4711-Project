@@ -1,5 +1,4 @@
 
-    {{log this}}
     {{#each postList}}
     <div id="post-main" class="post-wrapper">
         <div class="post-inline-divs">
@@ -20,8 +19,8 @@
             </div>
 
             <div class="post-parameters">
-                <span>{{this.timedate}}</span>
-                <a id="replies-anchor{{@index}}" class="post-param-right replies-link" onclick="expandCloseReplies(this)" >{{this.replies.length}} replies</a>
+                <span>{{this.f_timedate}}</span>
+                <a id="replies-anchor{{@index}}" class="post-param-right replies-link" onclick="expandCloseReplies(this)">{{this.replies.length}} replies</a>
                 {{>replies replies = this.replies}}
             </div>
         </div>

@@ -2,7 +2,6 @@ let db = require('../util/database');
 
 // insert a single post to the database
 function addPost(data) {
-   
     let sql = `INSERT INTO post (userid, topic, title, "text") VALUES (${data.userID}, (SELECT topicid FROM topic where topicname LIKE '%${data.topic}%'), '${data.title}', '${data.text}')`;
     db.query(sql);
 }
