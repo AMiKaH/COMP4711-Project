@@ -1,5 +1,5 @@
-let modUserProfile = require('../models/user');
-let modUserPosts = require('../models/post');
+const modUserProfile = require('../models/user');
+const modUserPosts = require('../models/post');
 
 //Get
 exports.getProfile = function(req,res,next) {
@@ -9,8 +9,8 @@ exports.getProfile = function(req,res,next) {
         return
     }
 
-    let currentUser = modUserProfile.getUserByID(req.cookies.userid);
-    let currentUsersPosts = modUserPosts.getPosts(req.cookies.userid);
+    const currentUser = modUserProfile.getUserByID(req.cookies.userid);
+    const currentUsersPosts = modUserPosts.getPosts(req.cookies.userid);
 
     Promise.all([currentUsersPosts, currentUser]).then((data) => {
 
@@ -28,29 +28,62 @@ exports.getProfile = function(req,res,next) {
 }
 
 // Post
-exports.signup = function(req,res,next) {
+exports.signup = async function(req,res,next) {
 
-    let sFirstName = req.body.first-name;
-    let sLastName =  req.body.last-name;
+    const sFirstName = req.body["first-name"];
+    const sLastName =  req.body["last-name"];
 
-    let sEmail = req.body.email;
-    let sPassword = req.body.password;
+    const sEmail = req.body.email;
+    const sPassword = req.body.password;
 
-    let validateSignUp = modUserProfile.userExists(sEmail, sPassword);
-
-    validateSignUp.then((data) => {
+    const validateSignUp = modUserProfile.getUserByEmail(sEmail);
+    const result = await validateSignUp.then((data) => {
 
         // Not sure if correct
-        if (data === 0) {
-            let addedUser = modUserProfile.addUser(data.email, data.password);
-        }
+        return (data.rows.length === 0);
+
+        // let addedUser = modUserProfile.addUser(data.email, data.password);
         
-    }).then((data) => {
+    });
 
+    if (!result) {
+
+        throw Error("Failed sign up. User exists, please login");
+        // TODO: Redirect
+    }
+
+    const addedUser = await modUserProfile.addUser({
         
+        email: sEmail, 
+        password: sPassword
 
-    })
+    });
+    // const addedUserResult = await addedUser;
 
+    const getIDByEmail = await modUserProfile.getUserByEmail(sEmail)
+        .then((data) => {
+            return data.rows[0].userid;
+        });
+
+    const updateName = await modUserProfile.addProfile({
+    
+        userid : getIDByEmail,
+        fname : sFirstName,
+        lname : sLastName,
+
+    });
+
+    if(getIDByEmail > 0){
+        res.cookie('pageNum',0);
+        res.cookie('signedIn','true');
+        res.cookie('userid',getIDByEmail)
+        .redirect('/homepage');
+    } else {
+        return;
+    }
+
+
+    
 }
 
 // Post 

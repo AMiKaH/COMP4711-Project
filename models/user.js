@@ -6,6 +6,12 @@ function addUser(data) {
     return db.query(sql);
 }
 
+// add a single user profile to the database
+function addProfile(data) {
+    let sql = `INSERT INTO "profile" (userid, fname, lname) VALUES ('${data.userid}', '${data.fname}','${data.lname}')`;
+    return db.query(sql);
+}
+
 // get all the individuals in the database
 function getAllUser() {
     let sql = "SELECT * FROM v_user";
@@ -64,6 +70,7 @@ function increaseLike(id) {
 
 module.exports = {
     addUser: addUser,
+    addProfile: addProfile,
     getAll: getAllUser,
     getUserByID: getUserByID,
     getUserByEmail: getUserByEmail,

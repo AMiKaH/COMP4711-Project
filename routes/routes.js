@@ -24,6 +24,11 @@ router.post('/addReply',postController.addReply);
 
 router.post('/logout',loginController.logout);
 
+
+// Profile Routes
+
 router.get('/profile', profileController.getProfile);
+
+router.post('/signup', profileController.signup);
 
 module.exports = router;
