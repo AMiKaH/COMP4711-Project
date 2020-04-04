@@ -214,6 +214,18 @@ input::placeholder {
     vertical-align: middle;
 }
 
+input#search-field {
+    background-image: url('../imgs/search.png');
+    background-size:contain;
+    background-repeat: no-repeat;
+    padding: 5px;
+    text-indent: 20px;
+}
+input#search-field:focus {
+    background-image:none;
+    text-indent:0px
+    }
+
 #header-logo{
     display: inline-block;
     vertical-align: middle;
@@ -432,7 +444,6 @@ input::placeholder {
 
 #post-previous {
     float: left;
-    display: none;
 }
 /**
     Replies css
