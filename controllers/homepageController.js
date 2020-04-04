@@ -12,12 +12,13 @@ exports.getHomePage = function(req,res,next, pageNumber = 0){
     let prof = modUser.getUserByID(req.cookies.userid);
 
     Promise.all([post,prof]).then((data)=>{
-        parsePosts(data[0].rows);
-        
-        res.redirect( 'homepage', {pageTitle:'Home Page',
+        parsePosts(data[0].rows)
+        console.log(data[1].rows[0])
+        res.render('homepage', {pageTitle:'Home Page',
         profile: data[1].rows[0],
         signedIn:true,
-        postList: data[0].rows});
+        postList: data[0].rows})
+
     });
     
 }
