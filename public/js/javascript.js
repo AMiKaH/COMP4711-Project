@@ -59,7 +59,7 @@ function paginate(button){
         document.cookie ="pageNum=" + pageNum;
         window.location.reload(true)
     } else {
-        
+
         if(pageNum != 0)
             pageNum--;
 
