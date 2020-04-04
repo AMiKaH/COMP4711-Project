@@ -8,9 +8,9 @@ const paginator = require('../controllers/paginateController');
 
 
 exports.paginate = function(req,res,next){
-    var pageNumber = req.query.pageNumber
+    var pageNumber = req.query.pageNum
 
-    if (req.headers.referer.includes('homePage')) {
+    if (req.headers.referer.includes('homepage')) {
         home.getHomePage(req, res, next, pageNumber)
     } else if (req.headers.referer.includes('search')) {
 

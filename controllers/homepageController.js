@@ -2,18 +2,17 @@ let modPost = require('../models/post');
 let modUser = require('../models/user');
 
 
-exports.getHomePage = function(req,res,next=1, pageNumber){
+exports.getHomePage = function(req,res,next, pageNumber = 0){
     if(req.cookies.signedIn !== "true"){
         res.redirect(301,'/');
         return
     }
 
-    let post = modPost.getRecentPostRe();
-    //TO:DO MAKE READ FROM COOKIE 
+    let post = modPost.getRecentPostRe(pageNumber);
     let prof = modUser.getUserByID(req.cookies.userid);
-    Promise.all([post,prof]).then((data)=>{
-        let list = parsePosts(data[0].rows);
 
+    Promise.all([post,prof]).then((data)=>{
+        parsePosts(data[0].rows);
         res.render('homepage', {pageTitle:'Home Page',
         profile: data[1].rows[0],
         signedIn:true,
