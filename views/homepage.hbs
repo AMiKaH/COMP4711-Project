@@ -14,7 +14,7 @@
                     <tr><td>Likes</td><td>{{profile.like}}</td></tr>
                 </table>
                 <br>
-                <a>Edit profile</a>
+                <a href="/editProfile?userid={{profile.userid}}">Edit profile</a>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
             <div class="profile-inner-wrapper">
                 <p>Latest discussions:</p>
             </div>
-            <div class="profile-inner-wrapper">
+            <div id="post-partial-div" class="profile-inner-wrapper">
                 {{>posts postList = postList}}  
             </div>      
         </div>

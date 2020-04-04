@@ -1,10 +1,10 @@
+
 {{#each postList}}
+
 <div class="post-wrapper">
     <div class="post-inline-divs">
         <img class="circle-img-75" src="{{this.imgurl}}" alt="{{this.fname}}">
     </div>
-
-
     <div class="post-parameters-outer">
         <div class="post-parameters">
             <div id="post-title" class="post-param-left post-header-inline">
@@ -28,3 +28,19 @@
     </div>
 </div>
 {{/each}}
+
+
+{{#ifCond postList.length 5}}
+    <div>
+        <div id="post-previous">
+            <button id="btn-previous" onclick="paginate(this)" type="submit" class="comment-btn white-blue-btn"><-Previous</button>
+        </div>
+        
+        <div id="post-next">
+            <button id="btn-next" onclick="paginate(this)" type="submit" class="comment-btn white-blue-btn">Next-></button>
+        </div>
+    </div>
+
+{{/ifCond}}
+
+{{this.render}}

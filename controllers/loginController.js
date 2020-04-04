@@ -1,13 +1,12 @@
-let modUser = require('../models/user');
-let modHome = require('../models/user');
 
 exports.validateLogin = function(req,res,next) {
 
     let email = req.body.email;
     let pass = req.body.password;
-
+    console.log(req.headers.referer)
     let log = modUser.userExists(email,pass);
     
+
     log.then((data) => {
         let id = parseInt(data.rows[0].userid);
         if(id > 0){
