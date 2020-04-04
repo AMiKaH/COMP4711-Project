@@ -17,7 +17,7 @@ exports.getProfile = function(req,res,next) {
             userPostList: data[1].rows});
     });
 }
-
+ 
 // Post
 exports.signup = function(req,res,next) {
 
