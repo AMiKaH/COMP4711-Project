@@ -7,8 +7,14 @@ exports.getHomePage = function(req,res,next, pageNumber = 0){
         res.redirect(301,'/');
         return
     }
-    let a = req.cookies.pageNum
+    if (req.headers.referer == undefined || req.headers.referer.includes('search'))
+        res.cookie('pageNum',0);
 
+    let pageNum = req.cookies.pageNum
+
+    if(pageNum ==="undefined")
+        pageNum = 0;
+        
     let post = modPost.getRecentPostRe(req.cookies.pageNum);
     let prof = modUser.getUserByID(req.cookies.userid);
 
