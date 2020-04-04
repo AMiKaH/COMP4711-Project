@@ -51,9 +51,10 @@ function truncateText(className, maxLength) {
  * Paginate
  */
 function paginate(button){
+
     initSessionVar();
 
-     //check which button is pressed first
+    //check which button is pressed first
     if (button.id == "btn-next") {
         sessionStorage.setItem("pageNum", parseInt(sessionStorage.getItem("pageNum")) + 1)
         
@@ -62,9 +63,11 @@ function paginate(button){
         fetch('/paginator?pageNum=' + pageNum)
         .then((res) => res)  
         .then((data) => {
-            
+                console.log(data)
+
         })
         .catch((err) => console.log(err));
+
     } else {
         sessionStorage.setItem("pageNum", parseInt(sessionStorage.getItem("pageNum")) - 1)
         console.log(sessionStorage.getItem("pageNum"))
@@ -73,7 +76,8 @@ function paginate(button){
         fetch('/paginator?pageNum=' + pageNum)
         .then((res) => res)  
         .then((data) => {
-            
+            location.reload();
+
         })
         .catch((err) => console.log(err));
     }

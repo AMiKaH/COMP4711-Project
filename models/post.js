@@ -21,7 +21,7 @@ function getRecentPost(limit = 5) {
 }
 
 // get recent posts with its replies by specified limit parament
-function getRecentPostWithReplies(page = 0) {
+function getRecentPostWithReplies(page) {
     let offset = 5 * page;
     let sql = `SELECT '` + page + `' AS page, * FROM v_post_r ORDER BY timeDATE desc LIMIT 5 offset `  + offset
     return db.query(sql)
