@@ -13,17 +13,14 @@ exports.getProfile = function(req,res,next) {
     const currentUsersPosts = modUserPosts.getPosts(req.params.id);
 
     Promise.all([currentUsersPosts, currentUser]).then((data) => {
-        
         res.render('visitProfile', {
             profile: data[1].rows[0],
             signedIn: true, 
-            userPostList: data[0].rows})
-            .catch((error) => {
+            userPostList: data[0].rows});
+    }).catch((error) => {
 
-                console.log("new erro");
-                console.log(error);
-        
-            });
+        console.log("new erro");
+        console.log(error);
     })
 }
 
