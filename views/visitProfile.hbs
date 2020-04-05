@@ -22,11 +22,11 @@
         </div>
     </div>
 
-        <div class="profile-wrapper-posts">
+        <div class="profile-posts profile-wrapper-posts">
             <div class="profile-inner-wrapper">
                 <p>All posts by {{profile.fname}}:</p>
             </div>
-            <div id="post-partial-div" class="profile-inner-wrapper">
+            <div id="post-partial-div" >
                 {{>posts postList = userPostList}}  
             </div>      
         </div>
