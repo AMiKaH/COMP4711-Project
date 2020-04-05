@@ -2,7 +2,7 @@
     {{#each postList}}
     <div id="post-main" class="post-wrapper">
         <div class="post-inline-divs">
-            <img class="circle-img-75" src="{{this.imgurl}}" alt="{{this.fname}}">
+            <a href= "/profile/{{this.userid}}"><img class="circle-img-75" src="{{this.imgurl}}" alt="{{this.fname}}"> </a>
         </div>
         <div class="post-parameters-outer">
             <div class="post-parameters">
@@ -14,7 +14,7 @@
                 </div>    
             </div>
 
-            <div id="post-details" >
+            <div class="post-details" >
                 <p id="post-id-{{@index}}" class="limit-150">{{this.text}}</p>
             </div>
 

@@ -38,6 +38,7 @@ exports.getPost = function(req,res,next) {
         res.render('posts', {postList: data.rows});
     });
 }
+
 exports.getRecentPosts = function(req,res,next){
 
     if(req.cookies.signedIn !== "true"){
