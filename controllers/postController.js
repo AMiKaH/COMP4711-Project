@@ -18,7 +18,6 @@ exports.addPost = function(req,res,next) {
             title: titl,
             text: txt
          }
-      
          mod.add(newPost);
          res.redirect(301, '/homepage');
     }
@@ -71,6 +70,10 @@ exports.addReply = function(req,res,next){
     }
     let post = mod.addReply(data);
     post.then((data)=>{
-        res.redirect(301, '/homepage');
+        if (req.headers.referer.includes('homepage')){
+            res.redirect(301, '/homepage');
+        } else if (req.headers.referer.includes('search')){
+            res.redirect(301, '/search');
+        }
     })
 }

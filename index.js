@@ -2,7 +2,7 @@ let express = require('express')
 let app = express();
 let bodyParser = require('body-parser');
 let path = require('path');
-let db = require('./db/db');
+let db = require('./util/database');
 var cookieParser = require('cookie-parser');
 const expressHbs = require('express-handlebars');
 
