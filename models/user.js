@@ -45,13 +45,11 @@ function userExists(email, pwd) {
 // update user information
 function updateUser(data) {
     let sql = `UPDATE profile
-        SET fName = '${data.fName}',
-            lName = '${data.lName}',
-            imgURL = '${data.imgURL}',
+        SET imgurl = '${data.imgurl}',
             about = '${data.about}',
-            countryID = ${data.countryID},
-            DOB = '${data.DOB}'
-        WHERE userID = ${data.userID}
+            countryid = ${data.countryid},
+            dob = '${data.dob}'
+        WHERE userid = ${data.userid}
     `;
     return db.query(sql)
 }
@@ -64,7 +62,7 @@ function getLikes(id) {
 
 // increase user like information
 function increaseLike(id) {
-    let sql = `UPDATE "user" SET like= like + 1 WHERE id= ${id}`;
+    let sql = `UPDATE "profile" SET like= like + 1 WHERE id= ${id}`;
     return db.query(sql)
 }
 
