@@ -1,0 +1,46 @@
+<div id="messages-main-wrapper">
+    <div id="conversations" class="conversations inline-divs">
+        {{#each conversation}}
+            <div id="conversation-{{this.id}}"class="border-bottom conversation-wrapper">
+                <div class="conversation-left inline-divs">
+                    <img class="circle-img-50" src="{{this.sender.imgUrl}}" alt="{{this.sender.fName}}">
+                </div>
+                <div class="conversation-right inline-divs">
+                    <span class="float-left">{{this.sender.fName}} {{this.sender.lName}}</span>
+                    <span class="float-right">{{this.date}}</span>
+                    <br/>
+                    <p class="coversation-subject">{{this.subject}}</p>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+    <div id="messages" class="inline-divs">
+        {{#each conversation}}
+        <div id="conversation-messages-{{@index}}" class="conversation-div"></div>
+            {{#each conversation.message}}
+            <div class="message-div">
+                <p class="background"><span class="bg-line">{{this.date}}</span></p>
+                            <div class="conversation-wrapper">
+                <div class="message-left inline-divs">
+                    <img class="circle-img-35" src="{{this.sender.imgUrl}}" alt="{{this.fName}}">
+                </div>
+
+                <div class="message-right inline-divs">
+                    <span class="float-left">{{this.sender.fName}} {{this.sender.lName}}</span>
+                    <span>{{this.time}}</span>
+                    <br/>
+                    <p class="coversation-subject">{{this.text}}</p>
+                </div>
+            </div>
+            {{/each}}
+            <div id="reply-form-{{@index}}" class="reply-form">
+                <form id="messages-form" METHOD="GET">
+                    <textarea name="add-reply-text" rows="4" class="reply-input-field input-field" placeholder="Write a message..."></textarea>
+                    <button type="submit" class="comment-btn blue-btn">send</button>
+                </form>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

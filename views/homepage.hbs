@@ -1,0 +1,74 @@
+{{log this}}
+
+<div id="profile">
+    <div class="profile-divs">
+        <div class="profile-wrapper">
+            <div id="profile-bio">
+                <img id="profile-img" class="circle-img-100" src="{{profile.imgurl}}" alt="{{profile.firstName}}"/>
+                <h3 id="profile-name">{{profile.fname}} {{profile.lname}}</h3>
+                <span>{{profile.about}}</span>
+            </div>
+            <br/>
+            <div class="profile-controls profile-inner-wrapper">
+                <table>
+                    <tr><td><a href="/search?userid={{profile.userid}}" +{{profile.fname}} >Posts</a></td><td>{{profile.postcnt}}</td> </tr>
+                    <tr><td><a>Messages</a></td><td>{{profile.msgcnt}}</td></tr>
+                    <tr><td>Likes</td><td>{{profile.like}}</td></tr>
+                </table>
+                <br>
+                <a href="/edit">Edit profile</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-divs">
+        <div class="profile-wrapper">
+            <div>
+                <p>What is your question today?</p>
+            {{#ifCond postNotComplete 666}}
+                <span class="error">Please make sure all fields are filled out</span>
+            {{/ifCond}}
+            </div>
+            <form action="addPost" method="POST" id="question-form" class="form-control">
+                <input class="input-field" type="text" name="title" placeholder="subject">
+                <textarea class="input-field" rows="4" name="text" placeholder="explain in detail..."></textarea>
+                <select class="topic-select" name="topic">
+                    <option value="php">php</option>
+                    <option value="nodejs">node.js</option>
+                    <option value="java">java</option>
+                    <option value="sql">sql</option>
+                    <option value="zend">zend</option>
+                </select>
+                <button type="submit" class="white-blue-btn" id="new-post-btn">post to timeline</button>
+            </form>
+        </div>
+
+        <div class="profile-wrapper">
+            <form action="/searchTopic" method="POST" id="search-by-topic-div" class="form-control">
+
+                <span>Search by topic</span>
+                <select class="topic-select" name="topic">
+                    <option value="php">php</option>
+                    <option value="nodejs">node.js</option>
+                    <option value="java">java</option>
+                    <option value="sql">sql</option>
+                    <option value="zend">zend</option>
+                </select>
+                <button  type="submit" class="blue-btn" id="search-by-topic-btn">go -></button>
+            </form>
+
+        </div>
+
+        <div class="profile-wrapper-posts">
+            <div class="profile-inner-wrapper">
+                <p>Latest discussions:</p>
+            </div>
+            <div id="post-partial-div" class="profile-inner-wrapper">
+                {{>posts postList = postList}}  
+            </div>      
+        </div>
+
+    </div>
+</div>
+
+
