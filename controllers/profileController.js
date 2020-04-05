@@ -1,5 +1,6 @@
 const modUserProfile = require('../models/user');
 const modUserPosts = require('../models/post');
+const parse = require('./parse');
 
 //Get
 exports.getProfile = function(req,res,next) {
@@ -10,9 +11,10 @@ exports.getProfile = function(req,res,next) {
     }
 
     const currentUser = modUserProfile.getUserByID(req.params.id);
-    const currentUsersPosts = modUserPosts.getPosts(req.params.id);
+    const currentUsersPosts = modUserPosts.getRecentPostRe(req.params.id);
 
     Promise.all([currentUsersPosts, currentUser]).then((data) => {
+        parse.parsePosts(data[0].rows);
 
         res.render('visitProfile', {
             profile: data[1].rows[0],
@@ -143,21 +145,3 @@ exports.likeProfile = function(req,res,next) {
     });
 }
 
-function parsePosts(rows){
-    let postList = rows;
-    postList.forEach(element => {
-        var replies = [];
-        if(element.r_text[0] != null){
-            for(let i = element.r_text.length - 1; i >= 0; i--){
-
-                let obj = {
-                        postid: element.postid,
-                        imgUrl : element.r_imgurl[i],
-                        replyText : element.r_text[i]
-                    }                
-                replies.push(obj);
-            }
-            element.replies = replies;
-        }
-    });
-}
