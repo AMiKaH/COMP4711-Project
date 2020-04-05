@@ -1,5 +1,6 @@
 const modUserProfile = require('../models/user');
 const modUserPosts = require('../models/post');
+const parse = require('./parse');
 
 //Get
 exports.getProfile = function(req,res,next) {
@@ -9,15 +10,25 @@ exports.getProfile = function(req,res,next) {
         return
     }
 
+    if (!req.headers.referer.includes('profile')){
+        res.cookie('pageNum',0);
+    }
+
     const currentUser = modUserProfile.getUserByID(req.params.id);
-    const currentUsersPosts = modUserPosts.getPosts(req.params.id);
+    const currentUsersPosts = modUserPosts.getPosts(req.cookies.pageNum);
 
     Promise.all([currentUsersPosts, currentUser]).then((data) => {
+
+        parse.parsePosts(data[0].rows);
+
+        // Pass over a cookie stating what person's page the user is visiting.
+        res.cookie('visitorID', data[1].rows[0].userid);
 
         res.render('visitProfile', {
             profile: data[1].rows[0],
             signedIn: true, 
             userPostList: data[0].rows});
+
     }).catch((error) => {
 
         console.log("new erro");
@@ -71,7 +82,7 @@ exports.signup = async function(req,res,next) {
         lname : sLastName,
 
     });
-
+ 
     if(getIDByEmail > 0){
         res.cookie('pageNum',0);
         res.cookie('signedIn','true');
@@ -113,7 +124,7 @@ exports.editProfile = function(req,res,next) {
 
     Promise.all([post, getUser]).then((data) => {
 
-        parsePosts(data[0].rows);
+        parse.parsePosts(data[0].rows);
         
         res.render('homepage', {
         pageTitle:'Home Page',
@@ -122,7 +133,7 @@ exports.editProfile = function(req,res,next) {
         signedIn: true,
         postList: data[0].rows,
         postNotComplete: req.query.postNotComplete});
-    })
+    });
 }
 
 // Get
@@ -132,32 +143,14 @@ exports.editProfileForm = function(req,res,next) {
 
 }
 
-
-//Post
+//Get
 exports.likeProfile = function(req,res,next) {
+
+    console.log(req.params.id);
     
-    let userLiked = modUserProfile.increaseLike;
+    let userLiked = modUserProfile.increaseLike(req.params.id);
 
-    userLiked.then((data) => {
-        res.render('peoples', { people: data.rows, main: true });
-    });
+    userLiked.then();
+
 }
 
-function parsePosts(rows){
-    let postList = rows;
-    postList.forEach(element => {
-        var replies = [];
-        if(element.r_text[0] != null){
-            for(let i = element.r_text.length - 1; i >= 0; i--){
-
-                let obj = {
-                        postid: element.postid,
-                        imgUrl : element.r_imgurl[i],
-                        replyText : element.r_text[i]
-                    }                
-                replies.push(obj);
-            }
-            element.replies = replies;
-        }
-    });
-}

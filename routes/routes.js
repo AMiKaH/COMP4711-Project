@@ -5,8 +5,11 @@ const loginController = require('../controllers/loginController');
 const postController = require('../controllers/postController');
 const searchController = require('../controllers/searchController');
 const profileController = require('../controllers/profileController');
+const conversationController = require('../controllers/conversationController');
 const paginator = require('../controllers/paginateController');
 
+
+router.get('/message/email',conversationController.email);
 
 router.post('/validateLogin',loginController.validateLogin);
 
@@ -26,9 +29,10 @@ router.post('/addReply',postController.addReply);
 
 router.post('/logout',loginController.logout);
 
-
 // Profile Routes
 router.get('/profile/:id', profileController.getProfile);
+
+router.get('/profile/like/:id', profileController.likeProfile);
 
 router.post('/signup', profileController.signup);
 
@@ -40,7 +44,14 @@ router.get('/edit', profileController.editProfileForm);
 
 router.post('/edit', profileController.editProfile);
 
+// Message Routes
 
+router.get('/messageUser', conversationController.getMessagePage);
+router.post('/messageUser', conversationController.postMessagePage);
+
+router.get('/messages', conversationController.getMessages);
+
+router.post('/messages/send', conversationController.sendMessage);
 
 
 module.exports = router;
