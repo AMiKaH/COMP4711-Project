@@ -477,13 +477,10 @@ input::placeholder {
     border-radius: 2px;
 }
 
-#post-details span {
+.post-details p {
     margin: 10px 10px 10px 0px;
-    height: 90px;
-    width: 285px;
-    overflow: eli;
-    display: -webkit-box;
-    -webkit-box-orient: vertical; 
+    font-size: 1em;
+    color: rgb(86, 92, 97);
 }
 
 #post-next {
@@ -517,19 +514,23 @@ input::placeholder {
     width: 50%;
 }
 
+.replies-text span {
+    font-size: 0.9em;
+    color: rgb(86, 92, 97);
+}
+
 .reply-input-field {
     display: block;
     width: 100%;
     box-sizing: border-box;
-
 }
+
+
 
 .comment-btn {
     float: right;
 }
-#reply-form {
 
-}
 
 /**
     anchor
