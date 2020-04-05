@@ -30,6 +30,8 @@ router.post('/logout',loginController.logout);
 // Profile Routes
 router.get('/profile/:id', profileController.getProfile);
 
+router.post('/profile/like/:id', profileController.likeProfile);
+
 router.post('/signup', profileController.signup);
 
 router.get('/signup/completion', profileController.completeRegistration);
@@ -39,6 +41,7 @@ router.post('/signup/completion', profileController.editProfile);
 router.get('/edit', profileController.editProfileForm);
 
 router.post('/edit', profileController.editProfile);
+
 
 
 
