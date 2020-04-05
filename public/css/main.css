@@ -256,6 +256,7 @@ input::placeholder {
     vertical-align: middle;
 }
 
+<<<<<<< HEAD
 input#search-field {
     background-image: url('../imgs/search.png');
     background-size:contain;
@@ -267,6 +268,9 @@ input#search-field:focus {
     background-image:none;
     text-indent:0px
     }
+=======
+
+>>>>>>> dbee34b77923e2bd2e186369442819d38b725821
 
 #header-logo{
     display: inline-block;
@@ -487,6 +491,7 @@ input#search-field:focus {
     border-radius: 2px;
 }
 
+<<<<<<< HEAD
 #post-details span {
     margin: 10px 10px 10px 0px;
     height: 90px;
@@ -494,6 +499,12 @@ input#search-field:focus {
     overflow: eli;
     display: -webkit-box;
     -webkit-box-orient: vertical; 
+=======
+.post-details p {
+    margin: 10px 10px 10px 0px;
+    font-size: 1em;
+    color: rgb(86, 92, 97);
+>>>>>>> dbee34b77923e2bd2e186369442819d38b725821
 }
 
 #post-next {
@@ -527,10 +538,19 @@ input#search-field:focus {
     width: 50%;
 }
 
+<<<<<<< HEAD
+=======
+.replies-text span {
+    font-size: 0.9em;
+    color: rgb(86, 92, 97);
+}
+
+>>>>>>> dbee34b77923e2bd2e186369442819d38b725821
 .reply-input-field {
     display: block;
     width: 100%;
     box-sizing: border-box;
+<<<<<<< HEAD
 
 }
 
@@ -540,6 +560,16 @@ input#search-field:focus {
 #reply-form {
 
 }
+=======
+}
+
+
+
+.comment-btn {
+    float: right;
+}
+
+>>>>>>> dbee34b77923e2bd2e186369442819d38b725821
 
 /**
     anchor
@@ -631,12 +661,41 @@ a {
     width: 70%;
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> dbee34b77923e2bd2e186369442819d38b725821
 /**
     seach div
 **/
 
+<<<<<<< HEAD
+=======
+input#search-field {
+    background-image: url('../imgs/search.png');
+    background-size:contain;
+    background-repeat: no-repeat;
+    padding: 5px;
+    background-color: rgb(225,234,237);
+    color: rgb(122, 132, 140);
+    text-indent: 20px;
+}
+
+input#search-field::placeholder {
+    color: rgb(122, 132, 140);
+
+}
+input#search-field:focus {
+    background-image:none;
+    text-indent:0px
+}
+
+input#search-field::placeholder {
+}
+
+
+>>>>>>> dbee34b77923e2bd2e186369442819d38b725821
 #search-wrapper {
     margin-top: 25px;;
     text-align: center;
