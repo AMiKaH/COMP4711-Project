@@ -5,10 +5,27 @@ let transport = nodemailer.createTransport({
     host: 'smtp.mailtrap.io',
     port: 2525,
     auth: {
-       user: 'put_your_username_here',
-       pass: 'put_your_password_here'
+       user: process.env.smtpid || 'a3ed550b256a51',
+       pass: process.env.smtppw || 'a3cfcb674a17c0'
     }
 });
+
+exports.email = function(req,res,next) {
+    console.log("here");
+    const message = {
+        from: 'elonmusk@tesla.com', // Sender address
+        to: 'humble92@gmail.com',         // List of recipients
+        subject: 'Design Your Model S | Tesla', // Subject line
+        text: 'Have the most fun you can in a car. Get your Tesla today!' // Plain text body
+    };
+    transport.sendMail(message, function(err, info) {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log(info);
+        }
+    });
+}
 
 exports.getMessages = function(req,res,next) {
 
