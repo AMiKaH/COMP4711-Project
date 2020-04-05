@@ -35,7 +35,7 @@ function addReply(data) {
 // search post with replies using keyword 
 function searchPostWithReplies(keyword,page) {
     let offset = 5 * page;
-    let condition = `(LOWER(title) LIKE '%${keyword}%' OR LOWER(topicName) LIKE '%${keyword}%' OR LOWER(text) LIKE '%${keyword}%')`;
+    let condition = `(LOWER(title) LIKE '%${keyword}%')`;
     let sql = `SELECT '` + page + `' AS page,* FROM v_post_r WHERE ${condition}LIMIT 5 offset `  + offset;
     return db.query(sql)
 }
