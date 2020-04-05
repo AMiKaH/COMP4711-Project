@@ -45,6 +45,7 @@ function searchPostWithRepliesByUserID(keyword,page) {
     let sql = `SELECT '` + page + `' AS page,* FROM v_post_r WHERE ${condition}LIMIT 5 offset `  + offset;
     return db.query(sql)
 }
+
 // search post with replies by topicID
 function searchPostWithRepliesByTopic(topicID,page) {
     let offset = 5 * page;
