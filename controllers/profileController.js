@@ -4,17 +4,15 @@ const modUserPosts = require('../models/post');
 //Get
 exports.getProfile = function(req,res,next) {
 
-    if(req.cookies.signedIn !== "true"){
-        res.redirect(301,'/');
-        return
-    }
+    // if(req.cookies.signedIn !== "true"){
+    //     res.redirect(301,'/');
+    //     return
+    // }
 
-    const currentUser = modUserProfile.getUserByID(req.cookies.userid);
-    const currentUsersPosts = modUserPosts.getPosts(req.cookies.userid);
+    const currentUser = modUserProfile.getUserByID(req.params.id);
+    const currentUsersPosts = modUserPosts.getPosts(req.params.id);
 
     Promise.all([currentUsersPosts, currentUser]).then((data) => {
-
-        // parsePosts(data[0].rows);
 
         res.render('visitProfile', {
             profile: data[1].rows[0],
@@ -22,6 +20,7 @@ exports.getProfile = function(req,res,next) {
             userPostList: data[0].rows});
     }).catch((error) => {
 
+        console.log("new erro");
         console.log(error);
 
     });
@@ -77,34 +76,60 @@ exports.signup = async function(req,res,next) {
         res.cookie('pageNum',0);
         res.cookie('signedIn','true');
         res.cookie('userid',getIDByEmail)
-        .redirect('/homepage');
+        .redirect('/signup/completion');
     } else {
         return;
     }
 
+}
 
-    
+// Get
+exports.completeRegistration = function(req, res, next) {
+
+    res.render('completeRegistration');
+
 }
 
 // Post 
 exports.editProfile = function(req,res,next) {
 
-    let updatedProfile = modUserProfile.updateUser;
+    const infoImgURL = req.body.imageurl;
+    const infoAbout = req.body.about;
+    const infoCountry = req.body.country;
+    const infoDOB = req.body.dob;
 
-    updatedProfile.then((data) => {
-        res.render('peoples', { people: data.rows, main: true });
+    const updatedProfile = modUserProfile.updateUser({
+        userid : req.cookies.userid,
+        imgurl : infoImgURL,
+        about : infoAbout,
+        countryid : infoCountry,
+        dob : infoDOB
     });
+
+    updatedProfile.then();
+
+    const post = modUserPosts.getRecentPostRe(req.cookies.pageNum);
+    const getUser = modUserProfile.getUserByID(req.cookies.userid); 
+
+    Promise.all([post, getUser]).then((data) => {
+
+        parsePosts(data[0].rows);
+        
+        res.render('homepage', {
+        pageTitle:'Home Page',
+        pageNum: req.cookies.pageNum,
+        profile: data[1].rows[0],
+        signedIn: true,
+        postList: data[0].rows,
+        postNotComplete: req.query.postNotComplete});
+    })
 }
 
-// Post
+// Get
 exports.editProfileForm = function(req,res,next) {
 
-    // How do we get the profile form?
-    let userID = modUserProfile.getUserByID;
+    res.render('editProfile');
 
-    Peoples.then((data) => {
-        res.render('editProfile', { main: true });
-    });
 }
 
 
@@ -121,6 +146,7 @@ exports.likeProfile = function(req,res,next) {
 function parsePosts(rows){
     let postList = rows;
     postList.forEach(element => {
+        var replies = [];
         if(element.r_text[0] != null){
             for(let i = element.r_text.length - 1; i >= 0; i--){
 
@@ -128,7 +154,6 @@ function parsePosts(rows){
                         postid: element.postid,
                         imgUrl : element.r_imgurl[i],
                         replyText : element.r_text[i]
-
                     }                
                 replies.push(obj);
             }

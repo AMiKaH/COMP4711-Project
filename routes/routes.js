@@ -26,9 +26,19 @@ router.post('/logout',loginController.logout);
 
 
 // Profile Routes
-
-router.get('/profile', profileController.getProfile);
+router.get('/profile/:id', profileController.getProfile);
 
 router.post('/signup', profileController.signup);
+
+router.get('/signup/completion', profileController.completeRegistration);
+
+router.post('/signup/completion', profileController.editProfile);
+
+router.get('/edit', profileController.editProfileForm);
+
+router.post('/edit', profileController.editProfile);
+
+
+
 
 module.exports = router;
