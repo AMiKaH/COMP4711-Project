@@ -1,0 +1,766 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One|M+PLUS+1p|Noto+Sans+TC&display=swap');
+
+p, span, a {
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+h1, h2 {
+    font-family: 'Fjalla One';
+}
+
+h3, h4 {
+    font-family: 'Noto Sans TC', sans-serif;
+}
+/**
+    main div
+**/
+body {
+    text-align: center;
+}
+#page-main-div {
+    width: 60%;
+    text-align: left;
+    margin: 0 auto;
+}
+
+.error {
+    color: red;
+    font-size: 0.7em;
+}
+/**
+    Forms Stylesheets
+**/
+.inline-divs {
+    display: inline-block;
+    width: 45%;
+    text-align: left;
+    vertical-align: top;
+}
+
+
+.header-inline-divs {
+    vertical-align: middle;
+}
+
+
+
+#login-div {
+    text-align: left;
+}
+
+.left-aligned-divs {
+    display: inline-block;
+    width: 45%;
+    text-align: left;
+    vertical-align: top;
+}
+
+#signup-div {
+    display: inline-block;
+    text-align: left;
+    width: 75%;
+}
+
+#signup-form {
+    width: 100%;
+}
+
+#signup-div .form-control {
+    width:75%
+}
+
+.form-control {
+    display: inline-block;
+}
+
+
+#registration-form {
+    width: 100%;
+}
+
+
+
+/**
+    edit profile
+**/
+
+#edit-profile-wrapper {
+    text-align: center;
+}
+
+#edit-div {
+    display: inline-block;
+    text-align: center;
+    width: 50%;
+}
+
+#edit-profile-form {
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+}
+
+#edit-form {
+    width: 100%;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+
+
+.inline-container {
+    text-align: justify;
+    text-justify: distribute-all-lines;
+    /* just for demo */
+    min-width: 100%;
+    line-height: 0;
+}
+
+.stretch {
+    width: 50%;
+    height: 0%;
+    display: inline-block;
+}
+
+#signup-div .form-control .input-field {
+    max-width: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-control .input-field {
+    max-width: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.inline-fields-div {
+    display: inline-block;
+    *display: inline;
+    width: 48%;
+}
+
+.inline-fields-div > .input-ilfield{
+    max-width: 100%;
+    box-sizing: border-box;
+
+}
+
+#signup-div Button {
+    width: 100%;
+}
+
+.form-control .btn {
+    background-color: rgb(6, 158, 231);
+    color: white;
+    border-radius: 2px;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+}
+
+#signup-div .form-control .btn {
+    background-color: rgb(6, 158, 231);
+    color: white;
+    border-radius: 2px;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 5px 10px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+#complete-btn {
+    background-color: white;
+    color: rgb(6, 158, 231);
+    border-radius: 2px;
+    border-color: rgb(6, 158, 231);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 5px 10px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+.form-control Button:active {
+    box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.4);
+}
+
+
+.inline-divs h2, h1 {
+    margin-top: 0;
+}
+
+#complete-registration-form .input-field {
+    display: block;
+}
+
+
+
+#comp-reg {
+    display: inline-block;
+    text-align: left;
+    width: 50%;
+}
+
+.input-field, .input-ilfield {
+    max-width: inherit;
+    padding: 5px 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid lightgrey;
+}
+
+input::placeholder {
+    color: lightgrey;
+    width: 80%;
+    padding-right: 25px;;
+}
+
+/**
+    Header stylesheets
+**/
+#header {
+    margin-top: 25px;;
+    text-align: left;
+}
+
+#main-header {
+    /*Edited width and alignment*/
+    width: 75%;
+    margin: 0 auto;
+    vertical-align: middle;
+    margin-top: 25px;;
+}
+
+#base-span {
+    color: rgb(6, 158, 231);
+}
+
+.login-field {
+    width: 35%;
+}
+
+.search-logo-wrapper {
+    display: inline-block;
+    *display: inline;
+    width: 48%;
+    text-align: left;
+    vertical-align: middle;
+}
+
+
+
+#header-logo{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.logout {
+    display: inline-block;
+}
+
+#search {
+    width: 75%;
+}
+
+#search input  {
+    width: 100%;
+}
+
+#sign-up-wrapper {
+   width: 75%;
+   margin: 0 auto;
+}
+
+/**
+    profile stylesheets
+**/
+
+.profile-divs {
+    vertical-align: top;
+    width: 49%;
+    display: inline-block;
+    text-align: center;
+}
+
+.profile-wrapper {
+    min-width: 40%;
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.profile-wrapper-posts {
+    width: 75%;
+    margin: 0 auto;
+}
+
+#profile-bio {
+    display: inline-block;
+}
+
+.profile-inner-wrapper {
+    text-align: left;
+}
+
+.profile-controls {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 25px;
+
+}
+
+.profile-controls > table {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.topic-select {
+    padding: 5px 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid lightgrey;
+    width: 30%;
+}
+
+/**
+    Image css
+**/
+.circle-img-150 {
+    width: 150px;
+    height: 150px;
+
+    border-radius: 50%;
+    border-width: 50px;
+    border-color: black;
+}
+
+.circle-img-100 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.circle-img-75 {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+.circle-img-50 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.circle-img-35 {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.white-blue-btn {
+    background-color: white;
+    color: rgb(6, 158, 231);
+    border-radius: 2px;
+    border-color: rgb(6, 158, 231);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 5px 10px;
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+
+#new-post-btn {
+    width: 63%;
+}
+
+.blue-btn {
+    background-color: rgb(6, 158, 231);
+    color: white;
+    border-radius: 2px;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 5px 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+#search-by-topic-div {
+    width: 100%;
+}
+
+#search-by-topic-btn {
+    width: 25%;
+    display: inline-block;
+}
+
+/**
+    Posts stylesheet
+**/
+
+.post-wrapper{
+    height: auto;
+    text-align: left;
+    margin: 0px 10px;
+    margin-bottom: 25px;
+}
+
+.post-parameters-outer {
+    width: 75%;
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+
+}
+
+.post-parameters {
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.post-inline-divs {
+    margin: 0px 10px;
+    vertical-align: top;
+    display: inline-block;
+}
+
+
+.post-header-inline {
+    vertical-align: top;
+    display: inline-block;
+}
+
+.post-header-inline {
+    vertical-align: top;
+    display: inline-block;
+}
+
+.post-header-inline h4 {
+    margin: 0;
+}
+
+.post-header-inline p {
+    margin: 0;
+}
+
+.post-param-left {
+    margin: 0;
+}
+
+.post-param-right {
+    padding: 0px 5px;
+    float: right;
+}
+
+#post-topic {
+    color: rgb(6, 158, 231);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 2px;
+}
+
+.post-details p {
+    margin: 10px 10px 10px 0px;
+    font-size: 1em;
+    color: rgb(86, 92, 97);
+}
+
+#post-next {
+    float: right;
+}
+
+#post-previous {
+    float: left;
+}
+/**
+    Replies css
+**/
+
+.replies-outer-wrapper {
+    display: none;
+}
+.replies-inline {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.reply-wrapper {
+    margin-top: 20px;
+}
+
+.replies-profile-img {
+    width: 30%;
+}
+
+.replies-text {
+    width: 50%;
+}
+
+.replies-text span {
+    font-size: 0.9em;
+    color: rgb(86, 92, 97);
+}
+
+.reply-input-field {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+
+.comment-btn {
+    float: right;
+}
+
+
+/**
+    anchor
+**/
+
+a {
+    text-decoration: underline;
+}
+
+
+.limit-150-alt{
+    width: 250px;
+    max-height: auto;
+
+}
+
+.limit-150 {
+    width: 250px;
+    height: auto;
+    max-height: 100px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/**
+    View profile
+**/
+
+
+#profile-div-left {
+    width: 75%;
+    text-align: left;
+}
+
+#profile-div-right {
+    text-align: center;
+    height: 100%;
+    width: 20% ;
+
+}
+
+.align-bottom {
+    vertical-align: bottom;
+}
+
+
+#profile-div-right div {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+#visit-profile-posts {
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+/**
+    Send message 
+**/
+
+#send-message-wrapper {
+    margin-top: 25px;
+    text-align: center;
+}
+
+#send-message-inner-wrapper {
+    display: inline-block;
+    margin: 0 auto;
+    width: 40%;
+    text-align: center;
+}
+
+#message-left-div {
+    width: 25%;
+    float: left;
+}
+
+#message-right-div {
+    width: 70%;
+    float: right;
+}
+
+#message-subject {
+    width: 70%;
+}
+
+/**
+    seach div
+**/
+
+input#search-field {
+    background-image: url('../imgs/search.png');
+    background-size:contain;
+    background-repeat: no-repeat;
+    padding: 5px;
+    background-color: rgb(225,234,237);
+    color: rgb(122, 132, 140);
+    text-indent: 20px;
+}
+
+input#search-field::placeholder {
+    color: rgb(122, 132, 140);
+
+}
+input#search-field:focus {
+    background-image:none;
+    text-indent:0px
+}
+
+input#search-field::placeholder {
+}
+
+
+#search-wrapper {
+    margin-top: 25px;;
+    text-align: center;
+}
+#search-div{
+    display: inline-block;
+    margin: 0 auto;
+    width: 40%;
+}
+
+/**
+    Conversations page
+**/
+
+#messages-main-wrapper{
+    margin-top: 50px;;
+}
+#conversations {
+    width: 25%;
+    margin-right: 25px;
+    vertical-align: middle;
+}
+
+.border-bottom:hover {
+    background-color: rgb(241, 241, 241);
+}
+
+.conversation-wrapper {
+    vertical-align: middle;
+    
+
+}
+
+.border-bottom {
+    border-color: lightgrey;
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+    margin: 10px 0px 10px 0px
+}
+
+.conversation-left {
+    margin: 0 auto;
+    text-align: center;
+    width: 25%;
+    vertical-align: top;
+}
+
+.conversation-right {
+    width: 70%;
+    vertical-align: top;
+}
+
+.float-left{
+    font-weight: bold;
+    float: left;
+    margin-right: 15px;;
+}
+
+.float-right {
+    float: right;
+}
+
+.coversation-subject {
+    margin-top: 5px;
+}
+
+#messages {
+    border: none;
+    border-left: lightgrey;
+    border-width: 0px 0px 0px 1px;
+    border-style: solid;
+}
+
+.messages-form {
+    vertical-align: bottom;
+}
+
+p.background {
+    margin-top: 0px;
+    text-align: center;
+}
+
+.background {
+    position: relative;
+    z-index: 1;
+}
+
+.background:before {
+    border-top: 1px solid #dfdfdf;
+    content:"";
+    margin: 0 auto; 
+    position: absolute; 
+    top: 8px; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+.bg-line { 
+    background: #fff; 
+    padding: 0 15px; 
+}
+
+.message-left {
+    width: 15%;
+    text-align: center;
+}
+
+.message-right {
+    width: 70%;
+    vertical-align: center;
+}
+
+.message-div {
+    vertical-align: center;
+}

@@ -1,0 +1,45 @@
+
+    {{#each postList}}
+    <div id="post-main" class="post-wrapper">
+        <div class="post-inline-divs">
+            <a href= "/profile/{{this.userid}}"><img class="circle-img-75" src="{{this.imgurl}}" alt="{{this.fname}}"> </a>
+        </div>
+        <div class="post-parameters-outer">
+            <div class="post-parameters">
+                <div id="post-title" class="post-param-left post-header-inline">
+                    <h4>{{this.title}}</h4>
+                </div>
+                <div id="post-topic" class="post-param-right post-header-inline">
+                    <p>{{this.topicname}}</p>
+                </div>    
+            </div>
+
+            <div class="post-details" >
+                <p id="post-id-{{@index}}" class="limit-150">{{this.text}}</p>
+            </div>
+
+            <div class="post-parameters">
+                <span>{{this.f_timedate}}</span>
+                <a id="replies-anchor{{@index}}" class="post-param-right replies-link" onclick="expandCloseReplies(this)">{{this.replies.length}} replies</a>
+                {{>replies replies = this.replies}}
+            </div>
+        </div>
+    </div>
+    {{/each}}
+
+
+    <div>
+        {{#ifCond2 pageNum 0}}
+        <div id="post-previous">
+            <button id="btn-previous" onclick="paginate(this)" type="submit" class="comment-btn white-blue-btn"><-Previous</button>
+        </div>
+        {{/ifCond2}}
+        
+        {{#ifCond postList.length 5}}
+        <div id="post-next">
+            <button id="btn-next" onclick="paginate(this)" type="submit" class="comment-btn white-blue-btn">Next-></button>
+        </div>
+        {{/ifCond}}
+    </div>
+
+{{this.render}}

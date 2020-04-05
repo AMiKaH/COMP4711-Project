@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ pageTitle }}</title>
+    <link rel = "icon"  href = "/imgs/Kb.png">
+    <link href='/css/main.css' rel='stylesheet' />
+</head>
+<body>
+    <div id="page-main-div">
+    {{#if signedIn}}
+        <div id="header">
+            <div id="inner-wrapper">
+                <div class="inline-container">
+                    <div class="search-logo-wrapper">
+                        <span class="helper"></span>
+
+                        <div id="header-logo">
+                            <a href="/homepage">
+                                <img src="/imgs/Kb.png" onclick='/'>
+                            </a>
+                        </div>
+
+                        <div id="search" class="form-control">
+                            <form action="/search" method="POST">
+                                <input  id="search-field" class="input-ilfield" type="text" name="search" placeholder="search">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="logout">
+                        <div class="form-control">
+                            <form action="/logout" method="POST">
+                                <button class="btn" type="submit">logout</button>
+                            </form>
+                        </div>
+                    </div>
+                    <span class="stretch"></span>
+                </div>
+            </div>
+        </div>
+    {{else}}
+        {{#if finishSigning}}
+            <div id="main-header">
+                <div class="inline-divs">
+                    <h1>knowledgeBase</h1>
+                </div>
+            </div>
+        {{else}}
+                <div id="main-header">
+                    <span class="helper"></span>
+                    <div class="header-inline-divs inline-divs">
+                        <h1><span>knowledge</span><span id="base-span">Base</span></h1>
+                    </div>
+                    <div class="header-inline-divs float-right inline-divs">
+                        {{#if loginError}}
+                            <span class="error">Username and password combination is incorrect!</span>
+                        {{/if}}
+                        <div id="login-div">
+                            <form id="login-form" action="/validateLogin" method="POST">
+                                <div id="login-form" class="form-control">
+                                    <input class="login-field input-ilfield" type="text" name="email" placeholder="email">
+                                    <input class="login-field input-ilfield" type="password" name="password" placeholder="password">
+                                    <button class="btn" type="submit">login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+    {{/if}}

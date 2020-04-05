@@ -1,0 +1,8 @@
+{
+    "name": "Knowlege Base",
+    "description": "SPA: Knowlege Base using node/express and postgresql",
+    "repository": "https://github.com/AMiKaH/COMP4711-Project",
+    "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+    "keywords": ["node", "express", "heroku", "postgresql"],
+    "image": "heroku/nodejs"
+}
