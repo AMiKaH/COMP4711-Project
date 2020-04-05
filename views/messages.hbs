@@ -1,10 +1,9 @@
-{{log this}}
 <div id="messages-main-wrapper">
     <div id="conversations" class="conversations inline-divs">
         {{#each conversation}}
-            <div id="conversation-{{this.conversationid}}"class="border-bottom conversation-wrapper">
+            <div data-index="{{@index}}" onclick="makeActive({{@index}})" id="conversation-{{this.conversationid}}"class="border-bottom conversation-wrapper active-target">
                 <div class="conversation-left inline-divs">
-                    <img class="circle-img-50" src="{{this.imgurl}}" alt="{{this.r_name}}">
+                    <img class="circle-img-50" src="{{this.r_imgurl}}" alt="{{this.r_name}}">
                 </div>
                 <div class="conversation-right inline-divs">
                     <span class="float-left">{{this.r_fname}} {{this.r_lname}}</span>
@@ -18,7 +17,7 @@
 
     <div id="messages" class="inline-divs">
         {{#each conversation}}
-        <div id="conversation-messages-{{@index}}" class="conversation-div">
+        <div data-index="{{@index}}" id="conversation-messages-{{@index}}" class="conversation-div active-target">
             {{#each this.messages}}
             <div class="message-div">
                 <p class="background"><span class="bg-line">{{this.f1_timedate}}</span></p>
@@ -45,4 +44,40 @@
         {{/each}}
     </div>
 
+    <style>
+
+        #messages .conversation-div.active-target {
+            display: none;
+        }
+
+        #messages .conversation-div.active-target.active {
+            display: block;
+        }
+
+    </style>
+    <script>
+
+        function makeActive(index) {
+
+            var elements = document.querySelectorAll(".active-target");
+
+            elements.forEach((element) => {
+
+                element.classList.remove("active");
+
+
+            });
+
+            var activeElements = document.querySelectorAll(`div[data-index='${index}']`)
+
+            activeElements.forEach((element) => {
+
+                element.classList.add("active");
+
+
+            });
+        }
+
+        makeActive(0);
+    </script>
 </div>

@@ -2,7 +2,7 @@ let db = require('../util/database');
 
 // get conversation list
 function getConversations(id) {
-    let sql = `SELECT * FROM v_conversation WHERE senderID=${id} OR receiverID=${id}`;
+    let sql = `SELECT * FROM v_conversation WHERE senderID=${id} OR receiverID=${id} ORDER by f1_timedate DESC, f2_timedate DESC`;
     return db.query(sql);
 }
 
