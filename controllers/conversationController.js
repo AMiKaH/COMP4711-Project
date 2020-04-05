@@ -70,8 +70,6 @@ exports.getMessages = async function(req,res,next) {
 
         for (let convo of listOfConversations) {
 
-            console.log(convo);
-
             let currentConvoMessages = modConvo.getMsg(convo.conversationid);
             
             convo.messages = await currentConvoMessages.then((data) => {
@@ -81,8 +79,6 @@ exports.getMessages = async function(req,res,next) {
             })
 
         };
-
-        console.log(listOfConversations);
 
         res.render('messages', {
             conversation : listOfConversations
@@ -101,7 +97,6 @@ exports.getMessages = async function(req,res,next) {
 
 exports.sendMessage = function(req,res,next) {
 
-    
 
     let mObject = {
         messageCID : m_CID,

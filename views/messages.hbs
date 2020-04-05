@@ -1,3 +1,4 @@
+{{log this}}
 <div id="messages-main-wrapper">
     <div id="conversations" class="conversations inline-divs">
         {{#each conversation}}
@@ -7,7 +8,7 @@
                 </div>
                 <div class="conversation-right inline-divs">
                     <span class="float-left">{{this.r_fname}} {{this.r_lname}}</span>
-                    <span class="float-right">{{this.f1_timedate}}</span>
+                    <span class="float-right">{{this.f1_timedate}} {{this.f2_timedate}}</span>
                     <br/>
                     <p class="conversation-subject">{{this.subject}}</p>
                 </div>
@@ -18,7 +19,7 @@
     <div id="messages" class="inline-divs">
         {{#each conversation}}
         <div id="conversation-messages-{{@index}}" class="conversation-div">
-            {{#each conversation.message}}
+            {{#each this.messages}}
             <div class="message-div">
                 <p class="background"><span class="bg-line">{{this.f1_timedate}}</span></p>
                 <div class="conversation-wrapper">
@@ -44,33 +45,4 @@
         {{/each}}
     </div>
 
-    {{!-- <div id="messages" class="inline-divs">
-        {{#each conversation}}
-        <div id="conversation-messages-{{@index}}" class="conversation-div">
-            {{#each conversation.message}}
-            <div class="message-div">
-                <p class="background"><span class="bg-line">{{this.f1_timedate}}</span></p>
-                            <div class="conversation-wrapper">
-                <div class="message-left inline-divs">
-                    <img class="circle-img-35" src="{{this.r_imgUrl}}" alt="{{this.r_fName}}">
-                </div>
-
-                <div class="message-right inline-divs">
-                    <span class="float-left">{{this.r_fName}} {{this.r_lName}}</span>
-                    <span>{{this.f2_timedate}}</span>
-                    <br/>
-                    <p class="coversation-subject">{{this.text}}</p>
-                </div>
-            </div>
-            {{/each}}
-            <div id="reply-form-{{@index}}" class="reply-form">
-                <form id="messages-form-{{@index}}" METHOD="GET">
-                    <textarea name="add-reply-text" rows="4" class="reply-input-field input-field" placeholder="Write a message..."></textarea>
-                    <button type="submit" class="comment-btn blue-btn">send</button>
-                </form>
-            </div>
-        </div>
-        </div>
-        {{/each}}
-    </div> --}}
 </div>
