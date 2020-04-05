@@ -10,16 +10,22 @@ exports.getProfile = function(req,res,next) {
         return
     }
 
+    if (!req.headers.referer.includes('profile')){
+        res.cookie('pageNum',0);
+    }
+
     const currentUser = modUserProfile.getUserByID(req.params.id);
-    const currentUsersPosts = modUserPosts.getRecentPostRe(req.params.id);
+    const currentUsersPosts = modUserPosts.getRecentPostRe(req.cookies.pageNum);
 
     Promise.all([currentUsersPosts, currentUser]).then((data) => {
+
         parse.parsePosts(data[0].rows);
 
         res.render('visitProfile', {
             profile: data[1].rows[0],
             signedIn: true, 
             userPostList: data[0].rows});
+
     }).catch((error) => {
 
         console.log("new erro");
@@ -83,6 +89,8 @@ exports.signup = async function(req,res,next) {
         return;
     }
 
+
+
 }
 
 // Get
@@ -115,7 +123,7 @@ exports.editProfile = function(req,res,next) {
 
     Promise.all([post, getUser]).then((data) => {
 
-        parsePosts(data[0].rows);
+        parse.parsePosts(data[0].rows);
         
         res.render('homepage', {
         pageTitle:'Home Page',
@@ -124,7 +132,7 @@ exports.editProfile = function(req,res,next) {
         signedIn: true,
         postList: data[0].rows,
         postNotComplete: req.query.postNotComplete});
-    })
+    });
 }
 
 // Get
