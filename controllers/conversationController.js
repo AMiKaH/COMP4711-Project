@@ -1,5 +1,32 @@
 let modConvo = require('../models/message');
 let modUser = require('../models/user');
+const nodemailer = require('nodemailer');
+
+let transport = nodemailer.createTransport({
+    host: 'smtp.mailtrap.io',
+    port: 2525,
+    auth: {
+       user: process.env.smtpid || 'a3ed550b256a51',
+       pass: process.env.smtppw || 'a3cfcb674a17c0'
+    }
+});
+
+exports.email = function(req,res,next) {
+    console.log("here");
+    const message = {
+        from: 'elonmusk@tesla.com', // Sender address
+        to: 'fake@gmail.com',         // List of recipients
+        subject: 'Design Your Model S | Tesla', // Subject line
+        text: 'Have the most fun you can in a car. Get your Tesla today!' // Plain text body
+    };
+    transport.sendMail(message, function(err, info) {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log(info);
+        }
+    });
+}
 
 // GET
 // Render the initial start message page
