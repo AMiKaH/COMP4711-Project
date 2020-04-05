@@ -39,7 +39,12 @@ function searchPostWithReplies(keyword,page) {
     let sql = `SELECT '` + page + `' AS page,* FROM v_post_r WHERE ${condition}LIMIT 5 offset `  + offset;
     return db.query(sql)
 }
-
+function searchPostWithRepliesByUserID(keyword,page) {
+    let offset = 5 * page;
+    let condition = `(userid = ${keyword})`;
+    let sql = `SELECT '` + page + `' AS page,* FROM v_post_r WHERE ${condition}LIMIT 5 offset `  + offset;
+    return db.query(sql)
+}
 // search post with replies by topicID
 function searchPostWithRepliesByTopic(topicID,page) {
     let offset = 5 * page;
@@ -68,6 +73,7 @@ module.exports = {
     addReply: addReply,
     getPosts: getPosts,
     searchPostRe: searchPostWithReplies,
+    searchPostReByUID : searchPostWithRepliesByUserID,
     searchPostReByTopic: searchPostWithRepliesByTopic,
     getPostCounts: getPostCounts,
 }
