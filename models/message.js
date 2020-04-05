@@ -21,7 +21,7 @@ function renewConversationTimestamp(id) {
 
 // get messages
 function getMessage(id) {
-    let sql = `SELECT *, to_char(timedate, 'Mon DD') f1_timedate, to_char(timedate, 'HH12:MI AM') f2_timedate FROM message WHERE conversationID=${id} ORDER BY timeDate`;
+    let sql = `SELECT * FROM v_message WHERE conversationID=${id} ORDER BY timeDate`;
     return db.qeury(sql);
 }
 
