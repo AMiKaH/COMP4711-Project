@@ -92,8 +92,6 @@ exports.signup = async function(req,res,next) {
         return;
     }
 
-
-
 }
 
 // Get
@@ -145,14 +143,14 @@ exports.editProfileForm = function(req,res,next) {
 
 }
 
-
-//Post
+//Get
 exports.likeProfile = function(req,res,next) {
-    
-    let userLiked = modUserProfile.increaseLike;
 
-    userLiked.then((data) => {
-        res.render('peoples', { people: data.rows, main: true });
-    });
+    console.log(req.params.id);
+    
+    let userLiked = modUserProfile.increaseLike(req.params.id);
+
+    userLiked.then();
+
 }
 

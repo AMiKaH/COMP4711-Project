@@ -16,7 +16,8 @@
             </div>
             <div>
                 <a>Likes</a>
-                <a><button>+</button></a>
+                {{!-- HREF MUST BE EDITED HERE, CURRENTLY USING USERID NOT VISITING PROFILE ID --}}
+                <a href='/profile/like/{{profile.userid}}' formmethod="GET"><button>+</button></a>
             </div>
             <div>
                 <a>Posts</a>

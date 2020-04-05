@@ -27,11 +27,10 @@ router.post('/addReply',postController.addReply);
 
 router.post('/logout',loginController.logout);
 
-
 // Profile Routes
 router.get('/profile/:id', profileController.getProfile);
 
-router.post('/profile/like/:id', profileController.likeProfile);
+router.get('/profile/like/:id', profileController.likeProfile);
 
 router.post('/signup', profileController.signup);
 
@@ -48,7 +47,9 @@ router.post('/edit', profileController.editProfile);
 router.get('/messageUser', conversationController.getMessagePage);
 router.post('/messageUser', conversationController.postMessagePage);
 
-router.get('/conversation', conversationController.getMessages);
+router.get('/messages', conversationController.getMessages);
+
+router.post('/messages/send', conversationController.sendMessage);
 
 
 module.exports = router;
