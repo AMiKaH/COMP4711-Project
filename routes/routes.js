@@ -9,6 +9,8 @@ const conversationController = require('../controllers/conversationController');
 const paginator = require('../controllers/paginateController');
 
 
+router.get('/message/email',convo.email);
+
 router.post('/validateLogin',loginController.validateLogin);
 
 router.post('/addPost',postController.addPost);
