@@ -4,10 +4,10 @@ const modUserPosts = require('../models/post');
 //Get
 exports.getProfile = function(req,res,next) {
 
-    // if(req.cookies.signedIn !== "true"){
-    //     res.redirect(301,'/');
-    //     return
-    // }
+    if(req.cookies.signedIn !== "true"){
+        res.redirect(301,'/');
+        return
+    }
 
     const currentUser = modUserProfile.getUserByID(req.params.id);
     const currentUsersPosts = modUserPosts.getPosts(req.params.id);
