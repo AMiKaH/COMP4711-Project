@@ -25,6 +25,7 @@ exports.getHomePage = function(req,res,next, pageNumber = 0){
         pageNum: req.cookies.pageNum,
         profile: data[1].rows[0],
         signedIn:true,
-        postList: data[0].rows});
+        postList: data[0].rows,
+        postNotComplete: req.query.postNotComplete});
     });
 }
