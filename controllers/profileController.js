@@ -10,7 +10,7 @@ exports.getProfile = function(req,res,next) {
     }
 
     const currentUser = modUserProfile.getUserByID(req.params.id);
-    const currentUsersPosts = modUserPosts.getRecentPostRe(req.params.id);
+    const currentUsersPosts = modUserPosts.getPosts(req.params.id);
 
     Promise.all([currentUsersPosts, currentUser]).then((data) => {
         parsePosts(data[0].rows)
