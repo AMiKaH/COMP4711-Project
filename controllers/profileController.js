@@ -12,7 +12,8 @@ exports.getProfile = function(req,res,next) {
     const currentUser = modUserProfile.getUserByID(req.params.id);
     const currentUsersPosts = modUserPosts.getPosts(req.params.id);
 
-    Promise.all([currentUsersPosts, currentUser]).then((data) => {
+   Promise.all([currentUsersPosts, currentUser]).then((data) => {
+
         res.render('visitProfile', {
             profile: data[1].rows[0],
             signedIn: true, 
@@ -21,7 +22,8 @@ exports.getProfile = function(req,res,next) {
 
         console.log("new erro");
         console.log(error);
-    })
+
+    });
 }
 
 // Post
