@@ -8,8 +8,18 @@ exports.searchByKeyword = function(req,res,next) {
         res.cookie('pageNum',0);
         page = 0;
     }
-
+    
     let keyword = req.body.search.toLowerCase();
+
+    if(keyword === ""){
+        res.render('search', {
+            pageNum: 0,
+            signedIn:true,
+            pageTitle: 'Search', 
+            searchError: true});
+            return;
+    }
+    
     let post = modPost.searchPostRe(keyword,page);
     post.then((data) => {
         

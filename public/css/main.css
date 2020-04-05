@@ -308,6 +308,10 @@ input::placeholder {
     margin: 0 auto;
 }
 
+.profile-posts {
+    width: 40%;
+}
+
 #profile-bio {
     display: inline-block;
 }
