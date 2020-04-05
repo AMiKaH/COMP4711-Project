@@ -14,6 +14,8 @@ router.post('/addPost',postController.addPost);
 
 router.post('/search',searchController.searchByKeyword);
 
+router.get('/search',searchController.searchByUserID);
+
 router.post('/searchTopic',searchController.searchByTopic);
 
 router.get('/homepage', home.getHomePage);
