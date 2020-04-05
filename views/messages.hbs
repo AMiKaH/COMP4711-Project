@@ -3,13 +3,13 @@
         {{#each conversation}}
             <div id="conversation-{{this.id}}"class="border-bottom conversation-wrapper">
                 <div class="conversation-left inline-divs">
-                    <img class="circle-img-50" src="{{this.sender.imgUrl}}" alt="{{this.sender.fName}}">
+                    <img class="circle-img-50" src="{{this.senderid.imgurl}}" alt="{{this.senderid.fname}}">
                 </div>
                 <div class="conversation-right inline-divs">
-                    <span class="float-left">{{this.sender.fName}} {{this.sender.lName}}</span>
-                    <span class="float-right">{{this.date}}</span>
+                    <span class="float-left">{{sender.fname}} {{sender.lname}}</span>
+                    <span class="float-right">{{this.timedate}}</span>
                     <br/>
-                    <p class="coversation-subject">{{this.subject}}</p>
+                    <p class="conversation-subject">{{this.subject}}</p>
                 </div>
             </div>
         {{/each}}

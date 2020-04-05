@@ -6,7 +6,7 @@ function getConversations(id) {
         ORDER BY timedate desc`;
     return db.query(sql);
 }
-
+ 
 // get count of incomming message
 function getMessageCount(id) {
     let sql = `SELECT count(*) as cnt FROM message WHERE receiverID=${id}`;

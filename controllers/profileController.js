@@ -15,11 +15,14 @@ exports.getProfile = function(req,res,next) {
     }
 
     const currentUser = modUserProfile.getUserByID(req.params.id);
-    const currentUsersPosts = modUserPosts.getRecentPostRe(req.cookies.pageNum);
+    const currentUsersPosts = modUserPosts.getPosts(req.cookies.pageNum);
 
     Promise.all([currentUsersPosts, currentUser]).then((data) => {
 
         parse.parsePosts(data[0].rows);
+
+        // Pass over a cookie stating what person's page the user is visiting.
+        res.cookie('visitorID', data[1].rows[0].userid);
 
         res.render('visitProfile', {
             profile: data[1].rows[0],
@@ -79,7 +82,7 @@ exports.signup = async function(req,res,next) {
         lname : sLastName,
 
     });
-
+ 
     if(getIDByEmail > 0){
         res.cookie('pageNum',0);
         res.cookie('signedIn','true');
