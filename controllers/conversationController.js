@@ -14,7 +14,7 @@ exports.email = function(req,res,next) {
     console.log("here");
     const message = {
         from: 'elonmusk@tesla.com', // Sender address
-        to: 'humble92@gmail.com',         // List of recipients
+        to: 'fake@gmail.com',         // List of recipients
         subject: 'Design Your Model S | Tesla', // Subject line
         text: 'Have the most fun you can in a car. Get your Tesla today!' // Plain text body
     };
