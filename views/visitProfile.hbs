@@ -2,8 +2,8 @@
     <div id="view-profile-top-wrapper">
         <div id="profile-div-left" class="profile-divs">
             <div id="view-profile-bio">
-                <img id="profile-img" class="circle-img-150" src="https://randomuser.me/api/portraits/women/12.jpg" alt="{{profile.firstName}}"/>
-                <h3 id="profile-name">{{profile.firstName}} {{profile.lastName}}</h3>
+                <img id="profile-img" class="circle-img-150" src="{{profile.imgurl}}" alt="{{profile.firstName}}"/>
+                <h3 id="profile-name">{{profile.fname}} {{profile.lname}}</h3>
                 <span>{{profile.about}}</span>
             </div>
         </div>
@@ -22,8 +22,12 @@
         </div>
     </div>
 
-    <div id="visit-profile-posts">
-        <h2>All posts by {{profile.firstName}}:</h2>
-        {{>posts}}
-    </div>
+        <div class="profile-wrapper-posts">
+            <div class="profile-inner-wrapper">
+                <p>All posts by {{profile.fname}}:</p>
+            </div>
+            <div id="post-partial-div" class="profile-inner-wrapper">
+                {{>posts postList = userPostList}}  
+            </div>      
+        </div>
 </div>

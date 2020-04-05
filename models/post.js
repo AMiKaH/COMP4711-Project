@@ -2,7 +2,6 @@ let db = require('../util/database');
 
 // insert a single post to the database
 function addPost(data) {
-   
     let sql = `INSERT INTO post (userid, topic, title, "text") VALUES (${data.userID}, (SELECT topicid FROM topic where topicname LIKE '%${data.topic}%'), '${data.title}', '${data.text}')`;
     db.query(sql);
 }
@@ -40,7 +39,12 @@ function searchPostWithReplies(keyword,page) {
     let sql = `SELECT '` + page + `' AS page,* FROM v_post_r WHERE ${condition}LIMIT 5 offset `  + offset;
     return db.query(sql)
 }
-
+function searchPostWithRepliesByUserID(keyword,page) {
+    let offset = 5 * page;
+    let condition = `(userid = ${keyword})`;
+    let sql = `SELECT '` + page + `' AS page,* FROM v_post_r WHERE ${condition}LIMIT 5 offset `  + offset;
+    return db.query(sql)
+}
 // search post with replies by topicID
 function searchPostWithRepliesByTopic(topicID,page) {
     let offset = 5 * page;
@@ -57,7 +61,7 @@ function getPostCounts(id){
 
 // get all the posts written by specific user
 function getPosts(id) {
-    let sql = "SELECT * FROM post WHERE userID = " + id;
+    let sql = "SELECT *, to_char(timedate, 'DD mon YYYY') f_timedate FROM post WHERE userID = " + id;
     return db.qeury(sql);
 }
 
@@ -69,6 +73,7 @@ module.exports = {
     addReply: addReply,
     getPosts: getPosts,
     searchPostRe: searchPostWithReplies,
+    searchPostReByUID : searchPostWithRepliesByUserID,
     searchPostReByTopic: searchPostWithRepliesByTopic,
     getPostCounts: getPostCounts,
 }

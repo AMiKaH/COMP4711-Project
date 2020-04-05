@@ -2,7 +2,7 @@ let express = require('express')
 let app = express();
 let bodyParser = require('body-parser');
 let path = require('path');
-let db = require('./db/db');
+let db = require('./util/database');
 var cookieParser = require('cookie-parser');
 const expressHbs = require('express-handlebars');
 
@@ -34,7 +34,6 @@ hbs.handlebars.registerHelper('ifCond2', function(v1, v2, options) {
   return options.inverse(this);
 });
 
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false })) // middleware
 
@@ -53,13 +52,10 @@ app.get('/', function (req,res) {
   if(req.cookies.signedIn === "true" && req.cookies.userid !== undefined){
     res.redirect(301,'/homepage')
   } else {
-    res.render('home', { pageTitle: 'KB Login/Signup', heading: 'Welcome to People App'});
+    res.render('home', { pageTitle: 'KB Login/Signup', loginError: false, heading: 'Welcome to People App'});
   }
 });
 
 app.use(routes)
 
 app.listen(process.env.PORT || 3000, () => console.log('Server ready @ port 3000'))
-
-
-

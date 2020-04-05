@@ -8,18 +8,21 @@ exports.addPost = function(req,res,next) {
     let titl = req.body.title;
     let txt = req.body.text;
     
-    if(top === "" || titl === "" || txt === "")
+    if(top === "" || titl === "" || txt === "") {
+        res.redirect(301, '/homepage?postNotComplete=666');
         return;
-
-    let newPost = {
-       userID: uid,
-       topic: top,
-       title: titl,
-       text: txt
+    } else {
+        let newPost = {
+            userID: uid,
+            topic: top,
+            title: titl,
+            text: txt
+         }
+         mod.add(newPost);
+         res.redirect(301, '/homepage');
     }
- 
-    mod.add(newPost);
-    res.redirect(301, '/homepage');
+
+
 }
 
 exports.getPost = function(req,res,next) {

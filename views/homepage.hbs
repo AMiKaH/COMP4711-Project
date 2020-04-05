@@ -1,3 +1,5 @@
+{{log this}}
+
 <div id="profile">
     <div class="profile-divs">
         <div class="profile-wrapper">
@@ -7,10 +9,10 @@
                 <span>{{profile.about}}</span>
             </div>
             <br/>
-            <div class="profile-inner-wrapper">
+            <div class="profile-controls profile-inner-wrapper">
                 <table>
-                    <tr><td><a>Posts</a></td> <td>{{profile.postcnt}}</td> </tr>
-                    <tr><td><a>Messages</a></td></td><td>{{profile.msgcnt}}</td></tr>
+                    <tr><td><a href="/search?userid={{profile.userid}}" +{{profile.fname}} >Posts</a></td><td>{{profile.postcnt}}</td> </tr>
+                    <tr><td><a>Messages</a></td><td>{{profile.msgcnt}}</td></tr>
                     <tr><td>Likes</td><td>{{profile.like}}</td></tr>
                 </table>
                 <br>
@@ -23,6 +25,9 @@
         <div class="profile-wrapper">
             <div>
                 <p>What is your question today?</p>
+            {{#ifCond postNotComplete 666}}
+                <span class="error">Please make sure all fields are filled out</span>
+            {{/ifCond}}
             </div>
             <form action="addPost" method="POST" id="question-form" class="form-control">
                 <input class="input-field" type="text" name="title" placeholder="subject">
