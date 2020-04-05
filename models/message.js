@@ -2,7 +2,7 @@ let db = require('../util/database');
 
 // get conversation list
 function getConversations(id) {
-    let sql = `SELECT *, to_char(timedate, 'Mon DD') f1_timedate FROM conversation WHERE senderID=${id} OR receiverID=${id}
+    let sql = `SELECT * FROM v_conversation WHERE senderID=${id} OR receiverID=${id}
         ORDER BY timedate desc`;
     return db.query(sql);
 }
@@ -21,7 +21,7 @@ function renewConversationTimestamp(id) {
 
 // get messages
 function getMessage(id) {
-    let sql = `SELECT *, to_char(timedate, 'Mon DD') f1_timedate, to_char(timedate, 'HH12:MI AM') f2_timedate FROM message WHERE conversationID=${id} ORDER BY timeDate`;
+    let sql = `SELECT * FROM v_message WHERE conversationID=${id} ORDER BY timeDate`;
     return db.qeury(sql);
 }
 

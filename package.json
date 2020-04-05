@@ -24,6 +24,7 @@
     "express-handlebars": "^4.0.0",
     "express-session": "^1.17.0",
     "handlebars": "^4.4.2",
+    "nodemailer": "^6.4.6",
     "pg": "^7.18.2"
   }
 }
