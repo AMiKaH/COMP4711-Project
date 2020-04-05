@@ -85,31 +85,27 @@ exports.getMessages = async function(req,res,next) {
         });
     });
 }
- 
-// exports.getMessages = function(req,res,next, conversationID) {
-
-//     let specificConversation = messageContainer.getMessage(conversationID);
-
-//     specificConversation.then((data) => {
-//         res.render('messages', { people: data.rows, peoplesCSS: true });
-//     });
-// }
 
 exports.sendMessage = function(req,res,next) {
 
+    currentConvoID = Object.keys(req.body)[0];
+    currentConvoMsg = req.body["add-reply-text"];
 
-    let mObject = {
-        messageCID : m_CID,
-        messageID : m_ID,
-        senderID : s_ID,
-        receiverID : r_ID,
-        timeDate : time_Date,
-        text : text
-    }
+    let specificConvo = modConvo.getSpecificConversation(currentConvoID);
 
-    //Incomplete.
-    messageContainer.add(mObject);
-    res.redirect(301, 'conversationView');
+    specificConvo.then((data) => {
+
+        modConvo.sendMsg({
+            conversationID: currentConvoID,
+            senderID: data.rows[0].senderid,
+            receiverID: data.rows[0].receiverid,
+            text: currentConvoMsg
+
+        }).then();
+
+    })
+
+    res.redirect('/messages');
 
 }
 

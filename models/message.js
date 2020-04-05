@@ -6,12 +6,12 @@ function getConversations(id) {
     return db.query(sql);
 }
 
-// function getSpecificConversation(data) {
+function getSpecificConversation(id) {
 
-//     let sql = 'SELECT * from conversation c where conversationid=${data.cid} and senderid=${data.sid} and receiverid = ${data.rid}';
-//     return db.query(sql);
+    let sql = `SELECT * from conversation c where conversationid=${id}`;
+    return db.query(sql);
 
-// }
+}
 
 // get count of incomming message
 function getMessageCount(id) {
@@ -37,7 +37,7 @@ function startConversation(data) {
     let sql = `INSERT INTO conversation (senderid, receiverid, subject) values (${data.senderID}, ${data.receiverID}, '${data.subject}')`;
     return db.query(sql);
 }
-
+ 
 // send message
 function addMessage(data) {
     let sql = `INSERT INTO message (conversationid, senderid, receiverid, text) values (${data.conversationID}, ${data.senderID}, ${data.receiverID},'${data.text}')`;
@@ -46,6 +46,7 @@ function addMessage(data) {
 
 module.exports = {
     getConversation: getConversations,
+    getSpecificConversation: getSpecificConversation,
     getMsgCount: getMessageCount,
     renewConversation: renewConversationTimestamp,
     getMsg: getMessage,
