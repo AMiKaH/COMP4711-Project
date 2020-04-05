@@ -1,7 +1,9 @@
 let modPost = require('../models/post');
+let parse= require('./parse');
 
 exports.searchByKeyword = function(req,res,next) {
     let page = req.cookies.pageNum;
+    
     if (req.headers.referer.includes('homepage')){
         res.cookie('pageNum',0);
         page = 0;
@@ -10,6 +12,8 @@ exports.searchByKeyword = function(req,res,next) {
     let keyword = req.body.search.toLowerCase();
     let post = modPost.searchPostRe(keyword,page);
     post.then((data) => {
+        
+        parse.parsePosts(data.rows);
         res.render('search', {
             postList: data.rows, 
             pageNum: page,
@@ -26,6 +30,8 @@ exports.searchByTopic = function(req,res,next) {
     let topic = req.body.topic;
     let post = modPost.searchPostReByTopic(topic,page);
     post.then((data) => {
+        
+        parse.parsePosts(data.rows);
         res.render('search', {
             postList: data.rows, 
             pageNum: page,
@@ -42,6 +48,7 @@ exports.searchByUserID = function(req,res,next) {
     }
     let post  = modPost.searchPostReByUID(id,page);
     post.then((data)=>{
+        parse.parsePosts(data.rows);
         res.render('search', {
             postList: data.rows, 
             pageNum: page,
