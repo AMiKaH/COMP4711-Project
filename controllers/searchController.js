@@ -32,3 +32,19 @@ exports.searchByTopic = function(req,res,next) {
             signedIn:true});
     });
 }
+
+exports.searchByUserID = function(req,res,next) {
+    let page = req.cookies.pageNum;
+    let id = req.query.userid;
+    if (req.headers.referer.includes('homepage')){
+        res.cookie('pageNum',0);
+        page = 0;
+    }
+    let post  = modPost.searchPostReByUID(id,page);
+    post.then((data)=>{
+        res.render('search', {
+            postList: data.rows, 
+            pageNum: page,
+            signedIn:true});
+    })
+}
