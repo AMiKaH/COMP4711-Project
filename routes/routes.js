@@ -9,7 +9,7 @@ const conversationController = require('../controllers/conversationController');
 const paginator = require('../controllers/paginateController');
 
 
-router.get('/message/email',convo.email);
+router.get('/message/email',conversationController.email);
 
 router.post('/validateLogin',loginController.validateLogin);
 
