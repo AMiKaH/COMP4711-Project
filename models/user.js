@@ -62,7 +62,7 @@ function getLikes(id) {
 
 // increase user like information
 function increaseLike(id) {
-    let sql = `UPDATE "profile" SET like= like + 1 WHERE id= ${id}`;
+    let sql = `UPDATE profile SET "like" = "like" + 1 WHERE userid = ${id}`;
     return db.query(sql)
 }
 

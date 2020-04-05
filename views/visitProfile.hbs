@@ -10,11 +10,14 @@
 
         <div id="profile-div-right" class="profile-divs align-bottom">
             <div>
-                <button class="blue-btn">Message</button>
+                <a href="/messageUser">
+                    <button class="blue-btn">Message</button>
+                </a>
             </div>
             <div>
                 <a>Likes</a>
-                <a>+</a>
+                {{!-- HREF MUST BE EDITED HERE, CURRENTLY USING USERID NOT VISITING PROFILE ID --}}
+                <a href='/profile/like/{{profile.userid}}' formmethod="GET"><button>+</button></a>
             </div>
             <div>
                 <a>Posts</a>
