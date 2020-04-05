@@ -50,6 +50,7 @@ exports.searchByUserID = function(req,res,next) {
     post.then((data)=>{
         parse.parsePosts(data.rows);
         res.render('search', {
+            pageNum: req.cookies.pageNum,
             postList: data.rows, 
             pageNum: page,
             signedIn:true});
