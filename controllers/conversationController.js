@@ -43,7 +43,7 @@ exports.getMessagePage = function(req,res,next) {
 
     getUBV.then((data) => {
 
-        
+
 
         res.render('messageUser', {
             
@@ -131,7 +131,8 @@ exports.getMessages = async function(req,res,next) {
         };
 
         res.render('messages', {
-            conversation : listOfConversations
+            conversation : listOfConversations,
+            signedIn: true
         });
     });
 }
