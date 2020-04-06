@@ -26,6 +26,15 @@ function getRecentPostWithReplies(page) {
     return db.query(sql)
 }
 
+// get recent posts with its replies by specified limit parament
+function getRecentPostWithRepliesBySpecificUser(id, page) {
+    let offset = 5 * page;
+    // let sql = `SELECT '` + page + `' AS page, * FROM v_post_r ORDER BY timeDATE desc LIMIT 5 offset `  + offset + `WHERE userID = ${id}`;
+    let sql = `SELECT '` + page + `' AS page, * FROM v_post_r Where userID = ${id} ORDER BY timeDATE desc LIMIT 5 offset `  + offset
+    // let sql = `SELECT *, to_char(timedate, 'DD mon YYYY') f_timedate FROM v_post_r vpr WHERE userID = ${id}limit 5` + offset;
+    return db.query(sql)
+}
+
 // insert a single post to the database
 function addReply(data) {
     let sql = `INSERT INTO reply (postid, userid, "text") VALUES (${data.postID}, ${data.userID}, '${data.text}')`;
@@ -35,7 +44,7 @@ function addReply(data) {
 // search post with replies using keyword 
 function searchPostWithReplies(keyword,page) {
     let offset = 5 * page;
-    let condition = `(LOWER(title) LIKE '%${keyword}%' OR LOWER(topicName) LIKE '%${keyword}%' OR LOWER(text) LIKE '%${keyword}%')`;
+    let condition = `(LOWER(title) LIKE '%${keyword}%')`;
     let sql = `SELECT '` + page + `' AS page,* FROM v_post_r WHERE ${condition}LIMIT 5 offset `  + offset;
     return db.query(sql)
 }
@@ -45,6 +54,7 @@ function searchPostWithRepliesByUserID(keyword,page) {
     let sql = `SELECT '` + page + `' AS page,* FROM v_post_r WHERE ${condition}LIMIT 5 offset `  + offset;
     return db.query(sql)
 }
+
 // search post with replies by topicID
 function searchPostWithRepliesByTopic(topicID,page) {
     let offset = 5 * page;
@@ -61,7 +71,7 @@ function getPostCounts(id){
 
 // get all the posts written by specific user
 function getPosts(id) {
-    let sql = "SELECT *, to_char(timedate, 'DD mon YYYY') f_timedate FROM post WHERE userID = " + id;
+    let sql = `SELECT *, to_char(timedate, 'DD mon YYYY') f_timedate FROM post WHERE userID = ${id}`;
     return db.query(sql);
 }
 
@@ -76,4 +86,5 @@ module.exports = {
     searchPostReByUID : searchPostWithRepliesByUserID,
     searchPostReByTopic: searchPostWithRepliesByTopic,
     getPostCounts: getPostCounts,
+    getRecentPostWithRepliesBySpecificUser : getRecentPostWithRepliesBySpecificUser
 }

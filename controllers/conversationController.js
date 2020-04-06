@@ -1,47 +1,162 @@
-let messageContainer = require('../models/message');
+let modConvo = require('../models/message');
+let modUser = require('../models/user');
+const nodemailer = require('nodemailer');
 
-exports.getMessages = function(req,res,next) {
+let transport = nodemailer.createTransport({
+    host: 'smtp.mailtrap.io',
+    port: 2525,
+    auth: {
+       user: process.env.smtpid || 'a3ed550b256a51',
+       pass: process.env.smtppw || 'a3cfcb674a17c0'
+    }
+});
 
-    // Doesn't exist
-    let AllMessages = messageContainer.getConversations();
-
-    AllMessages.then((data) => {
-        // what goes in place of peoples here?
-        res.render('conversationView', { people: data.rows, peoplesCSS: true });
+exports.email = function(req,res,next) {
+    console.log("here");
+    const message = {
+        from: 'elonmusk@tesla.com', // Sender address
+        to: 'fake@gmail.com',         // List of recipients
+        subject: 'Design Your Model S | Tesla', // Subject line
+        text: 'Have the most fun you can in a car. Get your Tesla today!' // Plain text body
+    };
+    transport.sendMail(message, function(err, info) {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log(info);
+        }
     });
 }
- 
-exports.getMessages = function(req,res,next, conversationID) {
 
-    let specificConversation = messageContainer.getMessage(conversationID);
+// GET
+// Render the initial start message page
+exports.getMessagePage = function(req,res,next) {
 
-    specificConversation.then((data) => {
-        res.render('conversationView', { people: data.rows, peoplesCSS: true });
+    if(req.cookies.signedIn !== "true"){
+        res.redirect(301,'/');
+        return
+    }
+
+    const userBeingVisited = req.cookies.visitorID;
+
+    const getUBV = modUser.getUserByID(userBeingVisited);
+
+    getUBV.then((data) => {
+
+
+
+        res.render('messageUser', {
+            
+            visitedUser: data.rows[0],
+            signedIn: true,      
+        });
+
+    });
+
+
+} 
+
+// POST
+// Send a message from that message page
+exports.postMessagePage = async function(req,res,next) {
+
+    // startConversation requires senderid receiverid subject
+    const mSubject = req.body["message-subject"];
+    const mDetails = req.body["message-details"];
+    const mUserSending = req.cookies.userid;
+    const mUserToSendTo = req.cookies.visitorID;
+
+    // Start the conversation
+    const startConversationWithUser = modConvo.startConversation({
+        senderID : mUserSending,
+        receiverID : mUserToSendTo,
+        subject : mSubject
+    }).then();
+
+    // Need conversation ID
+
+    const getConversationWithUser = modConvo.getConversation(mUserSending);
+    const getReceivingUser = modUser.getUserByID(mUserSending);
+
+    let currentConvoID = await Promise.all([getReceivingUser, getConversationWithUser]).then((data) => {
+
+        console.log("Convo");
+        console.log(data[1].rows[0].conversationid);
+        console.log(data[0].rows[0].fname);
+
+        const sendMessage = modConvo.sendMsg({
+            conversationID: data[1].rows[0].conversationid,
+            senderID : mUserSending,
+            receiverID : mUserToSendTo,
+            subject : mSubject,
+            text : mDetails
+        });
+        
+        res.render('messages', {
+            conversation : data[1].rows,
+            signedIn: true         
+        });
+
+    }).catch((error) => {
+
+        console.log("Error Starting Conversation. ")
+        console.log(error);
+
+    });
+
+    // Send the message using the saved conversation ID
+
+}
+
+// GET
+exports.getMessages = async function(req,res,next) {
+
+    // Doesn't exist
+    let AllConversations = modConvo.getConversation(req.cookies.userid);
+
+    AllConversations.then(async function(data) {
+
+        let listOfConversations = data.rows;
+
+        for (let convo of listOfConversations) {
+
+            let currentConvoMessages = modConvo.getMsg(convo.conversationid);
+            
+            convo.messages = await currentConvoMessages.then((data) => {
+                
+                return data.rows;
+
+            })
+
+        };
+
+        res.render('messages', {
+            conversation : listOfConversations,
+            signedIn: true
+        });
     });
 }
 
 exports.sendMessage = function(req,res,next) {
 
-    
-    //  let m_CID =
-    //  let m_ID = 
-    //  let s_ID = 
-    //  let r_ID =
-    //  let time_Date =
-    //  let text = req.body.
+    currentConvoID = Object.keys(req.body)[0];
+    currentConvoMsg = req.body["add-reply-text"];
 
-    let mObject = {
-        messageCID = m_CID,
-        messageID = m_ID,
-        senderID = s_ID,
-        receiverID = r_ID,
-        timeDate = time_Date,
-        text = text
-    }
+    let specificConvo = modConvo.getSpecificConversation(currentConvoID);
 
-    //Incomplete.
-    messageContainer.add(mObject);
-    res.redirect(301, 'conversationView');
+    specificConvo.then((data) => {
+
+        modConvo.sendMsg({
+            conversationID: currentConvoID,
+            senderID: data.rows[0].senderid,
+            receiverID: data.rows[0].receiverid,
+            text: currentConvoMsg
+
+        }).then();
+
+    })
+
+    res.redirect('/messages');
 
 }
 

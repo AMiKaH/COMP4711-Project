@@ -8,17 +8,28 @@ exports.searchByKeyword = function(req,res,next) {
         res.cookie('pageNum',0);
         page = 0;
     }
-
+    
     let keyword = req.body.search.toLowerCase();
-    let post = modPost.searchPostRe(keyword,page);
-    post.then((data) => {
-        
-        parse.parsePosts(data.rows);
+    if(keyword == ""){
         res.render('search', {
-            postList: data.rows, 
-            pageNum: page,
-            signedIn:true});
-    });
+            pageNum: 0,
+            signedIn:true,
+            pageTitle: 'Search', 
+            searchError: true});
+            return;
+    } else {
+        let post = modPost.searchPostRe(keyword,page);
+        post.then((data) => {
+            
+            parse.parsePosts(data.rows);
+            res.render('search', {
+                postList: data.rows, 
+                pageNum: page,
+                signedIn:true});
+        });
+    }
+    
+
 }
 
 exports.searchByTopic = function(req,res,next) {

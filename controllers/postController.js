@@ -21,8 +21,6 @@ exports.addPost = function(req,res,next) {
          mod.add(newPost);
          res.redirect(301, '/homepage');
     }
-
-
 }
 
 exports.getPost = function(req,res,next) {

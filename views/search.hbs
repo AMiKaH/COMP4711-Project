@@ -1,6 +1,10 @@
 <div id="search-wrapper">
     <div id="search-div">
-        {{>posts postList = postList}}
+        {{#if searchError}}
+            <h1 class="error">Enter a keyword!</h1>
+        {{else}}
+            {{>posts postList = postList}}
+        {{/if}}
     </div>
 </div>
 

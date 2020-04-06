@@ -1,5 +1,6 @@
 const modUserProfile = require('../models/user');
 const modUserPosts = require('../models/post');
+const parse = require('./parse');
 
 //Get
 exports.getProfile = function(req,res,next) {
@@ -9,15 +10,34 @@ exports.getProfile = function(req,res,next) {
         return
     }
 
+    pageNum = req.cookies.pageNum;
+
+    if (!req.headers.referer.includes('profile')){
+        res.cookie('pageNum',0);
+    }
+
     const currentUser = modUserProfile.getUserByID(req.params.id);
-    const currentUsersPosts = modUserPosts.getPosts(req.params.id);
+    const currentUsersPosts = modUserPosts.getRecentPostWithRepliesBySpecificUser(req.params.id, pageNum);
 
     Promise.all([currentUsersPosts, currentUser]).then((data) => {
 
+        parse.parsePosts(data[0].rows);
+
+        console.log('paginate cookie');
+        console.log(req.cookies.pageNum);
+
+        pageTitle = data[1].rows[0].fname + ' ' + data[1].rows[0].lname;
+
+        // Pass over a cookie stating what person's page the user is visiting.
+        res.cookie('visitorID', data[1].rows[0].userid);
+
         res.render('visitProfile', {
+            pageTitle:  pageTitle,
+            pageNum: req.cookies.pageNum,
             profile: data[1].rows[0],
             signedIn: true, 
-            userPostList: data[0].rows});
+            postList: data[0].rows});
+
     }).catch((error) => {
 
         console.log("new erro");
@@ -34,21 +54,24 @@ exports.signup = async function(req,res,next) {
 
     const sEmail = req.body.email;
     const sPassword = req.body.password;
+    const sPasswordCOnf = req.body.password2;
 
     const validateSignUp = modUserProfile.getUserByEmail(sEmail);
     const result = await validateSignUp.then((data) => {
 
-        // Not sure if correct
         return (data.rows.length === 0);
-
-        // let addedUser = modUserProfile.addUser(data.email, data.password);
         
     });
 
     if (!result) {
+        console.log("User Exists");
+        res.redirect(301, '/homepage');
+    }
 
-        throw Error("Failed sign up. User exists, please login");
-        // TODO: Redirect
+    if (sPassword !== sPasswordCOnf) {
+
+        console.log("Mismatch pass");
+        res.redirect(301, '/homepage');
     }
 
     const addedUser = await modUserProfile.addUser({
@@ -57,7 +80,6 @@ exports.signup = async function(req,res,next) {
         password: sPassword
 
     });
-    // const addedUserResult = await addedUser;
 
     const getIDByEmail = await modUserProfile.getUserByEmail(sEmail)
         .then((data) => {
@@ -71,7 +93,7 @@ exports.signup = async function(req,res,next) {
         lname : sLastName,
 
     });
-
+ 
     if(getIDByEmail > 0){
         res.cookie('pageNum',0);
         res.cookie('signedIn','true');
@@ -113,7 +135,7 @@ exports.editProfile = function(req,res,next) {
 
     Promise.all([post, getUser]).then((data) => {
 
-        parsePosts(data[0].rows);
+        parse.parsePosts(data[0].rows);
         
         res.render('homepage', {
         pageTitle:'Home Page',
@@ -122,42 +144,29 @@ exports.editProfile = function(req,res,next) {
         signedIn: true,
         postList: data[0].rows,
         postNotComplete: req.query.postNotComplete});
-    })
+    });
 }
 
 // Get
 exports.editProfileForm = function(req,res,next) {
 
-    res.render('editProfile');
+    res.render('editProfile', {
+        pageTitle:'Edit Profile',
+        signedIn: true
+    });
 
 }
 
-
-//Post
+//Get
 exports.likeProfile = function(req,res,next) {
     
-    let userLiked = modUserProfile.increaseLike;
+    let userLiked = modUserProfile.increaseLike(req.params.id);
 
     userLiked.then((data) => {
-        res.render('peoples', { people: data.rows, main: true });
+
+        redirectPage = '/profile/' + (req.params.id).toString();
+        res.redirect(301, redirectPage);
     });
+
 }
 
-function parsePosts(rows){
-    let postList = rows;
-    postList.forEach(element => {
-        var replies = [];
-        if(element.r_text[0] != null){
-            for(let i = element.r_text.length - 1; i >= 0; i--){
-
-                let obj = {
-                        postid: element.postid,
-                        imgUrl : element.r_imgurl[i],
-                        replyText : element.r_text[i]
-                    }                
-                replies.push(obj);
-            }
-            element.replies = replies;
-        }
-    });
-}
