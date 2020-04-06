@@ -26,6 +26,12 @@ function getRecentPostWithReplies(page) {
     return db.query(sql)
 }
 
+// get recent posts with its replies by specified limit parament
+function getRecentPostWithRepliesBySpecificUser(id) {
+    let sql = `SELECT *, to_char(timedate, 'DD mon YYYY') f_timedate FROM v_post_r vpr WHERE userID = ${id}`
+    return db.query(sql)
+}
+
 // insert a single post to the database
 function addReply(data) {
     let sql = `INSERT INTO reply (postid, userid, "text") VALUES (${data.postID}, ${data.userID}, '${data.text}')`;
@@ -76,4 +82,5 @@ module.exports = {
     searchPostReByUID : searchPostWithRepliesByUserID,
     searchPostReByTopic: searchPostWithRepliesByTopic,
     getPostCounts: getPostCounts,
+    getRecentPostWithRepliesBySpecificUser : getRecentPostWithRepliesBySpecificUser
 }

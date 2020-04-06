@@ -20,14 +20,14 @@ exports.getProfile = function(req,res,next) {
     //     pageNum = 0;
 
     const currentUser = modUserProfile.getUserByID(req.params.id);
-    const currentUsersPosts = modUserPosts.getPosts(req.params.id);
+    const currentUsersPosts = modUserPosts.getRecentPostWithRepliesBySpecificUser(req.params.id);
 
     Promise.all([currentUsersPosts, currentUser]).then((data) => {
 
         console.log("data.rows");
         console.log(data[0].rows);
         console.log(data[1].rows[0].like);
-        // parse.parsePosts(data[0].rows);
+        parse.parsePosts(data[0].rows);
 
         // Pass over a cookie stating what person's page the user is visiting.
         res.cookie('visitorID', data[1].rows[0].userid);
