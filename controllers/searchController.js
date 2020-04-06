@@ -17,8 +17,8 @@ exports.searchByKeyword = function(req,res,next) {
             signedIn:true,
             pageTitle: 'Search', 
             searchError: true});
-            return;
-    }
+        return;
+    } else {
     
     let post = modPost.searchPostRe(keyword,page);
     post.then((data) => {
@@ -29,6 +29,7 @@ exports.searchByKeyword = function(req,res,next) {
             pageNum: page,
             signedIn:true});
     });
+    }
 }
 
 exports.searchByTopic = function(req,res,next) {

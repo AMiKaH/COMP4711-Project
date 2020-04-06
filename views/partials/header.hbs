@@ -23,10 +23,11 @@
 
                         <div id="search" class="form-control">
                             <form action="/search" method="POST">
-                                <input  id="search-field" class="input-ilfield" type="text" name="search" placeholder="search">
-                                {{#if searchError}}
+                                {{#ifCond searchError 666}}
                                     <span class="error">Enter a keyword!</span>
-                                {{/if}}
+                                {{/ifCond}}
+                                <input  id="search-field" class="input-ilfield" type="text" name="search" placeholder="search">
+                                
                             </form>
                         </div>
                     </div>
