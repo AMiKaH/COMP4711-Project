@@ -61,7 +61,7 @@ function getPostCounts(id){
 
 // get all the posts written by specific user
 function getPosts(id) {
-    let sql = "SELECT *, to_char(timedate, 'DD mon YYYY') f_timedate FROM post WHERE userID = " + id;
+    let sql = `SELECT *, to_char(timedate, 'DD mon YYYY') f_timedate FROM post WHERE userID = ${id}`;
     return db.query(sql);
 }
 

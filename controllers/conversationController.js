@@ -31,7 +31,15 @@ exports.email = function(req,res,next) {
 // GET
 // Render the initial start message page
 exports.getMessagePage = function(req,res,next) {
-    res.render('messageUser');
+
+    if(req.cookies.signedIn !== "true"){
+        res.redirect(301,'/');
+        return
+    }
+
+    res.render('messageUser', { 
+        signedIn: true,      
+    });
 } 
 
 // POST
@@ -71,7 +79,8 @@ exports.postMessagePage = async function(req,res,next) {
         });
         
         res.render('messages', {
-            conversation : data[1].rows         
+            conversation : data[1].rows,
+            signedIn: true         
         });
 
     }).catch((error) => {

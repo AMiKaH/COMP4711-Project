@@ -10,21 +10,34 @@ exports.getProfile = function(req,res,next) {
         return
     }
 
-    if (!req.headers.referer.includes('profile')){
-        res.cookie('pageNum',0);
-    }
+    // if (!req.headers.referer.includes('profile')){
+    //     res.cookie('pageNum',0);
+    // }
+
+    let pageNum = req.cookies.pageNum;
+
+    // if(pageNum ==="undefined")
+    //     pageNum = 0;
 
     const currentUser = modUserProfile.getUserByID(req.params.id);
-    const currentUsersPosts = modUserPosts.getPosts(req.cookies.pageNum);
+    const currentUsersPosts = modUserPosts.getPosts(req.params.id);
 
     Promise.all([currentUsersPosts, currentUser]).then((data) => {
 
-        parse.parsePosts(data[0].rows);
+        console.log("data.rows");
+        console.log(data[0].rows);
+        console.log(data[1].rows[0].like);
+        // parse.parsePosts(data[0].rows);
 
         // Pass over a cookie stating what person's page the user is visiting.
         res.cookie('visitorID', data[1].rows[0].userid);
 
+        console.log(data[1].rows[0]);
+        console.log(data[0].rows);
+
+
         res.render('visitProfile', {
+            // pageNum: req.cookies.pageNum,
             profile: data[1].rows[0],
             signedIn: true, 
             userPostList: data[0].rows});
