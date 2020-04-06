@@ -544,6 +544,13 @@ a {
     text-decoration: underline;
 }
 
+.post-parameters a {
+    text-decoration: none;
+    border: none;
+    padding-bottom: 2px;;
+    border-bottom: 1px solid grey;    
+}
+
 
 .limit-150-alt{
     width: 250px;
