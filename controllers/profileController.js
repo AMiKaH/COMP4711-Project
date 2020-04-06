@@ -10,20 +10,11 @@ exports.getProfile = function(req,res,next) {
         return
     }
 
-    // console.log("Before if");
-    // console.log(req.cookies.pageNum);
-    // console.log(req.headers.referer);
-
     pageNum = req.cookies.pageNum;
 
     if (!req.headers.referer.includes('profile')){
         res.cookie('pageNum',0);
     }
-
-    // let pageNum = req.cookies.pageNum;
-
-    // if(pageNum ==="undefined")
-    //     pageNum = 0;
 
     const currentUser = modUserProfile.getUserByID(req.params.id);
     const currentUsersPosts = modUserPosts.getRecentPostWithRepliesBySpecificUser(req.params.id, pageNum);
@@ -63,21 +54,24 @@ exports.signup = async function(req,res,next) {
 
     const sEmail = req.body.email;
     const sPassword = req.body.password;
+    const sPasswordCOnf = req.body.password2;
 
     const validateSignUp = modUserProfile.getUserByEmail(sEmail);
     const result = await validateSignUp.then((data) => {
 
-        // Not sure if correct
         return (data.rows.length === 0);
-
-        // let addedUser = modUserProfile.addUser(data.email, data.password);
         
     });
 
     if (!result) {
+        console.log("User Exists");
+        res.redirect(301, '/homepage');
+    }
 
-        throw Error("Failed sign up. User exists, please login");
-        // TODO: Redirect
+    if (sPassword !== sPasswordCOnf) {
+
+        console.log("Mismatch pass");
+        res.redirect(301, '/homepage');
     }
 
     const addedUser = await modUserProfile.addUser({
@@ -86,7 +80,6 @@ exports.signup = async function(req,res,next) {
         password: sPassword
 
     });
-    // const addedUserResult = await addedUser;
 
     const getIDByEmail = await modUserProfile.getUserByEmail(sEmail)
         .then((data) => {
