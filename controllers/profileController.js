@@ -10,37 +10,42 @@ exports.getProfile = function(req,res,next) {
         return
     }
 
-    // if (!req.headers.referer.includes('profile')){
-    //     res.cookie('pageNum',0);
-    // }
+    // console.log("Before if");
+    // console.log(req.cookies.pageNum);
+    // console.log(req.headers.referer);
 
-    let pageNum = req.cookies.pageNum;
+    pageNum = req.cookies.pageNum;
+
+    if (!req.headers.referer.includes('profile')){
+        res.cookie('pageNum',0);
+    }
+
+    // let pageNum = req.cookies.pageNum;
 
     // if(pageNum ==="undefined")
     //     pageNum = 0;
 
     const currentUser = modUserProfile.getUserByID(req.params.id);
-    const currentUsersPosts = modUserPosts.getRecentPostWithRepliesBySpecificUser(req.params.id);
+    const currentUsersPosts = modUserPosts.getRecentPostWithRepliesBySpecificUser(req.params.id, pageNum);
 
     Promise.all([currentUsersPosts, currentUser]).then((data) => {
 
-        console.log("data.rows");
-        console.log(data[0].rows);
-        console.log(data[1].rows[0].like);
         parse.parsePosts(data[0].rows);
+
+        console.log('paginate cookie');
+        console.log(req.cookies.pageNum);
+
+        pageTitle = data[1].rows[0].fname + ' ' + data[1].rows[0].lname;
 
         // Pass over a cookie stating what person's page the user is visiting.
         res.cookie('visitorID', data[1].rows[0].userid);
 
-        console.log(data[1].rows[0]);
-        console.log(data[0].rows);
-
-
         res.render('visitProfile', {
-            // pageNum: req.cookies.pageNum,
+            pageTitle:  pageTitle,
+            pageNum: req.cookies.pageNum,
             profile: data[1].rows[0],
             signedIn: true, 
-            userPostList: data[0].rows});
+            postList: data[0].rows});
 
     }).catch((error) => {
 
@@ -152,18 +157,23 @@ exports.editProfile = function(req,res,next) {
 // Get
 exports.editProfileForm = function(req,res,next) {
 
-    res.render('editProfile');
+    res.render('editProfile', {
+        pageTitle:'Edit Profile',
+        signedIn: true
+    });
 
 }
 
 //Get
 exports.likeProfile = function(req,res,next) {
-
-    console.log(req.params.id);
     
     let userLiked = modUserProfile.increaseLike(req.params.id);
 
-    userLiked.then();
+    userLiked.then((data) => {
+
+        redirectPage = '/profile/' + (req.params.id).toString();
+        res.redirect(301, redirectPage);
+    });
 
 }
 

@@ -27,8 +27,11 @@ function getRecentPostWithReplies(page) {
 }
 
 // get recent posts with its replies by specified limit parament
-function getRecentPostWithRepliesBySpecificUser(id) {
-    let sql = `SELECT *, to_char(timedate, 'DD mon YYYY') f_timedate FROM v_post_r vpr WHERE userID = ${id}limit 5`
+function getRecentPostWithRepliesBySpecificUser(id, page) {
+    let offset = 5 * page;
+    // let sql = `SELECT '` + page + `' AS page, * FROM v_post_r ORDER BY timeDATE desc LIMIT 5 offset `  + offset + `WHERE userID = ${id}`;
+    let sql = `SELECT '` + page + `' AS page, * FROM v_post_r Where userID = ${id} ORDER BY timeDATE desc LIMIT 5 offset `  + offset
+    // let sql = `SELECT *, to_char(timedate, 'DD mon YYYY') f_timedate FROM v_post_r vpr WHERE userID = ${id}limit 5` + offset;
     return db.query(sql)
 }
 
