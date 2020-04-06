@@ -1,3 +1,5 @@
+{{log this}}
+
 <div id="visit-profile-wrapper">
     <div id="view-profile-top-wrapper">
         <div id="profile-div-left" class="profile-divs">
@@ -16,22 +18,22 @@
                 </a>
             </div>
             <div>
-                <a>Likes</a>
+                <a>Likes = {{profile.like}}</a>
                 {{!-- HREF MUST BE EDITED HERE, CURRENTLY USING USERID NOT VISITING PROFILE ID --}}
-                <a href='/profile/like/{{profile.userid}}' formmethod="GET"><button>+</button></a>
+                <a href="/profile/like/{{profile.userid}}" formmethod="GET"><button>+</button></a>
             </div>
             <div>
-                <a>Posts</a>
+                <a>Posts = {{profile.postcnt}}</a>
             </div>
         </div>
     </div>
 
         <div class="profile-posts profile-wrapper-posts">
             <div class="profile-inner-wrapper">
-                <p>All posts by {{profile.fname}}:</p>
+                <p> {{profile.fname}}'s Posts': Page {{pageNum}}</p>
             </div>
             <div id="post-partial-div" >
-                {{>posts postList = userPostList}}  
+                {{>posts postList = postList}}  
             </div>      
         </div>
 </div>

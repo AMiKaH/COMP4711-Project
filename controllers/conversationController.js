@@ -31,7 +31,29 @@ exports.email = function(req,res,next) {
 // GET
 // Render the initial start message page
 exports.getMessagePage = function(req,res,next) {
-    res.render('messageUser');
+
+    if(req.cookies.signedIn !== "true"){
+        res.redirect(301,'/');
+        return
+    }
+
+    const userBeingVisited = req.cookies.visitorID;
+
+    const getUBV = modUser.getUserByID(userBeingVisited);
+
+    getUBV.then((data) => {
+
+
+
+        res.render('messageUser', {
+            
+            visitedUser: data.rows[0],
+            signedIn: true,      
+        });
+
+    });
+
+
 } 
 
 // POST
@@ -71,7 +93,8 @@ exports.postMessagePage = async function(req,res,next) {
         });
         
         res.render('messages', {
-            conversation : data[1].rows         
+            conversation : data[1].rows,
+            signedIn: true         
         });
 
     }).catch((error) => {
@@ -108,7 +131,8 @@ exports.getMessages = async function(req,res,next) {
         };
 
         res.render('messages', {
-            conversation : listOfConversations
+            conversation : listOfConversations,
+            signedIn: true
         });
     });
 }
