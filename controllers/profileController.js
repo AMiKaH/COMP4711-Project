@@ -113,22 +113,20 @@ exports.completeRegistration = function(req, res, next) {
 }
 
 // Post 
-exports.editProfile = function(req,res,next) {
+exports.editProfile = async function(req,res,next) {
 
     const infoImgURL = req.body.imageurl;
     const infoAbout = req.body.about;
     const infoCountry = req.body.country;
     const infoDOB = req.body.dob;
 
-    const updatedProfile = modUserProfile.updateUser({
+    const updatedProfile = await modUserProfile.updateUser({
         userid : req.cookies.userid,
         imgurl : infoImgURL,
         about : infoAbout,
         countryid : infoCountry,
         dob : infoDOB
-    });
-
-    updatedProfile.then();
+    }).then();
 
     const post = modUserPosts.getRecentPostRe(req.cookies.pageNum);
     const getUser = modUserProfile.getUserByID(req.cookies.userid); 
