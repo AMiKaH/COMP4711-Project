@@ -37,9 +37,23 @@ exports.getMessagePage = function(req,res,next) {
         return
     }
 
-    res.render('messageUser', { 
-        signedIn: true,      
+    const userBeingVisited = req.cookies.visitorID;
+
+    const getUBV = modUser.getUserByID(userBeingVisited);
+
+    getUBV.then((data) => {
+
+        
+
+        res.render('messageUser', {
+            
+            visitedUser: data.rows[0],
+            signedIn: true,      
+        });
+
     });
+
+
 } 
 
 // POST
