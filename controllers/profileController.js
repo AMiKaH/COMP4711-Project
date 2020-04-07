@@ -62,17 +62,39 @@ exports.signup = async function(req,res,next) {
         
     });
 
-    if (!result) {
-        console.log("User Exists");
-        res.redirect(301, '/homepage');
-    }
+    // // User Exists
+    // if (!result) {;
 
-    if (sPassword !== sPasswordCOnf) {
+    //     res.render('home', {
+    //         errorMsg: "Passwords don't match"
+    //     });
+    // }
 
-        res.render('home', {
-            errorMsg: "Passwords don't match"
-        });
-    } else {
+    // Signup validation error check
+    if (sPassword !== sPasswordCOnf || !result) {
+
+        if (sPassword!== sPassword) {
+
+            if(!result) {
+                res.render('home', {
+                    passErr: true,
+                    emailErr: true
+                });
+            } else {
+                res.render('home', {
+                    passErr: true,
+                    emailErr: false
+                });
+
+            }
+        } else {
+            res.render('home', {
+                passErr: false,
+                emailErr: true
+            });
+        }
+
+    };
 
     const addedUser = await modUserProfile.addUser({
         
