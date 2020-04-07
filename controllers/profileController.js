@@ -114,7 +114,7 @@ exports.completeRegistration = function(req, res, next) {
 
 // Post 
 exports.editProfile = async function(req,res,next) {
-
+    var errorEditing = false;
     const infoImgURL = req.body.imageurl;
     const infoAbout = req.body.about;
     const infoCountry = req.body.country;
@@ -126,14 +126,23 @@ exports.editProfile = async function(req,res,next) {
     getUserS.then((data) => {
 
         if (getCountryId.rows.length == 0) {
+                res.render('editProfile', {
+                    profile:data.rows[0],
+                    pageTitle:'Edit Profile',
+                    signedIn: true
 
-            res.render('editProfile', {
-                profile:data.rows[0],
-                pageTitle:'Edit Profile',
-                signedIn: true
-
-            })
-            .catch(err => console.log(err));
+                })
+            .catch(err => {
+                res.render('editProfile', {
+                    profile:data.rows[0],
+                    pageTitle:'Edit Profile',
+                    signedIn: true,
+                    errorEditing: false
+    
+                })
+                console.log(err)
+                return;
+            });
 
     }
 });
@@ -149,15 +158,25 @@ exports.editProfile = async function(req,res,next) {
         dob : infoDOB
     })
     .then()
-    .catch(err => console.log(err));
+    .catch(err => {
+        console.log(err)
+    });
 
+    res.render('editProfile', {
+        profile:data.rows[0],
+        pageTitle:'Edit Profile',
+        signedIn: true,
+        errorEditing: false
+
+    })
+
+    return;
+    
     const post = modUserPosts.getRecentPostRe(req.cookies.pageNum);
     const getUser = modUserProfile.getUserByID(req.cookies.userid); 
 
-    Promise.all([post, getUser]).then((data) => {
-
+    Promise.all([post, getUser]).then((data) => {        
         parse.parsePosts(data[0].rows);
-        
         res.render('homepage', {
         pageTitle:'Home Page',
         pageNum: req.cookies.pageNum,
@@ -166,7 +185,10 @@ exports.editProfile = async function(req,res,next) {
         postList: data[0].rows,
         postNotComplete: req.query.postNotComplete});
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+
+        console.log(err)}
+        );
 }
 
 // Get
