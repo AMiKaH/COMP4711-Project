@@ -42,6 +42,11 @@ function userExists(email, pwd) {
     return db.query(sql)
 }
 
+function getCountryID(name) {
+    let sql = `SELECT countryID FROM "country" WHERE upper(countryName) like upper(trim('%${name}%')) limit 1`
+    return db.query(sql)
+}
+
 // update user information
 function updateUser(data) {
     let sql = `UPDATE profile
@@ -76,5 +81,6 @@ module.exports = {
     userExists: userExists,
     updateUser: updateUser,
     getLikes: getLikes,
-    increaseLike: increaseLike
+    increaseLike: increaseLike,
+    getCountryID: getCountryID
 }

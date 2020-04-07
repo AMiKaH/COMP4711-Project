@@ -12,7 +12,10 @@
     {{/each}}
     <div id="reply-form">
         <form action="/addReply" id="replies-form" METHOD="POST">
-            <input type="hidden" name="postID" value="{{this.postid}}">
+            <input type="hidden" name="postkey" value = "{{this.postkeyword}}">
+            <input type="hidden" name="postID" value = "{{this.postid}}">
+            <input type="hidden" name="postuserid" value = "{{this.postuserid}}">
+            <input type="hidden" name="posttopic" value = "{{this.posttopic}}">
             <input name="replyText" type="text"  class="reply-input-field input-field" placeholder="add your reply ...">
             <button type="submit" class="comment-btn blue-btn">comment</button>
         </form>

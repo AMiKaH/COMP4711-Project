@@ -20,12 +20,14 @@ exports.searchByKeyword = function(req,res,next) {
     } else {
         let post = modPost.searchPostRe(keyword,page);
         post.then((data) => {
-            
-            parse.parsePosts(data.rows);
+            let key = req.body.search.toLowerCase()
+            parse.parsePosts(data.rows,key);
             res.render('search', {
                 postList: data.rows, 
                 pageNum: page,
+                pageTitle: 'Search', 
                 signedIn:true});
+            return;
         });
     }
     
@@ -42,7 +44,7 @@ exports.searchByTopic = function(req,res,next) {
     let post = modPost.searchPostReByTopic(topic,page);
     post.then((data) => {
         
-        parse.parsePosts(data.rows);
+        parse.parsePosts(data.rows,"",req.body.topic.toLowerCase());
         res.render('search', {
             postList: data.rows, 
             pageNum: page,
@@ -59,7 +61,7 @@ exports.searchByUserID = function(req,res,next) {
     }
     let post  = modPost.searchPostReByUID(id,page);
     post.then((data)=>{
-        parse.parsePosts(data.rows);
+        parse.parsePosts(data.rows,"","",req.query.userid);
         res.render('search', {
             postList: data.rows, 
             pageNum: page,

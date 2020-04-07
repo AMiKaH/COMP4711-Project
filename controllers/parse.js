@@ -1,13 +1,16 @@
 
-function parsePosts(rows){
+function parsePosts(rows,key = "",topic ="",userid=""){
     let postList = rows;
     postList.forEach(element => {
         var replies = [];
         if(element.r_text[0] != null){
-            for(let i = element.r_text.length - 1; i >= 0; i--){
 
+            for(let i = element.r_text.length - 1; i >= 0; i--){
                 let obj = {
                         postid: element.postid,
+                        postkeyword: key,
+                        posttopic: topic,
+                        postuserid: userid,
                         imgUrl : element.r_imgurl[i],
                         replyText : element.r_text[i]
 
@@ -15,6 +18,9 @@ function parsePosts(rows){
                 replies.push(obj);
             }
             element.replies = replies;
+            element.postkeyword = key;
+            element.posttopic = topic;
+            element.postuserid = userid;
         }
     });
 }

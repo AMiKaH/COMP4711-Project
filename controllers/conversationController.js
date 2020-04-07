@@ -16,9 +16,6 @@ exports.getMessagePage = function(req,res,next) {
     const getUBV = modUser.getUserByID(userBeingVisited);
 
     getUBV.then((data) => {
-
-
-
         res.render('messageUser', {
             
             visitedUser: data.rows[0],
@@ -38,10 +35,12 @@ exports.postMessagePage = async function(req,res,next) {
     const mDetails = req.body["message-details"];
     const mUserSending = req.cookies.userid;
     const mUserToSendTo = req.cookies.visitorID;
+    
+    const profileLink = '/profile/' + mUserToSendTo;
 
 
     // Start the conversation
-    const startConversationWithUser = modConvo.startConversation({
+    const startConversationWithUser = await modConvo.startConversation({
         senderID : mUserSending,
         receiverID : mUserToSendTo,
         subject : mSubject
@@ -74,12 +73,23 @@ exports.postMessagePage = async function(req,res,next) {
             signedIn: true         
         });
 
+        return data[1].rows;
+
     }).catch((error) => {
 
         console.log("Error Starting Conversation. ")
         console.log(error);
 
     });
+
+    await modConvo.sendMsg({
+        conversationID: currentConvoID[0].conversationid,
+        senderID : mUserSending,
+        receiverID : mUserToSendTo,
+        text : mDetails
+    }).then();
+
+    res.redirect(301, profileLink);
 }
 
 // GET
