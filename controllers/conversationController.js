@@ -1,32 +1,6 @@
 let modConvo = require('../models/message');
 let modUser = require('../models/user');
-const nodemailer = require('nodemailer');
-
-let transport = nodemailer.createTransport({
-    host: 'smtp.mailtrap.io',
-    port: 2525,
-    auth: {
-       user: process.env.smtpid || 'a3ed550b256a51',
-       pass: process.env.smtppw || 'a3cfcb674a17c0'
-    }
-});
-
-exports.email = function(req,res,next) {
-    console.log("here");
-    const message = {
-        from: 'elonmusk@tesla.com', // Sender address
-        to: 'fake@gmail.com',         // List of recipients
-        subject: 'Design Your Model S | Tesla', // Subject line
-        text: 'Have the most fun you can in a car. Get your Tesla today!' // Plain text body
-    };
-    transport.sendMail(message, function(err, info) {
-        if (err) {
-          console.log(err)
-        } else {
-          console.log(info);
-        }
-    });
-}
+let mailer = require('../util/mailer')
 
 // GET
 // Render the initial start message page
@@ -42,9 +16,6 @@ exports.getMessagePage = function(req,res,next) {
     const getUBV = modUser.getUserByID(userBeingVisited);
 
     getUBV.then((data) => {
-
-
-
         res.render('messageUser', {
             
             visitedUser: data.rows[0],
@@ -59,7 +30,6 @@ exports.getMessagePage = function(req,res,next) {
 // POST
 // Send a message from that message page
 exports.postMessagePage = async function(req,res,next) {
-
     // startConversation requires senderid receiverid subject
     const mSubject = req.body["message-subject"];
     const mDetails = req.body["message-details"];
@@ -67,6 +37,7 @@ exports.postMessagePage = async function(req,res,next) {
     const mUserToSendTo = req.cookies.visitorID;
     
     const profileLink = '/profile/' + mUserToSendTo;
+
 
     // Start the conversation
     const startConversationWithUser = await modConvo.startConversation({
@@ -79,14 +50,15 @@ exports.postMessagePage = async function(req,res,next) {
 
     const getConversationWithUser = modConvo.getConversation(mUserSending);
     const getReceivingUser = modUser.getUserByID(mUserSending);
+    const getSenderUser = modUser.getUserByID(mUserSending);
 
-    let currentConvoID = await Promise.all([getReceivingUser, getConversationWithUser]).then((data) => {
+    let currentConvoID = await Promise.all([getReceivingUser, getConversationWithUser, getSenderUser]).then((data) => {
 
-        console.log("Convo");
-        console.log(data[1].rows[0].conversationid);
-        console.log(mUserSending);
-        console.log(mUserToSendTo);
-        console.log(mDetails);
+        let receiverEmail = data[0].rows[0].email;
+        let sfName = data[1].rows[0].s_fname;
+        let rfName = data[1].rows[0].r_fname;
+        
+        mailer.email(receiverEmail, sfName, rfName, mSubject, mDetails);
 
         return data[1].rows;
 
@@ -96,9 +68,6 @@ exports.postMessagePage = async function(req,res,next) {
         console.log(error);
 
     });
-
-    console.log(currentConvoID);
-    console.log(currentConvoID[0].conversationid);
 
     await modConvo.sendMsg({
         conversationID: currentConvoID[0].conversationid,
@@ -165,4 +134,3 @@ exports.sendMessage = function(req,res,next) {
     res.redirect('/messages');
 
 }
-

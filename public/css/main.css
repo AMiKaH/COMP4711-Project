@@ -544,11 +544,18 @@ a {
     text-decoration: underline;
 }
 
-.post-parameters a {
+
+
+.post-parameters > a {
     text-decoration: none;
-    border: none;
-    padding-bottom: 2px;;
+    padding-bottom: 2px;
     border-bottom: 1px solid grey;    
+}
+
+.a-no-descreption {
+    border: none;
+    text-decoration: none;
+    border-bottom: 0px;
 }
 
 
@@ -583,8 +590,30 @@ a {
     text-align: center;
     height: 100%;
     width: 20% ;
+}
+
+#profile-div-right div {
+    color: rgb(6, 158, 231);
+
+    height: 100%;
+    width: 50% ;
+    margin: 0 auto;
+}
+
+#profile-div-right div div {
+    width: 10%;
+    float: right;
+}
+
+
+.margin-left-15 button {
+    border-radius: 50%;
+    background-color: rgb(6, 158, 231);
+    color: white;
+    font-size: bold;
 
 }
+
 
 .align-bottom {
     vertical-align: bottom;
