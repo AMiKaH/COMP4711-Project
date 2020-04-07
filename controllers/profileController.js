@@ -113,7 +113,6 @@ exports.completeRegistration = function(req, res, next) {
 
 // Post 
 exports.editProfile = async function(req,res,next) {
-
     const infoImgURL = req.body.imageurl;
     const infoAbout = req.body.about;
     const infoCountry = req.body.country;
@@ -122,19 +121,31 @@ exports.editProfile = async function(req,res,next) {
     const getCountryId = await modUserProfile.getCountryID(infoCountry).then();
     const getUserS = modUserProfile.getUserByID(req.cookies.userid);
 
+
     getUserS.then((data) => {
+        console.log("XXXXXXXXXX");
+        console.log(getCountryId.rows.length);
 
         if (getCountryId.rows.length == 0) {
-
-            res.render('editProfile', {
-                profile:data.rows[0],
-                pageTitle:'Edit Profile',
-                signedIn: true
-
+                res.render('editProfile', {
+                    profile:data.rows[0],
+                    pageTitle:'Edit Profile',
+                    signedIn: true
+                })
+            .catch(err => {
+                res.render('editProfile', {
+                    profile:data.rows[0],
+                    pageTitle:'Edit Profile',
+                    signedIn: true,
+                    errorEditing: true
+    
+                })
+                console.log(err)
+                return;
             });
-
-    }
-});
+        }
+        profile:data.rows[0]
+    });
 
 
     const countryID = getCountryId.rows[0].countryid;
@@ -145,15 +156,18 @@ exports.editProfile = async function(req,res,next) {
         about : infoAbout,
         countryid : countryID,
         dob : infoDOB
-    }).then();
+    })
+    .then()
+    .catch(err => {
+        console.log(err)
+    });
+
 
     const post = modUserPosts.getRecentPostRe(req.cookies.pageNum);
     const getUser = modUserProfile.getUserByID(req.cookies.userid); 
 
-    Promise.all([post, getUser]).then((data) => {
-
+    Promise.all([post, getUser]).then((data) => {        
         parse.parsePosts(data[0].rows);
-        
         res.render('homepage', {
         pageTitle:'Home Page',
         pageNum: req.cookies.pageNum,
@@ -161,7 +175,10 @@ exports.editProfile = async function(req,res,next) {
         signedIn: true,
         postList: data[0].rows,
         postNotComplete: req.query.postNotComplete});
-    });
+    })
+    .catch(err => {
+        console.log(err)}
+    );
 }
 
 // Get
