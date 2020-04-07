@@ -228,7 +228,8 @@ input::placeholder {
     Header stylesheets
 **/
 #header {
-    margin-top: 25px;;
+    margin-top: 25px;
+    margin-bottom: 25px;
     text-align: left;
 }
 
