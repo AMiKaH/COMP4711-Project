@@ -1,5 +1,6 @@
 const modUserProfile = require('../models/user');
 const modUserPosts = require('../models/post');
+const modUserMsg = require('../models/message');
 const parse = require('./parse');
 
 //Get
@@ -18,14 +19,11 @@ exports.getProfile = function(req,res,next) {
 
     const currentUser = modUserProfile.getUserByID(req.params.id);
     const currentUsersPosts = modUserPosts.getRecentPostWithRepliesBySpecificUser(req.params.id, pageNum);
+    const getUserMsgCount = modUserMsg.getMsgCount(req.params.id);
 
-    Promise.all([currentUsersPosts, currentUser]).then((data) => {
+    Promise.all([currentUsersPosts, currentUser, getUserMsgCount]).then((data) => {
 
         parse.parsePosts(data[0].rows);
-
-        console.log('paginate cookie');
-        console.log(req.cookies.pageNum);
-
         pageTitle = data[1].rows[0].fname + ' ' + data[1].rows[0].lname;
 
         // Pass over a cookie stating what person's page the user is visiting.
@@ -35,6 +33,7 @@ exports.getProfile = function(req,res,next) {
             pageTitle:  pageTitle,
             pageNum: req.cookies.pageNum,
             profile: data[1].rows[0],
+            msgCount: data[2].rows[0].cnt,
             signedIn: true, 
             postList: data[0].rows});
 
