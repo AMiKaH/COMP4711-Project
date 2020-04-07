@@ -34,6 +34,15 @@ hbs.handlebars.registerHelper('ifCond2', function(v1, v2, options) {
   return options.inverse(this);
 });
 
+hbs.handlebars.registerHelper('ifCondNull', function(v, options) {
+  if(v[0] == null) {
+    console.log("True")
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
+
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false })) // middleware
 

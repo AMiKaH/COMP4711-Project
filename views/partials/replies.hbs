@@ -1,8 +1,10 @@
+
 <div id="replies-outer-wrapper{{@index}}" class="replies-outer-wrapper">
     {{#each replies}}
+    {{log this}}
     <div class="reply-wrapper">
         <div class="replies-profile-img replies-inline">
-            <img class="circle-img-50" src="{{this.imgUrl}}" alt="User Image">
+            <a class="a-no-descreption" href= "/profile/{{this.r_userid}}"><img class="circle-img-50" src="{{this.imgUrl}}" alt="User Image"></a>
         </div>
 
         <div class="replies-text replies-inline">
@@ -12,7 +14,10 @@
     {{/each}}
     <div id="reply-form">
         <form action="/addReply" id="replies-form" METHOD="POST">
-            <input type="hidden" name="postID" value="{{this.postid}}">
+            <input type="hidden" name="postkey" value = "{{this.postkeyword}}">
+            <input type="hidden" name="postID" value = "{{this.postid}}">
+            <input type="hidden" name="postuserid" value = "{{this.postuserid}}">
+            <input type="hidden" name="posttopic" value = "{{this.posttopic}}">
             <input name="replyText" type="text"  class="reply-input-field input-field" placeholder="add your reply ...">
             <button type="submit" class="comment-btn blue-btn">comment</button>
         </form>
