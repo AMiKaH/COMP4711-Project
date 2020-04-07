@@ -69,8 +69,9 @@ exports.signup = async function(req,res,next) {
 
     if (sPassword !== sPasswordCOnf) {
 
-        console.log("Mismatch pass");
-        res.redirect(301, '/homepage');
+        res.render('home', {
+            errorMsg: "Passwords don't match"
+        });
     } else {
 
     const addedUser = await modUserProfile.addUser({
