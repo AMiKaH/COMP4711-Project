@@ -23,6 +23,9 @@ exports.validateLogin = function(req,res,next) {
         } else {
             return;
         }
+    }).catch(function(error){
+        res.redirect(301,'/');
+        console.log(error);
     });
 }
 

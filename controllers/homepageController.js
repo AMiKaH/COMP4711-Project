@@ -30,5 +30,8 @@ exports.getHomePage = function(req,res,next, pageNumber = 0){
         signedIn:true,
         postList: data[0].rows,
         postNotComplete: req.query.postNotComplete});
+    }).catch(function(error){
+        res.redirect(301,'/homepage');
+        console.log(error);
     });
 }
