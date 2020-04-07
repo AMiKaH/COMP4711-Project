@@ -146,10 +146,14 @@ exports.sendMessage = function(req,res,next) {
 
     specificConvo.then((data) => {
 
+        let sender = data.rows[0].senderid;
+        if(req.cookies.userid == data.rows[0].senderid)
+            sender = data.rows[0].receiverid
+
         modConvo.sendMsg({
             conversationID: currentConvoID,
-            senderID: data.rows[0].senderid,
-            receiverID: data.rows[0].receiverid,
+            senderID: req.cookies.userid,
+            receiverID: sender,
             text: currentConvoMsg
 
         }).then();
