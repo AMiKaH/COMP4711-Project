@@ -60,19 +60,6 @@ exports.postMessagePage = async function(req,res,next) {
         
         mailer.email(receiverEmail, sfName, rfName, mSubject, mDetails);
 
-        const sendMessage = modConvo.sendMsg({
-            conversationID: data[1].rows[0].conversationid,
-            senderID : mUserSending,
-            receiverID : mUserToSendTo,
-            subject : mSubject,
-            text : mDetails
-        });
-        
-        res.render('messages', {
-            conversation : data[1].rows,
-            signedIn: true         
-        });
-
         return data[1].rows;
 
     }).catch((error) => {
