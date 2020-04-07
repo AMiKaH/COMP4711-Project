@@ -28,7 +28,10 @@ exports.searchByKeyword = function(req,res,next) {
                 pageTitle: 'Search', 
                 signedIn:true});
             return;
-        });
+        }).catch(function(error){
+            res.redirect(301,'/homepage');
+            console.log(error);
+        });;
     }
     
 
@@ -49,7 +52,10 @@ exports.searchByTopic = function(req,res,next) {
             postList: data.rows, 
             pageNum: page,
             signedIn:true});
-    });
+    }).catch(function(error){
+        res.redirect(301,'/homepage');
+        console.log(error);
+    });;
 }
 
 exports.searchByUserID = function(req,res,next) {
@@ -66,5 +72,8 @@ exports.searchByUserID = function(req,res,next) {
             postList: data.rows, 
             pageNum: page,
             signedIn:true});
-    })
+    }).catch(function(error){
+        res.redirect(301,'/homepage');
+        console.log(error);
+    });
 }

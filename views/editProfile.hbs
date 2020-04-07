@@ -1,11 +1,14 @@
     <div id="inline-divs">
         <div id="edit-profile-wrapper">
             <div id="edit-div">
+                {{#if errorEditing}}
+                    <span class="error">An eror occured while updating your profile, please contact site administrator</span>
+                {{/if}}
                 <form id="edit-profile-form" method="POST">
                     <div id="edit-form" class="form-control">
                         <input class="input-field" type="text" name="imageurl" placeholder="image url" value="{{profile.imgurl}}">
                         <textarea class="input-field" rows="4" cols="1" name="about" placeholder="a few lines about yourself...">{{profile.about}}</textarea>
-                        <input class="input-field" type="text" name="country" placeholder="country">
+                        <input class="input-field" type="text" name="country" placeholder="country" value="{{profile.countryname}}">
                         <input class="input-field" type="text" name="dob" placeholder="date of birth (mm/dd/yyyy)" value="{{profile.dob}}">
                         <button id="complete-btn" type="submit">update profile</button>
                     </div>

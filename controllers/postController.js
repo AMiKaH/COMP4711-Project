@@ -22,6 +22,11 @@ exports.addPost = function(req,res,next) {
          }
          mod.add(newPost);
          res.redirect(301, '/homepage');
+         mod.then()
+         .catch(function(error){
+            res.redirect(301,'/homepage');
+            console.log(error);
+        });
     }
 }
 
@@ -36,6 +41,9 @@ exports.getPost = function(req,res,next) {
     let post = mod.getpost(id);
     post.then((data) => {
         res.render('posts', {postList: data.rows});
+    }).catch(function(error){
+        res.redirect(301,'/homepage');
+        console.log(error);
     });
 }
 
@@ -53,6 +61,9 @@ exports.getRecentPosts = function(req,res,next){
         profile: data[1].rows[0],
         signedIn:true,
         postList: data[0].rows});
+    }).catch(function(error){
+        res.redirect(301,'/homepage');
+        console.log(error);
     });
 }
 
@@ -114,6 +125,11 @@ exports.addReply = function(req,res,next){
                 })
 
             }
+        } else if (req.headers.referer.includes('profile')){
+            res.redirect(301,'/profile/' + req.cookies.visitorID)
         }
-    })
+    }).catch(function(error){
+        res.redirect(301,'/homepage');
+        console.log(error);
+    });
 }

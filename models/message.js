@@ -15,8 +15,8 @@ function getSpecificConversation(id) {
 
 // get count of incomming message
 function getMessageCount(id) {
-    let sql = `SELECT count(*) as cnt FROM message WHERE receiverID=${id}`;
-    return db.qeury(sql);
+    let sql = `SELECT count(*) as cnt FROM message WHERE receiverID=${id} OR senderid =${id}`;
+    return db.query(sql);
 }
 
 // update conversation timestamp

@@ -1,3 +1,4 @@
+            {{log this}}
             <div id="sign-up-wrapper">
                 <div class="inline-divs">
                     <img src="/imgs/KBooks.png" width="300" height="300" alt="KnowledgeBooks"/>
@@ -8,6 +9,13 @@
                         <div>
                             <h1>Join the world"s largest community for knowledge sharing</h1>
                         </div>
+                        {{#if emailErr}}
+                            <span class="error">* The email address already exists in the system, please choose another email or log in</span><br>
+                        {{/if}}
+
+                        {{#if passErr}}
+                            <span class="error">* Passwords must match!</span>
+                        {{/if}}
 
                         <form id="signup-form" method="POST" action="/signup">
                             <div class="form-control">
