@@ -1,5 +1,7 @@
 let mod = require('../models/post');
 let modUser = require('../models/user');
+let modPost = require('../models/post');
+let parse= require('./parse');
 
 exports.addPost = function(req,res,next) {
     
@@ -71,8 +73,47 @@ exports.addReply = function(req,res,next){
     post.then((data)=>{
         if (req.headers.referer.includes('homepage')){
             res.redirect(301, '/homepage');
-        } else if (req.headers.referer.includes('search')){
-            res.redirect(301, '/search');
+        } else if (req.headers.referer.includes('search') || req.headers.referer.includes('addReply')){
+            let page = req.cookies.pageNum
+
+            if(req.body.postkey !== ""){
+                
+                let post = modPost.searchPostRe(req.body.postkey,page);
+                post.then((data) => {
+                    parse.parsePosts(data.rows,req.body.postkey);
+                    res.render('search', {
+                        postList: data.rows, 
+                        pageNum: req.cookies.pageNum,
+                        pageTitle: 'Search', 
+                        signedIn:true});
+                    return;
+                });
+
+
+            } else if (req.body.posttopic !== ""){
+
+                let post = modPost.searchPostReByTopic(req.body.posttopic,page);
+                post.then((data) => {
+        
+                parse.parsePosts(data.rows,"",req.body.posttopic.toLowerCase());
+                res.render('search', {
+                postList: data.rows, 
+                pageNum: page,
+                signedIn:true});
+                });
+
+            } else{
+                
+                let post  = modPost.searchPostReByUID(req.body.postuserid,page);
+                post.then((data)=>{
+                parse.parsePosts(data.rows,"","",req.body.postuserid);
+                res.render('search', {
+                postList: data.rows, 
+                pageNum: page,
+                signedIn:true});
+                })
+
+            }
         }
     })
 }
