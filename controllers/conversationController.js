@@ -65,9 +65,11 @@ exports.postMessagePage = async function(req,res,next) {
     const mDetails = req.body["message-details"];
     const mUserSending = req.cookies.userid;
     const mUserToSendTo = req.cookies.visitorID;
+    
+    const profileLink = '/profile/' + mUserToSendTo;
 
     // Start the conversation
-    const startConversationWithUser = modConvo.startConversation({
+    const startConversationWithUser = await modConvo.startConversation({
         senderID : mUserSending,
         receiverID : mUserToSendTo,
         subject : mSubject
@@ -86,19 +88,7 @@ exports.postMessagePage = async function(req,res,next) {
         console.log(mUserToSendTo);
         console.log(mDetails);
 
-        // modConvo.sendMsg({
-        //     conversationID: data[1].rows[0].conversationid,
-        //     senderID : mUserSending,
-        //     receiverID : mUserToSendTo,
-        //     text : mDetails
-        // }).then();
-
         return data[1].rows;
-        
-        // res.render('messages', {
-        //     conversation : data[1].rows,
-        //     signedIn: true         
-        // });
 
     }).catch((error) => {
 
@@ -117,7 +107,7 @@ exports.postMessagePage = async function(req,res,next) {
         text : mDetails
     }).then();
 
-    res.redirect(301, '/messages');
+    res.redirect(301, profileLink);
 }
 
 // GET
