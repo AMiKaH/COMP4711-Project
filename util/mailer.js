@@ -15,13 +15,6 @@ function email (receiverEmail, senderFName, receiverFName, subject, body) {
     paddedBody += `\n\nRegards,`
     paddedBody += `\nThe knowledgeBase Team!`
 
-
-    console.log(receiverEmail)
-    console.log(senderFName)
-    console.log(receiverFName)
-    console.log(subject)
-    console.log(paddedBody)
-
     const mailOptions = {
         from: 'knowledgeBase Messenger',
         to: receiverEmail, // List of recipients

@@ -61,23 +61,6 @@ exports.postMessagePage = async function(req,res,next) {
         
         mailer.email(receiverEmail, sfName, rfName, mSubject, mDetails);
 
-        //mailer.email(receiverEmail, mSubject, mDetails)
-        //console.log("data0")
-        //console.log(data[0])
-        //console.log("data1")
-        //console.log(data[1].rows[0])
-        //console.log("data2")
-        //console.log(data[2])
-
-        //console.log(sfName)
-        //console.log(rfName)
-        // console.log(receiverEmail)
-        // console.log(mSubject)
-        // console.log(mDetails)
-        //console.log("Convo");
-        //console.log(data[1].rows[0].conversationid);
-        //console.log(data[0].rows[0].fname);
-
         const sendMessage = modConvo.sendMsg({
             conversationID: data[1].rows[0].conversationid,
             senderID : mUserSending,
