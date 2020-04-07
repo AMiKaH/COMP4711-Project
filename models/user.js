@@ -55,6 +55,7 @@ function getCountryName(id) {
 
 // update user information
 function updateUser(data) {
+
     let sql = `UPDATE profile
         SET imgurl = '${data.imgurl}',
             about = '${data.about}',
@@ -75,6 +76,17 @@ function getLikes(id) {
 function increaseLike(id) {
     let sql = `UPDATE profile SET "like" = "like" + 1 WHERE userid = ${id}`;
     return db.query(sql)
+}
+
+// Wanted to use this to parse dates entered by users, but not needed anymore
+function dateParser(dateIn) {
+    if (dateIn.length < 10) {
+        return 'date must be mm/dd/yyyy format'
+    }
+    dateParsed = dateIn.substring(0, 2) + '/';
+    dateParsed += dateIn.substring(2, 4) + '/';
+    dateParsed += dateIn.substring(4);
+    return dateParsed;
 }
 
 module.exports = {
