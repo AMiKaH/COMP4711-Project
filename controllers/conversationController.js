@@ -1,32 +1,6 @@
 let modConvo = require('../models/message');
 let modUser = require('../models/user');
-const nodemailer = require('nodemailer');
-
-let transport = nodemailer.createTransport({
-    host: 'smtp.mailtrap.io',
-    port: 2525,
-    auth: {
-       user: process.env.smtpid || 'a3ed550b256a51',
-       pass: process.env.smtppw || 'a3cfcb674a17c0'
-    }
-});
-
-exports.email = function(req,res,next) {
-    console.log("here");
-    const message = {
-        from: 'elonmusk@tesla.com', // Sender address
-        to: 'fake@gmail.com',         // List of recipients
-        subject: 'Design Your Model S | Tesla', // Subject line
-        text: 'Have the most fun you can in a car. Get your Tesla today!' // Plain text body
-    };
-    transport.sendMail(message, function(err, info) {
-        if (err) {
-          console.log(err)
-        } else {
-          console.log(info);
-        }
-    });
-}
+let mailer = require('../util/mailer')
 
 // GET
 // Render the initial start message page
@@ -59,7 +33,7 @@ exports.getMessagePage = function(req,res,next) {
 // POST
 // Send a message from that message page
 exports.postMessagePage = async function(req,res,next) {
-
+    mailer.email()
     // startConversation requires senderid receiverid subject
     const mSubject = req.body["message-subject"];
     const mDetails = req.body["message-details"];
@@ -103,9 +77,6 @@ exports.postMessagePage = async function(req,res,next) {
         console.log(error);
 
     });
-
-    // Send the message using the saved conversation ID
-
 }
 
 // GET
@@ -146,10 +117,14 @@ exports.sendMessage = function(req,res,next) {
 
     specificConvo.then((data) => {
 
+        let sender = data.rows[0].senderid;
+        if(req.cookies.userid == data.rows[0].senderid)
+            sender = data.rows[0].receiverid
+
         modConvo.sendMsg({
             conversationID: currentConvoID,
-            senderID: data.rows[0].senderid,
-            receiverID: data.rows[0].receiverid,
+            senderID: req.cookies.userid,
+            receiverID: sender,
             text: currentConvoMsg
 
         }).then();
@@ -159,4 +134,3 @@ exports.sendMessage = function(req,res,next) {
     res.redirect('/messages');
 
 }
-
