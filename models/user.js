@@ -47,8 +47,15 @@ function getCountryID(name) {
     return db.query(sql)
 }
 
+// Gets countryname by ID
+function getCountryName(id) {
+    let sql = `SELECT countryName FROM "country" WHERE countryid = '${id}' limit 1`
+    return db.query(sql)
+}
+
 // update user information
 function updateUser(data) {
+
     let sql = `UPDATE profile
         SET imgurl = '${data.imgurl}',
             about = '${data.about}',
@@ -71,6 +78,17 @@ function increaseLike(id) {
     return db.query(sql)
 }
 
+// Wanted to use this to parse dates entered by users, but not needed anymore
+function dateParser(dateIn) {
+    if (dateIn.length < 10) {
+        return 'date must be mm/dd/yyyy format'
+    }
+    dateParsed = dateIn.substring(0, 2) + '/';
+    dateParsed += dateIn.substring(2, 4) + '/';
+    dateParsed += dateIn.substring(4);
+    return dateParsed;
+}
+
 module.exports = {
     addUser: addUser,
     addProfile: addProfile,
@@ -82,5 +100,6 @@ module.exports = {
     updateUser: updateUser,
     getLikes: getLikes,
     increaseLike: increaseLike,
-    getCountryID: getCountryID
+    getCountryID: getCountryID,
+    getCountryName: getCountryName
 }

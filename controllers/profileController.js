@@ -62,16 +62,41 @@ exports.signup = async function(req,res,next) {
         
     });
 
-    if (!result) {
-        console.log("User Exists");
-        res.redirect(301, '/homepage');
-    }
+    // // User Exists
+    // if (!result) {;
 
-    if (sPassword !== sPasswordCOnf) {
+    //     res.render('home', {
+    //         errorMsg: "Passwords don't match"
+    //     });
+    // }
 
-        console.log("Mismatch pass");
-        res.redirect(301, '/homepage');
-    }
+    // Signup validation error check
+    if (sPassword !== sPasswordCOnf || !result) {
+
+        if (sPassword !== sPasswordCOnf) {
+
+            if(!result) {
+                res.render('home', {
+                    passErr: true,
+                    emailErr: true
+                });
+                return;
+            } else {
+                res.render('home', {
+                    passErr: true,
+                    emailErr: false
+                });
+                return;
+            }
+        } else {
+            res.render('home', {
+                passErr: false,
+                emailErr: true
+            });
+            return;
+        }
+
+    };
 
     const addedUser = await modUserProfile.addUser({
         
@@ -83,7 +108,8 @@ exports.signup = async function(req,res,next) {
     const getIDByEmail = await modUserProfile.getUserByEmail(sEmail)
         .then((data) => {
             return data.rows[0].userid;
-        });
+        })
+        .catch((err) => console.log(err));
 
     const updateName = await modUserProfile.addProfile({
     
@@ -101,8 +127,8 @@ exports.signup = async function(req,res,next) {
     } else {
         return;
     }
-
 }
+
 
 // Get
 exports.completeRegistration = function(req, res, next) {
@@ -113,7 +139,6 @@ exports.completeRegistration = function(req, res, next) {
 
 // Post 
 exports.editProfile = async function(req,res,next) {
-
     const infoImgURL = req.body.imageurl;
     const infoAbout = req.body.about;
     const infoCountry = req.body.country;
@@ -122,19 +147,29 @@ exports.editProfile = async function(req,res,next) {
     const getCountryId = await modUserProfile.getCountryID(infoCountry).then();
     const getUserS = modUserProfile.getUserByID(req.cookies.userid);
 
+
     getUserS.then((data) => {
 
         if (getCountryId.rows.length == 0) {
-
-            res.render('editProfile', {
-                profile:data.rows[0],
-                pageTitle:'Edit Profile',
-                signedIn: true
-
+                res.render('editProfile', {
+                    profile:data.rows[0],
+                    pageTitle:'Edit Profile',
+                    signedIn: true
+                })
+            .catch(err => {
+                res.render('editProfile', {
+                    profile:data.rows[0],
+                    pageTitle:'Edit Profile',
+                    signedIn: true,
+                    errorEditing: true
+    
+                })
+                console.log(err)
+                return;
             });
-
-    }
-});
+        }
+        profile:data.rows[0]
+    });
 
 
     const countryID = getCountryId.rows[0].countryid;
@@ -145,15 +180,18 @@ exports.editProfile = async function(req,res,next) {
         about : infoAbout,
         countryid : countryID,
         dob : infoDOB
-    }).then();
+    })
+    .then()
+    .catch(err => {
+        console.log(err)
+    });
+
 
     const post = modUserPosts.getRecentPostRe(req.cookies.pageNum);
     const getUser = modUserProfile.getUserByID(req.cookies.userid); 
 
-    Promise.all([post, getUser]).then((data) => {
-
+    Promise.all([post, getUser]).then((data) => {        
         parse.parsePosts(data[0].rows);
-        
         res.render('homepage', {
         pageTitle:'Home Page',
         pageNum: req.cookies.pageNum,
@@ -161,7 +199,10 @@ exports.editProfile = async function(req,res,next) {
         signedIn: true,
         postList: data[0].rows,
         postNotComplete: req.query.postNotComplete});
-    });
+    })
+    .catch(err => {
+        console.log(err)}
+    );
 }
 
 // Get

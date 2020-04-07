@@ -49,7 +49,7 @@ exports.postMessagePage = async function(req,res,next) {
     // Need conversation ID
 
     const getConversationWithUser = modConvo.getConversation(mUserSending);
-    const getReceivingUser = modUser.getUserByID(mUserSending);
+    const getReceivingUser = modUser.getUserByID(mUserToSendTo);
     const getSenderUser = modUser.getUserByID(mUserSending);
 
     let currentConvoID = await Promise.all([getReceivingUser, getConversationWithUser, getSenderUser]).then((data) => {
@@ -57,7 +57,8 @@ exports.postMessagePage = async function(req,res,next) {
         let receiverEmail = data[0].rows[0].email;
         let sfName = data[1].rows[0].s_fname;
         let rfName = data[1].rows[0].r_fname;
-        
+
+        console.log(receiverEmail);
         mailer.email(receiverEmail, sfName, rfName, mSubject, mDetails);
 
         return data[1].rows;
