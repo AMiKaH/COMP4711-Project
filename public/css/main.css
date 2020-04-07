@@ -544,11 +544,18 @@ a {
     text-decoration: underline;
 }
 
-.post-parameters a {
+
+
+.post-parameters > a {
     text-decoration: none;
-    border: none;
-    padding-bottom: 2px;;
+    padding-bottom: 2px;
     border-bottom: 1px solid grey;    
+}
+
+.a-no-descreption {
+    border: none;
+    text-decoration: none;
+    border-bottom: 0px;
 }
 
 

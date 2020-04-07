@@ -1,8 +1,10 @@
+
 <div id="replies-outer-wrapper{{@index}}" class="replies-outer-wrapper">
     {{#each replies}}
+    {{log this}}
     <div class="reply-wrapper">
         <div class="replies-profile-img replies-inline">
-            <img class="circle-img-50" src="{{this.imgUrl}}" alt="User Image">
+            <a class="a-no-descreption" href= "/profile/{{this.r_userid}}"><img class="circle-img-50" src="{{this.imgUrl}}" alt="User Image"></a>
         </div>
 
         <div class="replies-text replies-inline">

@@ -2,7 +2,7 @@
     {{#each postList}}
     <div id="post-main" class="post-wrapper">
         <div class="post-inline-divs">
-            <a href= "/profile/{{this.userid}}"><img class="circle-img-75" src="{{this.imgurl}}" alt="{{this.fname}}"> </a>
+            <a href= "/profile/{{this.userid}}"><img class="circle-img-75" src="{{this.imgurl}}" alt="{{this.fname}}"></a>
         </div>
         <div class="post-parameters-outer">
             <div class="post-parameters">
@@ -20,7 +20,11 @@
 
             <div class="post-parameters">
                 <span>{{this.f_timedate}}</span>
+                {{#ifCondNull this.r_replyid}}
+                <a id="replies-anchor{{@index}}" class="post-param-right replies-link" onclick="expandCloseReplies(this)">No replies yet</a>
+                {{else}}
                 <a id="replies-anchor{{@index}}" class="post-param-right replies-link" onclick="expandCloseReplies(this)">{{this.replies.length}} replies</a>
+                {{/ifCondNull}}
                 {{>replies replies = this.replies}}
             </div>
         </div>
