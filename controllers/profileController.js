@@ -132,7 +132,8 @@ exports.editProfile = async function(req,res,next) {
                 pageTitle:'Edit Profile',
                 signedIn: true
 
-            });
+            })
+            .catch(err => console.log(err));
 
     }
 });
@@ -146,7 +147,9 @@ exports.editProfile = async function(req,res,next) {
         about : infoAbout,
         countryid : countryID,
         dob : infoDOB
-    }).then();
+    })
+    .then()
+    .catch(err => console.log(err));
 
     const post = modUserPosts.getRecentPostRe(req.cookies.pageNum);
     const getUser = modUserProfile.getUserByID(req.cookies.userid); 
@@ -162,7 +165,8 @@ exports.editProfile = async function(req,res,next) {
         signedIn: true,
         postList: data[0].rows,
         postNotComplete: req.query.postNotComplete});
-    });
+    })
+    .catch(err => console.log(err));
 }
 
 // Get

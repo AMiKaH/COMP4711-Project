@@ -1,6 +1,9 @@
     <div id="inline-divs">
         <div id="edit-profile-wrapper">
             <div id="edit-div">
+                {{#if errorEditing}}
+                    <span class="error">An eror occured while updating your profile, please contact site administrator</span>
+                {{/if}}
                 <form id="edit-profile-form" method="POST">
                     <div id="edit-form" class="form-control">
                         <input class="input-field" type="text" name="imageurl" placeholder="image url" value="{{profile.imgurl}}">
