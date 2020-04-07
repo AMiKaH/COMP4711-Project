@@ -82,20 +82,23 @@ exports.postMessagePage = async function(req,res,next) {
 
         console.log("Convo");
         console.log(data[1].rows[0].conversationid);
-        console.log(data[0].rows[0].fname);
+        console.log(mUserSending);
+        console.log(mUserToSendTo);
+        console.log(mDetails);
 
-        const sendMessage = modConvo.sendMsg({
-            conversationID: data[1].rows[0].conversationid,
-            senderID : mUserSending,
-            receiverID : mUserToSendTo,
-            subject : mSubject,
-            text : mDetails
-        });
+        // modConvo.sendMsg({
+        //     conversationID: data[1].rows[0].conversationid,
+        //     senderID : mUserSending,
+        //     receiverID : mUserToSendTo,
+        //     text : mDetails
+        // }).then();
+
+        return data[1].rows;
         
-        res.render('messages', {
-            conversation : data[1].rows,
-            signedIn: true         
-        });
+        // res.render('messages', {
+        //     conversation : data[1].rows,
+        //     signedIn: true         
+        // });
 
     }).catch((error) => {
 
@@ -104,8 +107,17 @@ exports.postMessagePage = async function(req,res,next) {
 
     });
 
-    // Send the message using the saved conversation ID
+    console.log(currentConvoID);
+    console.log(currentConvoID[0].conversationid);
 
+    await modConvo.sendMsg({
+        conversationID: currentConvoID[0].conversationid,
+        senderID : mUserSending,
+        receiverID : mUserToSendTo,
+        text : mDetails
+    }).then();
+
+    res.redirect(301, '/messages');
 }
 
 // GET
