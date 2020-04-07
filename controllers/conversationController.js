@@ -91,6 +91,26 @@ exports.getMessages = async function(req,res,next) {
         let listOfConversations = data.rows;
 
         for (let convo of listOfConversations) {
+            if(Number(req.cookies.userid) != convo.senderid){
+                let rname = convo.r_fname;
+                let rimg = convo.r_imgurl;
+                let r_lname = convo.r_lname;
+                let rid = convo.receiverid
+
+                
+                convo.receiverid = convo.senderid
+                convo.senderid = rid
+
+
+                convo.r_fname = convo.s_fname;
+                convo.r_imgurl = convo.s_imgurl;
+                convo.r_lname = convo.s_lname;
+
+                convo.s_fname = rname;
+                convo.s_imgurl = rimg;
+                convo.s_lname = r_lname;
+
+            }
 
             let currentConvoMessages = modConvo.getMsg(convo.conversationid);
             
