@@ -458,6 +458,7 @@ input::placeholder {
 .post-wrapper{
     height: auto;
     text-align: left;
+    vertical-align: top;
     margin: 0px 10px;
     margin-bottom: 25px;
 }
@@ -510,11 +511,17 @@ input::placeholder {
     float: right;
 }
 
+.post-title {
+    font-size: 0.9em;
+    width: 75%;
+}
+
 #post-topic {
     color: rgb(6, 158, 231);
     border-style: solid;
     border-width: 2px;
     border-radius: 2px;
+    font-size: 0.8em;;
 }
 
 .post-details p {
@@ -551,11 +558,11 @@ input::placeholder {
 }
 
 .replies-text {
-    width: 50%;
+    width: 65%;
 }
 
 .replies-text span {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: rgb(86, 92, 97);
 }
 
