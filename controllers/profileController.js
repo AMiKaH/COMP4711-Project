@@ -120,11 +120,15 @@ exports.editProfile = async function(req,res,next) {
     const infoCountry = req.body.country;
     const infoDOB = req.body.dob;
 
+    const getCountryId = await modUserProfile.getCountryID(infoCountry).then();
+
+    const countryID = getCountryId.rows[0].countryid;
+
     const updatedProfile = await modUserProfile.updateUser({
         userid : req.cookies.userid,
         imgurl : infoImgURL,
         about : infoAbout,
-        countryid : infoCountry,
+        countryid : countryID,
         dob : infoDOB
     }).then();
 
