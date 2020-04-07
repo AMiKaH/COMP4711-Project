@@ -82,7 +82,7 @@ exports.addReply = function(req,res,next){
     }
     let post = mod.addReply(data);
     post.then((data)=>{
-        if (req.headers.referer.includes('homepage') || req.headers.referer.include('edit')){
+        if (req.headers.referer.includes('homepage') || req.headers.referer.includes('edit')){
             res.redirect(301, '/homepage');
         } else if (req.headers.referer.includes('search') || req.headers.referer.includes('addReply')){
             let page = req.cookies.pageNum
