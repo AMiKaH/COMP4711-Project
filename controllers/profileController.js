@@ -121,6 +121,22 @@ exports.editProfile = async function(req,res,next) {
     const infoDOB = req.body.dob;
 
     const getCountryId = await modUserProfile.getCountryID(infoCountry).then();
+    const getUserS = modUserProfile.getUserByID(req.cookies.userid);
+
+    getUserS.then((data) => {
+
+        if (getCountryId.rows.length == 0) {
+
+            res.render('editProfile', {
+                profile:data.rows[0],
+                pageTitle:'Edit Profile',
+                signedIn: true
+
+            });
+
+    }
+});
+
 
     const countryID = getCountryId.rows[0].countryid;
 
@@ -152,9 +168,18 @@ exports.editProfile = async function(req,res,next) {
 // Get
 exports.editProfileForm = function(req,res,next) {
 
-    res.render('editProfile', {
-        pageTitle:'Edit Profile',
-        signedIn: true
+    const getUserS = modUserProfile.getUserByID(req.cookies.userid);
+    
+    getUserS.then((data) => {
+
+        res.render('editProfile', {
+
+            profile:data.rows[0],
+            pageTitle:'Edit Profile',
+            signedIn: true
+        });
+
+
     });
 
 }
