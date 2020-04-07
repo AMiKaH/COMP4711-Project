@@ -16,8 +16,6 @@ router.post('/signup/addPost',postController.addPost);
 
 router.post('/search',searchController.searchByKeyword);
 
-router.post('/signup/addPost')
-
 router.get('/search',searchController.searchByUserID);
 
 router.post('/searchTopic',searchController.searchByTopic);
