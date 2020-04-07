@@ -71,7 +71,7 @@ exports.signup = async function(req,res,next) {
 
         console.log("Mismatch pass");
         res.redirect(301, '/homepage');
-    }
+    } else {
 
     const addedUser = await modUserProfile.addUser({
         
@@ -101,6 +101,7 @@ exports.signup = async function(req,res,next) {
     } else {
         return;
     }
+}
 
 }
 
