@@ -33,12 +33,12 @@ exports.getMessagePage = function(req,res,next) {
 // POST
 // Send a message from that message page
 exports.postMessagePage = async function(req,res,next) {
-    mailer.email()
     // startConversation requires senderid receiverid subject
     const mSubject = req.body["message-subject"];
     const mDetails = req.body["message-details"];
     const mUserSending = req.cookies.userid;
     const mUserToSendTo = req.cookies.visitorID;
+
 
     // Start the conversation
     const startConversationWithUser = modConvo.startConversation({
@@ -51,12 +51,32 @@ exports.postMessagePage = async function(req,res,next) {
 
     const getConversationWithUser = modConvo.getConversation(mUserSending);
     const getReceivingUser = modUser.getUserByID(mUserSending);
+    const getSenderUser = modUser.getUserByID(mUserSending);
 
-    let currentConvoID = await Promise.all([getReceivingUser, getConversationWithUser]).then((data) => {
+    let currentConvoID = await Promise.all([getReceivingUser, getConversationWithUser, getSenderUser]).then((data) => {
 
-        console.log("Convo");
-        console.log(data[1].rows[0].conversationid);
-        console.log(data[0].rows[0].fname);
+        let receiverEmail = data[0].rows[0].email;
+        let sfName = data[1].rows[0].s_fname;
+        let rfName = data[1].rows[0].r_fname;
+        
+        mailer.email(receiverEmail, sfName, rfName, mSubject, mDetails);
+
+        //mailer.email(receiverEmail, mSubject, mDetails)
+        //console.log("data0")
+        //console.log(data[0])
+        //console.log("data1")
+        //console.log(data[1].rows[0])
+        //console.log("data2")
+        //console.log(data[2])
+
+        //console.log(sfName)
+        //console.log(rfName)
+        // console.log(receiverEmail)
+        // console.log(mSubject)
+        // console.log(mDetails)
+        //console.log("Convo");
+        //console.log(data[1].rows[0].conversationid);
+        //console.log(data[0].rows[0].fname);
 
         const sendMessage = modConvo.sendMsg({
             conversationID: data[1].rows[0].conversationid,
