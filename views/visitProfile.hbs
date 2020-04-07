@@ -18,19 +18,23 @@
                 </a>
             </div>
             <div>
-                <a>Likes = {{profile.like}}</a>
+                <span class="">{{profile.like}}</span>
+                <span class="">Likes</span>
                 {{!-- HREF MUST BE EDITED HERE, CURRENTLY USING USERID NOT VISITING PROFILE ID --}}
-                <a href="/profile/like/{{profile.userid}}" formmethod="GET"><button>+</button></a>
+                <div>
+                    <a class="margin-left-15 float-right" href="/profile/like/{{profile.userid}}" formmethod="GET"><button>+</button></a>
+                </div>
             </div>
             <div>
-                <a>Posts = {{profile.postcnt}}</a>
+                <span class="">{{profile.postcnt}}</span>
+                <span>Posts</span>
             </div>
         </div>
     </div>
 
         <div class="profile-posts profile-wrapper-posts">
             <div class="profile-inner-wrapper">
-                <p> {{profile.fname}}'s Posts': Page {{pageNum}}</p>
+                <p>{{profile.fname}}'s Posts': Page {{pageNum}}</p>
             </div>
             <div id="post-partial-div" >
                 {{>posts postList = postList}}  
