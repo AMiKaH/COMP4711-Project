@@ -3,7 +3,9 @@
         {{#each conversation}}
             <div data-index="{{@index}}" onclick="makeActive({{@index}})" id="conversation-{{this.conversationid}}"class="border-bottom conversation-wrapper active-target">
                 <div class="conversation-left inline-divs">
-                    <img class="circle-img-50" src="{{this.r_imgurl}}" alt="{{this.r_fname}}">
+                    <a href="/profile/{{this.receiverid}}"> 
+                        <img class="circle-img-50" src="{{this.r_imgurl}}" alt="{{this.r_fname}}">
+                    </a>
                 </div>
                 <div class="conversation-right inline-divs">
                     <span class="float-left">{{this.r_fname}} {{this.r_lname}}</span>
@@ -23,7 +25,9 @@
                 <p class="background"><span class="bg-line">{{this.f1_timedate}}</span></p>
                 <div class="conversation-wrapper">
                     <div class="message-left inline-divs">
+                        <a href="/profile/{{this.senderid}}">
                         <img class="circle-img-35" src="{{this.s_imgurl}}" alt="{{this.s_fname}}">
+                        </a>
                     </div>
                     <div class="message-right inline-divs">
                         <span class="float-left">{{this.s_fname}} {{this.s_lname}}</span>
