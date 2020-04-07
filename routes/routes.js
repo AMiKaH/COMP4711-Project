@@ -12,6 +12,8 @@ router.post('/validateLogin',loginController.validateLogin);
 
 router.post('/addPost',postController.addPost);
 
+router.post('/signup/addPost',postController.addPost);
+
 router.post('/search',searchController.searchByKeyword);
 
 router.get('/search',searchController.searchByUserID);
