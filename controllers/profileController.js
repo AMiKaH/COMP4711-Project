@@ -73,25 +73,27 @@ exports.signup = async function(req,res,next) {
     // Signup validation error check
     if (sPassword !== sPasswordCOnf || !result) {
 
-        if (sPassword!== sPassword) {
+        if (sPassword !== sPasswordCOnf) {
 
             if(!result) {
                 res.render('home', {
                     passErr: true,
                     emailErr: true
                 });
+                return;
             } else {
                 res.render('home', {
                     passErr: true,
                     emailErr: false
                 });
-
+                return;
             }
         } else {
             res.render('home', {
                 passErr: false,
                 emailErr: true
             });
+            return;
         }
 
     };
@@ -106,7 +108,8 @@ exports.signup = async function(req,res,next) {
     const getIDByEmail = await modUserProfile.getUserByEmail(sEmail)
         .then((data) => {
             return data.rows[0].userid;
-        });
+        })
+        .catch((err) => console.log(err));
 
     const updateName = await modUserProfile.addProfile({
     
@@ -126,7 +129,6 @@ exports.signup = async function(req,res,next) {
     }
 }
 
-}
 
 // Get
 exports.completeRegistration = function(req, res, next) {
@@ -147,8 +149,6 @@ exports.editProfile = async function(req,res,next) {
 
 
     getUserS.then((data) => {
-        console.log("XXXXXXXXXX");
-        console.log(getCountryId.rows.length);
 
         if (getCountryId.rows.length == 0) {
                 res.render('editProfile', {
