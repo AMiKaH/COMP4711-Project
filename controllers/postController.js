@@ -114,6 +114,8 @@ exports.addReply = function(req,res,next){
                 })
 
             }
+        } else if (req.headers.referer.includes('profile')){
+            res.redirect(301,'/profile/' + req.cookies.visitorID)
         }
     })
 }
