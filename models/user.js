@@ -47,6 +47,12 @@ function getCountryID(name) {
     return db.query(sql)
 }
 
+// Gets countryname by ID
+function getCountryName(id) {
+    let sql = `SELECT countryName FROM "country" WHERE countryid = '${id}' limit 1`
+    return db.query(sql)
+}
+
 // update user information
 function updateUser(data) {
     let sql = `UPDATE profile
@@ -82,5 +88,6 @@ module.exports = {
     updateUser: updateUser,
     getLikes: getLikes,
     increaseLike: increaseLike,
-    getCountryID: getCountryID
+    getCountryID: getCountryID,
+    getCountryName: getCountryName
 }

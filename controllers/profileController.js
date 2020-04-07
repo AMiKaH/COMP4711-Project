@@ -114,7 +114,6 @@ exports.completeRegistration = function(req, res, next) {
 
 // Post 
 exports.editProfile = async function(req,res,next) {
-    var errorEditing = false;
     const infoImgURL = req.body.imageurl;
     const infoAbout = req.body.about;
     const infoCountry = req.body.country;
@@ -123,29 +122,31 @@ exports.editProfile = async function(req,res,next) {
     const getCountryId = await modUserProfile.getCountryID(infoCountry).then();
     const getUserS = modUserProfile.getUserByID(req.cookies.userid);
 
+
     getUserS.then((data) => {
+        console.log("XXXXXXXXXX");
+        console.log(getCountryId.rows.length);
 
         if (getCountryId.rows.length == 0) {
                 res.render('editProfile', {
                     profile:data.rows[0],
                     pageTitle:'Edit Profile',
                     signedIn: true
-
                 })
             .catch(err => {
                 res.render('editProfile', {
                     profile:data.rows[0],
                     pageTitle:'Edit Profile',
                     signedIn: true,
-                    errorEditing: false
+                    errorEditing: true
     
                 })
                 console.log(err)
                 return;
             });
-
-    }
-});
+        }
+        profile:data.rows[0]
+    });
 
 
     const countryID = getCountryId.rows[0].countryid;
@@ -162,16 +163,7 @@ exports.editProfile = async function(req,res,next) {
         console.log(err)
     });
 
-    res.render('editProfile', {
-        profile:data.rows[0],
-        pageTitle:'Edit Profile',
-        signedIn: true,
-        errorEditing: false
 
-    })
-
-    return;
-    
     const post = modUserPosts.getRecentPostRe(req.cookies.pageNum);
     const getUser = modUserProfile.getUserByID(req.cookies.userid); 
 
@@ -186,9 +178,8 @@ exports.editProfile = async function(req,res,next) {
         postNotComplete: req.query.postNotComplete});
     })
     .catch(err => {
-
         console.log(err)}
-        );
+    );
 }
 
 // Get
