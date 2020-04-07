@@ -346,28 +346,44 @@ input::placeholder {
 .circle-img-150 {
     width: 150px;
     height: 150px;
-
     border-radius: 50%;
-    border-width: 50px;
-    border-color: black;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color:rgb(233, 233, 233);
+    box-shadow: 5px 5px 18px #888888;
 }
 
 .circle-img-100 {
     width: 100px;
     height: 100px;
     border-radius: 50%;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color:rgb(233, 233, 233);
+    box-shadow: 2px 2px 8px #cccccc;
 }
 
 .circle-img-75 {
     width: 75px;
     height: 75px;
     border-radius: 50%;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color:rgb(233, 233, 233);
+    box-shadow: 2px 2px 8px #888888;
 }
 
 .circle-img-50 {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    border-style: solid;
+    border-width: 2px;
+    border-color:rgb(233, 233, 233);
+    box-shadow: 2px 2px 8px #888888;
 }
 
 .circle-img-35 {
